@@ -40,11 +40,11 @@ class DonationTargetsTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('goal_amount')
                     ->label(__('Goal Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('collected_amount')
                     ->label(__('Collected Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('status')
                     ->label(__('Status'))

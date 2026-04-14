@@ -70,13 +70,13 @@ class CharityCaseForm
                             ->label(__('Requested Amount'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP')
+                            ->currency()
                             ->default(0.0),
                         TextInput::make('approved_amount')
                             ->label(__('Approved Amount'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP')
+                            ->currency()
                             ->default(0.0),
                     ]),
                 Section::make(__('Timeline'))

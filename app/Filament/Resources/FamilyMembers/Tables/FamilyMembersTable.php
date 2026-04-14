@@ -64,7 +64,7 @@ class FamilyMembersTable
                     ->sortable(),
                 TextColumn::make('monthly_income')
                     ->label(__('Monthly Income'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('national_id')
                     ->label(__('National ID'))

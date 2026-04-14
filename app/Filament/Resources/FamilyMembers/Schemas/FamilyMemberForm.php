@@ -70,7 +70,7 @@ class FamilyMemberForm
                             ->label(__('Monthly Income'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP')
+                            ->currency()
                             ->default(0.0),
                     ]),
                 Section::make(__('Contact'))

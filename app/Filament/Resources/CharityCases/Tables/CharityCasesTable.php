@@ -78,11 +78,11 @@ class CharityCasesTable
                     ->sortable(),
                 TextColumn::make('requested_amount')
                     ->label(__('Requested Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('approved_amount')
                     ->label(__('Approved Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))

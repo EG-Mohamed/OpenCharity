@@ -56,13 +56,13 @@ class DonationTargetForm
                             ->label(__('Goal Amount'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP')
+                            ->currency()
                             ->default(0.0),
                         TextInput::make('collected_amount')
                             ->label(__('Collected Amount'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP')
+                            ->currency()
                             ->default(0.0)
                             ->disabled()
                             ->dehydrated(),

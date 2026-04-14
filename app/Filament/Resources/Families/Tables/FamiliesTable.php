@@ -57,7 +57,7 @@ class FamiliesTable
                     ->sortable(),
                 TextColumn::make('monthly_income')
                     ->label(__('Monthly Income'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('members_count')
                     ->label(__('Members Count'))

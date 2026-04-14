@@ -45,7 +45,7 @@ class AssistanceScheduleForm
                         TextInput::make('amount')
                             ->label(__('Amount'))
                             ->numeric()
-                            ->prefix('EGP'),
+                            ->currency(),
                         TextInput::make('quantity')
                             ->label(__('Quantity'))
                             ->numeric(),

@@ -72,7 +72,7 @@ class FamilyForm
                             ->label(__('Monthly Income'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP')
+                            ->currency()
                             ->default(0.0),
                         Select::make('status')
                             ->label(__('Status'))

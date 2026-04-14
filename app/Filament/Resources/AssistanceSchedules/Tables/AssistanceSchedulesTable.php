@@ -37,7 +37,7 @@ class AssistanceSchedulesTable
                     ->sortable(),
                 TextColumn::make('amount')
                     ->label(__('Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('quantity')
                     ->label(__('Quantity'))

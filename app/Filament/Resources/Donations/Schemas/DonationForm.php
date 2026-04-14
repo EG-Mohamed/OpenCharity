@@ -47,7 +47,7 @@ class DonationForm
                             ->label(__('Amount'))
                             ->required()
                             ->numeric()
-                            ->prefix('EGP'),
+                            ->currency(),
                         Select::make('currency')
                             ->label(__('Currency'))
                             ->options(Currency::class)

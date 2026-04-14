@@ -36,7 +36,7 @@ class DonationsTable
                     ->searchable(),
                 TextColumn::make('amount')
                     ->label(__('Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('currency')
                     ->label(__('Currency'))

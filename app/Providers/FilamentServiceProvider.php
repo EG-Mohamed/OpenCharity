@@ -8,9 +8,11 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Infolists\Components\Entry;
 use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Panel;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -19,11 +21,14 @@ use Filament\Support\Enums\Size;
 use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class FilamentServiceProvider extends ServiceProvider
 {
@@ -72,5 +77,73 @@ class FilamentServiceProvider extends ServiceProvider
             ->extraImgAttributes(['loading' => 'lazy']));
         FileUpload::configureUsing(fn(FileUpload $fileUpload) => $fileUpload->visibility('public')
             ->fetchFileInformation(false));
+
+        TextColumn::macro('currency', function (): static {
+            $this->formatStateUsing(static function (TextColumn $column, $state): ?string {
+                if (blank($state) or empty($state) or ! is_numeric($state)) {
+                    return $state;
+                }
+
+                return money($state)->formatPrecise();
+            })
+                ->alignCenter()
+                ->badge()
+                ->color(function (string $state) {
+                    if (blank($state) or empty($state) or ! is_numeric($state)) {
+                        return 'warning';
+                    }
+
+                    return match ($state >= 0) {
+                        true => 'success',
+                        false => 'danger',
+                    };
+                });
+
+            return $this;
+        });
+
+        TextEntry::macro('currency', function (): static {
+            $this->formatStateUsing(static function ($state): ?string {
+                if (blank($state)) {
+                    return null;
+                }
+
+                return money($state)->formatPrecise();
+            })
+                ->badge()
+                ->color(fn (string $state): string => match ($state >= 0) {
+                    true => 'success',
+                    false => 'danger',
+                });
+
+            return $this;
+        });
+        Sum::macro('currency', function (): static {
+            $this->formatStateUsing(static function (Sum $sum, $state): ?string {
+                if (blank($state)) {
+                    return null;
+                }
+
+                return money($state)->formatPrecise();
+            });
+
+            return $this;
+        });
+        TextInput::macro('currency', function (): static {
+            $currency = config('app.currency');
+            $this->extraAttributes(['wire:key' => Str::random()])
+                ->prefix(static function (TextInput $component) use ($currency) {
+                    $currency = $component->evaluate($currency);
+
+                    return currency($currency)->getPrefix();
+                })
+                ->suffix(static function (TextInput $component) use ($currency) {
+                    $currency = $component->evaluate($currency);
+
+                    return currency($currency)->getSuffix();
+                });
+
+            return $this;
+        });
     }
 }

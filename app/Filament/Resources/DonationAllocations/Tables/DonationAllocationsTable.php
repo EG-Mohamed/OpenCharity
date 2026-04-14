@@ -21,7 +21,7 @@ class DonationAllocationsTable
             ->columns([
                 TextColumn::make('donation.amount')
                     ->label(__('Donation'))
-                    ->money('EGP')
+                    ->currency()
                     ->searchable(),
                 TextColumn::make('donationTarget.title')
                     ->label(__('Donation Target'))
@@ -37,7 +37,7 @@ class DonationAllocationsTable
                     ->searchable(),
                 TextColumn::make('amount')
                     ->label(__('Amount'))
-                    ->money('EGP')
+                    ->currency()
                     ->sortable(),
                 TextColumn::make('allocation_status')
                     ->label(__('Allocation Status'))
