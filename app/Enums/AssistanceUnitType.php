@@ -34,6 +34,10 @@ enum AssistanceUnitType: string implements HasColor, HasIcon, HasLabel
 
     public function getIcon(): string | BackedEnum | null
     {
-        return Heroicon::Gift;
+        return match ($this) {
+            self::Amount => Heroicon::OutlinedCurrencyDollar,
+            self::Item => Heroicon::OutlinedArchiveBox,
+            self::Service => Heroicon::OutlinedWrenchScrewdriver,
+        };
     }
 }
