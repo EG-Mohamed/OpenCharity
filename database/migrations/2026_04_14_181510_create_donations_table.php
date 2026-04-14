@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('payment_gateway')->index();
             $table->string('payment_method')->index();
             $table->string('transaction_id')->nullable()->unique();
-            $table->timestamp('paid_at')->nullable();
+            $table->dateTime('paid_at')->nullable();
             $table->boolean('anonymous')->default(false)->index();
             $table->text('notes')->nullable();
             $table->timestamps();

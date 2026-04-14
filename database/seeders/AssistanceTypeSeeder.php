@@ -2,16 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AssistanceType;
 use Illuminate\Database\Seeder;
 
 class AssistanceTypeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        AssistanceType::factory()->count(5)->create();
     }
 }

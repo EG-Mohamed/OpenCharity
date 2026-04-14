@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('priority')->index();
             $table->string('status')->index();
             $table->string('visit_status')->index();
-            $table->timestamp('registered_at')->nullable();
-            $table->timestamp('reviewed_at')->nullable();
-            $table->timestamp('approved_at')->nullable();
-            $table->timestamp('closed_at')->nullable();
-            $table->timestamp('last_visit_at')->nullable();
-            $table->timestamp('next_visit_at')->nullable();
+            $table->dateTime('registered_at')->nullable();
+            $table->dateTime('reviewed_at')->nullable();
+            $table->dateTime('approved_at')->nullable();
+            $table->dateTime('closed_at')->nullable();
+            $table->dateTime('last_visit_at')->nullable();
+            $table->dateTime('next_visit_at')->nullable();
             $table->decimal('requested_amount', 12, 2)->default(0);
             $table->decimal('approved_amount', 12, 2)->default(0);
             $table->text('notes')->nullable();

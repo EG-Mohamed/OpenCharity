@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('goal_amount', 12, 2)->default(0);
             $table->decimal('collected_amount', 12, 2)->default(0);
             $table->string('status')->index();
-            $table->timestamp('starts_at')->nullable();
-            $table->timestamp('ends_at')->nullable();
+            $table->dateTime('starts_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

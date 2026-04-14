@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('assistance_schedule_id')->nullable()->constrained()->nullOnDelete();
             $table->decimal('amount', 12, 2);
             $table->string('allocation_status')->index();
-            $table->timestamp('allocated_at')->nullable();
+            $table->dateTime('allocated_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

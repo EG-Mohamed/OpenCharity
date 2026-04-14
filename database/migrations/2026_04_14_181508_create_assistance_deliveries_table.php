@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('assistance_deliveries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('assistance_schedule_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('delivered_at')->nullable();
+            $table->dateTime('delivered_at')->nullable();
             $table->string('delivery_status')->index();
             $table->string('received_by_name')->nullable();
             $table->string('received_by_phone')->nullable();

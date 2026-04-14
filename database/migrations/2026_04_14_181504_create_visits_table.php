@@ -13,12 +13,12 @@ return new class extends Migration
             $table->foreignId('charity_case_id')->constrained()->cascadeOnDelete();
             $table->string('visit_type')->index();
             $table->string('status')->index();
-            $table->timestamp('scheduled_at')->nullable();
-            $table->timestamp('visited_at')->nullable();
+            $table->dateTime('scheduled_at')->nullable();
+            $table->dateTime('visited_at')->nullable();
             $table->text('summary')->nullable();
             $table->text('findings')->nullable();
             $table->text('recommendations')->nullable();
-            $table->timestamp('next_visit_at')->nullable();
+            $table->dateTime('next_visit_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
