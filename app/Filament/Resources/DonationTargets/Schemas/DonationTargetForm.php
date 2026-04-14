@@ -8,6 +8,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class DonationTargetForm
@@ -16,32 +17,71 @@ class DonationTargetForm
     {
         return $schema
             ->components([
-                Select::make('type')
-                    ->options(DonationTargetType::class)
-                    ->required(),
-                Select::make('family_id')
-                    ->relationship('family', 'name'),
-                Select::make('charity_case_id')
-                    ->relationship('charityCase', 'title'),
-                TextInput::make('title')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
-                Textarea::make('description')
+                Section::make(__('Target Info'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('type')
+                            ->label(__('Type'))
+                            ->options(DonationTargetType::class)
+                            ->required(),
+                        TextInput::make('title')
+                            ->label(__('Title'))
+                            ->required(),
+                        TextInput::make('slug')
+                            ->label(__('Slug'))
+                            ->required(),
+                        Select::make('status')
+                            ->label(__('Status'))
+                            ->options(DonationTargetStatus::class)
+                            ->required(),
+                    ]),
+                Section::make(__('Ownership'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('family_id')
+                            ->label(__('Family'))
+                            ->relationship('family', 'name')
+                            ->searchable()
+                            ->preload(),
+                        Select::make('charity_case_id')
+                            ->label(__('Charity Case'))
+                            ->relationship('charityCase', 'title')
+                            ->searchable()
+                            ->preload(),
+                    ]),
+                Section::make(__('Amounts'))
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('goal_amount')
+                            ->label(__('Goal Amount'))
+                            ->required()
+                            ->numeric()
+                            ->prefix('EGP')
+                            ->default(0.0),
+                        TextInput::make('collected_amount')
+                            ->label(__('Collected Amount'))
+                            ->required()
+                            ->numeric()
+                            ->prefix('EGP')
+                            ->default(0.0)
+                            ->disabled()
+                            ->dehydrated(),
+                    ]),
+                Section::make(__('Period'))
+                    ->columns(2)
+                    ->schema([
+                        DateTimePicker::make('starts_at')
+                            ->label(__('Starts At')),
+                        DateTimePicker::make('ends_at')
+                            ->label(__('Ends At')),
+                    ]),
+                Section::make(__('Description'))
+                    ->schema([
+                        Textarea::make('description')
+                            ->label(__('Description'))
+                            ->columnSpanFull(),
+                    ])
                     ->columnSpanFull(),
-                TextInput::make('goal_amount')
-                    ->required()
-                    ->numeric()
-                    ->default(0.0),
-                TextInput::make('collected_amount')
-                    ->required()
-                    ->numeric()
-                    ->default(0.0),
-                Select::make('status')
-                    ->options(DonationTargetStatus::class)
-                    ->required(),
-                DateTimePicker::make('starts_at'),
-                DateTimePicker::make('ends_at'),
             ]);
     }
 }

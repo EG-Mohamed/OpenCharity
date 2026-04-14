@@ -4,10 +4,13 @@ namespace App\Filament\Resources\AssistanceDeliveries\Schemas;
 
 use App\Enums\DeliveryStatus;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class AssistanceDeliveryForm
 {
@@ -15,18 +18,45 @@ class AssistanceDeliveryForm
     {
         return $schema
             ->components([
-                Select::make('assistance_schedule_id')
-                    ->relationship('assistanceSchedule', 'id')
-                    ->required(),
-                DateTimePicker::make('delivered_at'),
-                Select::make('delivery_status')
-                    ->options(DeliveryStatus::class)
-                    ->required(),
-                TextInput::make('received_by_name'),
-                TextInput::make('received_by_phone')
-                    ->tel(),
-                TextInput::make('proof_file_path'),
-                Textarea::make('notes')
+                Section::make(__('Delivery Info'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('assistance_schedule_id')
+                            ->label(__('Assistance Schedule'))
+                            ->relationship('assistanceSchedule', 'id')
+                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->charityCase?->title ? "{$record->charityCase->title} (#{$record->id})" : (string) $record->id)
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        DateTimePicker::make('delivered_at')
+                            ->label(__('Delivered At')),
+                        Select::make('delivery_status')
+                            ->label(__('Delivery Status'))
+                            ->options(DeliveryStatus::class)
+                            ->required(),
+                    ]),
+                Section::make(__('Receiver'))
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('received_by_name')
+                            ->label(__('Received By Name')),
+                        PhoneInput::make('received_by_phone')
+                            ->label(__('Received By Phone')),
+                    ]),
+                Section::make(__('Proof'))
+                    ->schema([
+                        FileUpload::make('proof_file_path')
+                            ->label(__('Proof'))
+                            ->visibility('public')
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpanFull(),
+                Section::make(__('Notes'))
+                    ->schema([
+                        Textarea::make('notes')
+                            ->label(__('Notes'))
+                            ->columnSpanFull(),
+                    ])
                     ->columnSpanFull(),
             ]);
     }

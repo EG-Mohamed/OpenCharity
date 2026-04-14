@@ -5,6 +5,7 @@ namespace App\Filament\Resources\CaseTypes\Schemas;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class CaseTypeForm
@@ -13,14 +14,31 @@ class CaseTypeForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('code')
-                    ->required(),
-                Textarea::make('description')
+                Section::make(__('Basic'))
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required(),
+                        TextInput::make('code')
+                            ->label(__('Code'))
+                            ->required(),
+                    ]),
+                Section::make(__('Description'))
+                    ->schema([
+                        Textarea::make('description')
+                            ->label(__('Description'))
+                            ->columnSpanFull(),
+                    ])
                     ->columnSpanFull(),
-                Toggle::make('is_active')
-                    ->required(),
-            ]);
+                Section::make(__('Settings'))
+                    ->columns(1)
+                    ->schema([
+                        Toggle::make('is_active')
+                            ->label(__('Is Active'))
+                            ->required(),
+                    ]),
+            ])
+            ->columns(2);
     }
 }

@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class AssistanceScheduleForm
@@ -18,28 +19,59 @@ class AssistanceScheduleForm
     {
         return $schema
             ->components([
-                Select::make('charity_case_id')
-                    ->relationship('charityCase', 'title')
-                    ->required(),
-                Select::make('assistance_type_id')
-                    ->relationship('assistanceType', 'name')
-                    ->required(),
-                DatePicker::make('scheduled_date'),
-                TimePicker::make('scheduled_time'),
-                TextInput::make('amount')
-                    ->numeric(),
-                TextInput::make('quantity')
-                    ->numeric(),
-                Select::make('frequency')
-                    ->options(ScheduleFrequency::class)
-                    ->required(),
-                Select::make('status')
-                    ->options(ScheduleStatus::class)
-                    ->required(),
-                Select::make('funding_status')
-                    ->options(FundingStatus::class)
-                    ->required(),
-                Textarea::make('notes')
+                Section::make(__('Schedule'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('charity_case_id')
+                            ->label(__('Charity Case'))
+                            ->relationship('charityCase', 'title')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Select::make('assistance_type_id')
+                            ->label(__('Assistance Type'))
+                            ->relationship('assistanceType', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        DatePicker::make('scheduled_date')
+                            ->label(__('Scheduled Date')),
+                        TimePicker::make('scheduled_time')
+                            ->label(__('Scheduled Time')),
+                    ]),
+                Section::make(__('Amount'))
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('amount')
+                            ->label(__('Amount'))
+                            ->numeric()
+                            ->prefix('EGP'),
+                        TextInput::make('quantity')
+                            ->label(__('Quantity'))
+                            ->numeric(),
+                        Select::make('frequency')
+                            ->label(__('Frequency'))
+                            ->options(ScheduleFrequency::class)
+                            ->required(),
+                    ]),
+                Section::make(__('Status'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('status')
+                            ->label(__('Status'))
+                            ->options(ScheduleStatus::class)
+                            ->required(),
+                        Select::make('funding_status')
+                            ->label(__('Funding Status'))
+                            ->options(FundingStatus::class)
+                            ->required(),
+                    ]),
+                Section::make(__('Notes'))
+                    ->schema([
+                        Textarea::make('notes')
+                            ->label(__('Notes'))
+                            ->columnSpanFull(),
+                    ])
                     ->columnSpanFull(),
             ]);
     }

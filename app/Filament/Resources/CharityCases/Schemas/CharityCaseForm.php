@@ -9,6 +9,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class CharityCaseForm
@@ -17,42 +18,89 @@ class CharityCaseForm
     {
         return $schema
             ->components([
-                Select::make('family_id')
-                    ->relationship('family', 'name')
-                    ->required(),
-                Select::make('case_type_id')
-                    ->relationship('caseType', 'name')
-                    ->required(),
-                TextInput::make('code')
-                    ->required(),
-                TextInput::make('title')
-                    ->required(),
-                Textarea::make('description')
+                Section::make(__('Case Information'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('family_id')
+                            ->label(__('Family'))
+                            ->relationship('family', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Select::make('case_type_id')
+                            ->label(__('Case Type'))
+                            ->relationship('caseType', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        TextInput::make('code')
+                            ->label(__('Code'))
+                            ->required(),
+                        TextInput::make('title')
+                            ->label(__('Title'))
+                            ->required(),
+                    ]),
+                Section::make(__('Classification'))
+                    ->columns(2)
+                    ->schema([
+                        Select::make('priority')
+                            ->label(__('Priority'))
+                            ->options(CasePriority::class)
+                            ->required(),
+                        Select::make('status')
+                            ->label(__('Status'))
+                            ->options(CaseStatus::class)
+                            ->required(),
+                        Select::make('visit_status')
+                            ->label(__('Visit Status'))
+                            ->options(VisitStatusCase::class)
+                            ->required(),
+                    ]),
+                Section::make(__('Description'))
+                    ->schema([
+                        Textarea::make('description')
+                            ->label(__('Description'))
+                            ->columnSpanFull(),
+                    ])
                     ->columnSpanFull(),
-                Select::make('priority')
-                    ->options(CasePriority::class)
-                    ->required(),
-                Select::make('status')
-                    ->options(CaseStatus::class)
-                    ->required(),
-                Select::make('visit_status')
-                    ->options(VisitStatusCase::class)
-                    ->required(),
-                DateTimePicker::make('registered_at'),
-                DateTimePicker::make('reviewed_at'),
-                DateTimePicker::make('approved_at'),
-                DateTimePicker::make('closed_at'),
-                DateTimePicker::make('last_visit_at'),
-                DateTimePicker::make('next_visit_at'),
-                TextInput::make('requested_amount')
-                    ->required()
-                    ->numeric()
-                    ->default(0.0),
-                TextInput::make('approved_amount')
-                    ->required()
-                    ->numeric()
-                    ->default(0.0),
-                Textarea::make('notes')
+                Section::make(__('Amounts'))
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('requested_amount')
+                            ->label(__('Requested Amount'))
+                            ->required()
+                            ->numeric()
+                            ->prefix('EGP')
+                            ->default(0.0),
+                        TextInput::make('approved_amount')
+                            ->label(__('Approved Amount'))
+                            ->required()
+                            ->numeric()
+                            ->prefix('EGP')
+                            ->default(0.0),
+                    ]),
+                Section::make(__('Timeline'))
+                    ->columns(2)
+                    ->schema([
+                        DateTimePicker::make('registered_at')
+                            ->label(__('Registered At')),
+                        DateTimePicker::make('reviewed_at')
+                            ->label(__('Reviewed At')),
+                        DateTimePicker::make('approved_at')
+                            ->label(__('Approved At')),
+                        DateTimePicker::make('closed_at')
+                            ->label(__('Closed At')),
+                        DateTimePicker::make('last_visit_at')
+                            ->label(__('Last Visit At')),
+                        DateTimePicker::make('next_visit_at')
+                            ->label(__('Next Visit At')),
+                    ]),
+                Section::make(__('Notes'))
+                    ->schema([
+                        Textarea::make('notes')
+                            ->label(__('Notes'))
+                            ->columnSpanFull(),
+                    ])
                     ->columnSpanFull(),
             ]);
     }
