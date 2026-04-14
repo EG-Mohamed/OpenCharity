@@ -33,6 +33,8 @@ class AssistanceDeliveryForm
                         Select::make('delivery_status')
                             ->label(__('Delivery Status'))
                             ->options(DeliveryStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Receiver'))

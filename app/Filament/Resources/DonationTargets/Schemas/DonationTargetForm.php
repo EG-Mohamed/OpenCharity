@@ -23,6 +23,8 @@ class DonationTargetForm
                         Select::make('type')
                             ->label(__('Type'))
                             ->options(DonationTargetType::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         TextInput::make('title')
                             ->label(__('Title'))
@@ -33,6 +35,8 @@ class DonationTargetForm
                         Select::make('status')
                             ->label(__('Status'))
                             ->options(DonationTargetStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Ownership'))

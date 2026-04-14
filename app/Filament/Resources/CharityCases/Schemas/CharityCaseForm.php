@@ -46,14 +46,20 @@ class CharityCaseForm
                         Select::make('priority')
                             ->label(__('Priority'))
                             ->options(CasePriority::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('status')
                             ->label(__('Status'))
                             ->options(CaseStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('visit_status')
                             ->label(__('Visit Status'))
                             ->options(VisitStatusCase::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Description'))

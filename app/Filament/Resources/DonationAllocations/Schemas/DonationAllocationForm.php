@@ -22,7 +22,7 @@ class DonationAllocationForm
                         Select::make('donation_id')
                             ->label(__('Donation'))
                             ->relationship('donation', 'id')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => money($record->amount)->format())
+                            ->getOptionLabelFromRecordUsing(fn ($record): string => __('EGP').' '.number_format((float) $record->amount, 2))
                             ->searchable()
                             ->preload()
                             ->required(),
@@ -55,10 +55,12 @@ class DonationAllocationForm
                             ->label(__('Amount'))
                             ->required()
                             ->numeric()
-                            ->currency(),
+                            ->prefix('EGP'),
                         Select::make('allocation_status')
                             ->label(__('Allocation Status'))
                             ->options(AllocationStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         DateTimePicker::make('allocated_at')
                             ->label(__('Allocated At')),

@@ -9,6 +9,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class FamilyForm
@@ -22,12 +23,14 @@ class FamilyForm
                     ->schema([
                         TextInput::make('code')
                             ->label(__('Code'))
-                            ->required(),
-                        TextInput::make('name')
-                            ->label(__('Name'))
-                            ->required(),
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->default(fn (): string => strtoupper(Str::ulid()->toBase32()))
+                            ->disabled()
+                            ->dehydrated(),
                         TextInput::make('national_id')
-                            ->label(__('National ID')),
+                            ->label(__('National ID'))
+                            ->unique(ignoreRecord: true),
                         TextInput::make('members_count')
                             ->label(__('Members Count'))
                             ->required()
@@ -60,6 +63,8 @@ class FamilyForm
                         Select::make('housing_status')
                             ->label(__('Housing Status'))
                             ->options(HousingStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Textarea::make('address')
                             ->label(__('Address'))
@@ -77,6 +82,8 @@ class FamilyForm
                         Select::make('status')
                             ->label(__('Status'))
                             ->options(FamilyStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Notes'))

@@ -52,6 +52,8 @@ class AssistanceScheduleForm
                         Select::make('frequency')
                             ->label(__('Frequency'))
                             ->options(ScheduleFrequency::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Status'))
@@ -60,10 +62,14 @@ class AssistanceScheduleForm
                         Select::make('status')
                             ->label(__('Status'))
                             ->options(ScheduleStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('funding_status')
                             ->label(__('Funding Status'))
                             ->options(FundingStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Notes'))

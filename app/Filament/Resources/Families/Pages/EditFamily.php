@@ -12,6 +12,13 @@ class EditFamily extends EditRecord
 {
     protected static string $resource = FamilyResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['name'] = $data['primary_contact_name'] ?: $this->record->code;
+
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

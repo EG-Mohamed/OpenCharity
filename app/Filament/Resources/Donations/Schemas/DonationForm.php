@@ -51,6 +51,8 @@ class DonationForm
                         Select::make('currency')
                             ->label(__('Currency'))
                             ->options(Currency::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Payment'))
@@ -59,14 +61,20 @@ class DonationForm
                         Select::make('status')
                             ->label(__('Status'))
                             ->options(DonationStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('payment_gateway')
                             ->label(__('Payment Gateway'))
                             ->options(PaymentGateway::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('payment_method')
                             ->label(__('Payment Method'))
                             ->options(PaymentMethod::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         TextInput::make('transaction_id')
                             ->label(__('Transaction ID')),

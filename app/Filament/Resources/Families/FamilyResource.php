@@ -24,7 +24,7 @@ class FamilyResource extends Resource
 {
     protected static ?string $model = Family::class;
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'code';
 
     public static function form(Schema $schema): Schema
     {

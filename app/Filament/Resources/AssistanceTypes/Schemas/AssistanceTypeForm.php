@@ -28,6 +28,8 @@ class AssistanceTypeForm
                         Select::make('unit_type')
                             ->label(__('Unit Type'))
                             ->options(AssistanceUnitType::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Description'))

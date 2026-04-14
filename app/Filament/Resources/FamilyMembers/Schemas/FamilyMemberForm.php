@@ -39,16 +39,22 @@ class FamilyMemberForm
                         Select::make('gender')
                             ->label(__('Gender'))
                             ->options(Gender::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('relation_to_head')
                             ->label(__('Relation To Head'))
                             ->options(RelationToHead::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         DatePicker::make('birth_date')
                             ->label(__('Birth Date')),
                         Select::make('marital_status')
                             ->label(__('Marital Status'))
                             ->options(MaritalStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('Status'))
@@ -57,14 +63,20 @@ class FamilyMemberForm
                         Select::make('education_status')
                             ->label(__('Education Status'))
                             ->options(EducationStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('employment_status')
                             ->label(__('Employment Status'))
                             ->options(EmploymentStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('health_status')
                             ->label(__('Health Status'))
                             ->options(HealthStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         TextInput::make('monthly_income')
                             ->label(__('Monthly Income'))

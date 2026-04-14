@@ -40,10 +40,14 @@ class DocumentForm
                         Select::make('type')
                             ->label(__('Type'))
                             ->options(DocumentType::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('category')
                             ->label(__('Category'))
                             ->options(DocumentCategory::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         TextInput::make('title')
                             ->label(__('Title'))
@@ -51,6 +55,8 @@ class DocumentForm
                         Select::make('visibility')
                             ->label(__('Visibility'))
                             ->options(DocumentVisibility::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make(__('File'))

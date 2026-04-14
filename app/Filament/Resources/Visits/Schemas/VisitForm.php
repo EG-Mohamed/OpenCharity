@@ -28,10 +28,14 @@ class VisitForm
                         Select::make('visit_type')
                             ->label(__('Visit Type'))
                             ->options(VisitType::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         Select::make('status')
                             ->label(__('Status'))
                             ->options(VisitStatus::class)
+                            ->searchable()
+                            ->preload()
                             ->required(),
                         DateTimePicker::make('scheduled_at')
                             ->label(__('Scheduled At')),
