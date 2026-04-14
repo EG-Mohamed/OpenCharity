@@ -35,6 +35,7 @@ class CharityCaseForm
                             ->required(),
                         TextInput::make('code')
                             ->label(__('Code'))
+                            ->unique(ignoreRecord: true)
                             ->required(),
                         TextInput::make('title')
                             ->label(__('Title'))

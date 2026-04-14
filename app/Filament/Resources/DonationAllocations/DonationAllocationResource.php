@@ -20,7 +20,7 @@ class DonationAllocationResource extends Resource
 {
     protected static ?string $model = DonationAllocation::class;
 
-    protected static ?string $recordTitleAttribute = 'amount';
+    protected static ?string $recordTitleAttribute = 'allocated_at';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
 

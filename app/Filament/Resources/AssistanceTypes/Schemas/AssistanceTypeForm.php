@@ -24,6 +24,7 @@ class AssistanceTypeForm
                             ->required(),
                         TextInput::make('code')
                             ->label(__('Code'))
+                            ->unique(ignoreRecord: true)
                             ->required(),
                         Select::make('unit_type')
                             ->label(__('Unit Type'))

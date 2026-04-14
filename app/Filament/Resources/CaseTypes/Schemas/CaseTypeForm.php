@@ -22,6 +22,7 @@ class CaseTypeForm
                             ->required(),
                         TextInput::make('code')
                             ->label(__('Code'))
+                            ->unique(ignoreRecord: true)
                             ->required(),
                     ]),
                 Section::make(__('Description'))
