@@ -5,6 +5,8 @@ namespace App\Filament\Resources\AssistanceSchedules;
 use App\Filament\Resources\AssistanceSchedules\Pages\CreateAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\Pages\EditAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\Pages\ListAssistanceSchedules;
+use App\Filament\Resources\AssistanceSchedules\RelationManagers\AssistanceDeliveriesRelationManager;
+use App\Filament\Resources\AssistanceSchedules\RelationManagers\DonationAllocationsRelationManager;
 use App\Filament\Resources\AssistanceSchedules\Schemas\AssistanceScheduleForm;
 use App\Filament\Resources\AssistanceSchedules\Tables\AssistanceSchedulesTable;
 use App\Models\AssistanceSchedule;
@@ -20,7 +22,11 @@ class AssistanceScheduleResource extends Resource
 {
     protected static ?string $model = AssistanceSchedule::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'id';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Assistance';
 
     public static function form(Schema $schema): Schema
     {
@@ -35,8 +41,24 @@ class AssistanceScheduleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AssistanceDeliveriesRelationManager::class,
+            DonationAllocationsRelationManager::class,
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Assistance Schedule');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Assistance Schedules');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Assistance');
     }
 
     public static function getPages(): array

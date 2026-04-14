@@ -20,7 +20,11 @@ class VisitResource extends Resource
 {
     protected static ?string $model = Visit::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'summary';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Cases';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,6 +43,16 @@ class VisitResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Visit');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Visits');
+    }
+
     public static function getPages(): array
     {
         return [
@@ -54,5 +68,10 @@ class VisitResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Cases');
     }
 }

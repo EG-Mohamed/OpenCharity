@@ -18,7 +18,7 @@ class AssistanceTypeResource extends Resource
 {
     protected static ?string $model = AssistanceType::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
@@ -44,5 +44,25 @@ class AssistanceTypeResource extends Resource
             'create' => CreateAssistanceType::route('/create'),
             'edit' => EditAssistanceType::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Assistance Type');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Assistance Types');
+    }
+
+    public static function getNavigationIcon(): string|BackedEnum|null
+    {
+        return Heroicon::OutlinedWrenchScrewdriver;
+    }
+
+    public static function getNavigationGroup(): string|\UnitEnum|null
+    {
+        return __('Assistance');
     }
 }

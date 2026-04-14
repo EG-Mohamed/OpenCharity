@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Donations;
 use App\Filament\Resources\Donations\Pages\CreateDonation;
 use App\Filament\Resources\Donations\Pages\EditDonation;
 use App\Filament\Resources\Donations\Pages\ListDonations;
+use App\Filament\Resources\Donations\RelationManagers\DonationAllocationsRelationManager;
 use App\Filament\Resources\Donations\Schemas\DonationForm;
 use App\Filament\Resources\Donations\Tables\DonationsTable;
 use App\Models\Donation;
@@ -20,7 +21,11 @@ class DonationResource extends Resource
 {
     protected static ?string $model = Donation::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'donor_name';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Donations';
 
     public static function form(Schema $schema): Schema
     {
@@ -35,8 +40,23 @@ class DonationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            DonationAllocationsRelationManager::class,
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Donation');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Donations');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Donations');
     }
 
     public static function getPages(): array

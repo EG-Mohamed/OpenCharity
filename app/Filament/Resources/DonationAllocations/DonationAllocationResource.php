@@ -20,7 +20,11 @@ class DonationAllocationResource extends Resource
 {
     protected static ?string $model = DonationAllocation::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'amount';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Donations';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,6 +43,16 @@ class DonationAllocationResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Donation Allocation');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Donation Allocations');
+    }
+
     public static function getPages(): array
     {
         return [
@@ -54,5 +68,10 @@ class DonationAllocationResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Donations');
     }
 }

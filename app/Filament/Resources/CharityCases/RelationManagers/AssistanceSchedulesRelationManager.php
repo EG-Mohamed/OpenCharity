@@ -5,13 +5,10 @@ namespace App\Filament\Resources\CharityCases\RelationManagers;
 use App\Enums\FundingStatus;
 use App\Enums\ScheduleFrequency;
 use App\Enums\ScheduleStatus;
-use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -107,18 +104,15 @@ class AssistanceSchedulesRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make(),
-                AssociateAction::make(),
             ])
             ->recordActions([
                 EditAction::make(),
-                DissociateAction::make(),
                 DeleteAction::make(),
                 ForceDeleteAction::make(),
                 RestoreAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DissociateBulkAction::make(),
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),

@@ -20,7 +20,11 @@ class FamilyMemberResource extends Resource
 {
     protected static ?string $model = FamilyMember::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Families';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,6 +43,16 @@ class FamilyMemberResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Family Member');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Family Members');
+    }
+
     public static function getPages(): array
     {
         return [
@@ -54,5 +68,10 @@ class FamilyMemberResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Families');
     }
 }

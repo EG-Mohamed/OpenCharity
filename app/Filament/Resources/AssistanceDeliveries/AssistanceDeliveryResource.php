@@ -20,7 +20,11 @@ class AssistanceDeliveryResource extends Resource
 {
     protected static ?string $model = AssistanceDelivery::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'received_by_name';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Assistance';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,6 +43,16 @@ class AssistanceDeliveryResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Assistance Delivery');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Assistance Deliveries');
+    }
+
     public static function getPages(): array
     {
         return [
@@ -54,5 +68,10 @@ class AssistanceDeliveryResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Assistance');
     }
 }

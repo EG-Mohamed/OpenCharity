@@ -20,7 +20,11 @@ class DocumentResource extends Resource
 {
     protected static ?string $model = Document::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'title';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Documents';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,6 +43,16 @@ class DocumentResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Document');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Documents');
+    }
+
     public static function getPages(): array
     {
         return [
@@ -46,6 +60,11 @@ class DocumentResource extends Resource
             'create' => CreateDocument::route('/create'),
             'edit' => EditDocument::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Documents');
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder

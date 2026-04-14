@@ -18,7 +18,7 @@ class CaseTypeResource extends Resource
 {
     protected static ?string $model = CaseType::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
@@ -44,5 +44,25 @@ class CaseTypeResource extends Resource
             'create' => CreateCaseType::route('/create'),
             'edit' => EditCaseType::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Case Type');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Case Types');
+    }
+
+    public static function getNavigationIcon(): string|BackedEnum|null
+    {
+        return Heroicon::OutlinedTag;
+    }
+
+    public static function getNavigationGroup(): string|\UnitEnum|null
+    {
+        return __('Cases');
     }
 }

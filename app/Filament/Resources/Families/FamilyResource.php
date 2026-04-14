@@ -5,6 +5,10 @@ namespace App\Filament\Resources\Families;
 use App\Filament\Resources\Families\Pages\CreateFamily;
 use App\Filament\Resources\Families\Pages\EditFamily;
 use App\Filament\Resources\Families\Pages\ListFamilies;
+use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager;
+use App\Filament\Resources\Families\RelationManagers\DocumentsRelationManager;
+use App\Filament\Resources\Families\RelationManagers\DonationTargetsRelationManager;
+use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use App\Filament\Resources\Families\Schemas\FamilyForm;
 use App\Filament\Resources\Families\Tables\FamiliesTable;
 use App\Models\Family;
@@ -20,7 +24,7 @@ class FamilyResource extends Resource
 {
     protected static ?string $model = Family::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
@@ -35,8 +39,31 @@ class FamilyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            FamilyMembersRelationManager::class,
+            CharityCasesRelationManager::class,
+            DocumentsRelationManager::class,
+            DonationTargetsRelationManager::class,
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Family');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Families');
+    }
+
+    public static function getNavigationIcon(): string|BackedEnum|null
+    {
+        return Heroicon::OutlinedHome;
+    }
+
+    public static function getNavigationGroup(): string|\UnitEnum|null
+    {
+        return __('Families');
     }
 
     public static function getPages(): array

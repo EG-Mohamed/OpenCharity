@@ -5,6 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
+use BackedEnum;
 use Filament\Support\Icons\Heroicon;
 
 enum CasePriority: string implements HasColor, HasIcon, HasLabel
@@ -34,7 +35,7 @@ enum CasePriority: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): ?Heroicon
+    public function getIcon(): string | BackedEnum | null
     {
         return match ($this) {
             self::Low => Heroicon::ArrowTrendingDown,

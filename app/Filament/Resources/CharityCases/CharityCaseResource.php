@@ -5,6 +5,10 @@ namespace App\Filament\Resources\CharityCases;
 use App\Filament\Resources\CharityCases\Pages\CreateCharityCase;
 use App\Filament\Resources\CharityCases\Pages\EditCharityCase;
 use App\Filament\Resources\CharityCases\Pages\ListCharityCases;
+use App\Filament\Resources\CharityCases\RelationManagers\AssistanceSchedulesRelationManager;
+use App\Filament\Resources\CharityCases\RelationManagers\DocumentsRelationManager;
+use App\Filament\Resources\CharityCases\RelationManagers\DonationTargetsRelationManager;
+use App\Filament\Resources\CharityCases\RelationManagers\VisitsRelationManager;
 use App\Filament\Resources\CharityCases\Schemas\CharityCaseForm;
 use App\Filament\Resources\CharityCases\Tables\CharityCasesTable;
 use App\Models\CharityCase;
@@ -20,7 +24,11 @@ class CharityCaseResource extends Resource
 {
     protected static ?string $model = CharityCase::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $recordTitleAttribute = 'title';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Cases';
 
     public static function form(Schema $schema): Schema
     {
@@ -35,8 +43,26 @@ class CharityCaseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            VisitsRelationManager::class,
+            DocumentsRelationManager::class,
+            AssistanceSchedulesRelationManager::class,
+            DonationTargetsRelationManager::class,
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Charity Case');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Charity Cases');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Cases');
     }
 
     public static function getPages(): array

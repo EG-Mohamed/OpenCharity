@@ -5,6 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
+use BackedEnum;
 use Filament\Support\Icons\Heroicon;
 
 enum DonationStatus: string implements HasColor, HasIcon, HasLabel
@@ -36,7 +37,7 @@ enum DonationStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): ?Heroicon
+    public function getIcon(): string | BackedEnum | null
     {
         return Heroicon::CreditCard;
     }
