@@ -23,7 +23,8 @@ class CaseTypeForm
                         TextInput::make('code')
                             ->label(__('Code'))
                             ->unique(ignoreRecord: true)
-                            ->required(),
+                            ->disabled()
+                            ->dehydrated(),
                     ]),
                 Section::make(__('Description'))
                     ->schema([

@@ -11,6 +11,7 @@ class CreateFamily extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        unset($data['code']);
         $data['name'] = $data['primary_contact_name'] ?: $data['code'];
 
         return $data;

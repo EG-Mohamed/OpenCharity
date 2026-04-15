@@ -7,11 +7,20 @@ use Database\Factories\AssistanceTypeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MohamedSaid\Referenceable\Traits\HasReference;
 
 class AssistanceType extends Model
 {
     /** @use HasFactory<AssistanceTypeFactory> */
     use HasFactory;
+
+    use HasReference;
+
+    protected string $referenceColumn = 'code';
+
+    protected string $referencePrefix = 'AT';
+
+    protected int $referenceLength = 5;
 
     protected function casts(): array
     {

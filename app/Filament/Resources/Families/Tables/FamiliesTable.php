@@ -19,6 +19,7 @@ class FamiliesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->withCount('familyMembers'))
             ->columns([
                 TextColumn::make('code')
                     ->label(__('Code'))
@@ -34,10 +35,6 @@ class FamiliesTable
                     ->searchable(),
                 TextColumn::make('secondary_contact_phone')
                     ->label(__('Secondary Contact Phone'))
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('national_id')
-                    ->label(__('National ID'))
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('governorate')
@@ -59,7 +56,7 @@ class FamiliesTable
                     ->label(__('Monthly Income'))
                     ->currency()
                     ->sortable(),
-                TextColumn::make('members_count')
+                TextColumn::make('familyMembers_count')
                     ->label(__('Members Count'))
                     ->numeric()
                     ->sortable(),

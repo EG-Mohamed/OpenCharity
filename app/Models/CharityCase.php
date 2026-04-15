@@ -11,13 +11,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use MohamedSaid\Referenceable\Traits\HasReference;
 
 class CharityCase extends Model
 {
     /** @use HasFactory<CharityCaseFactory> */
     use HasFactory;
 
+    use HasReference;
     use SoftDeletes;
+
+    protected string $referenceColumn = 'code';
+
+    protected string $referencePrefix = 'CASE';
+
+    protected int $referenceLength = 6;
 
     protected function casts(): array
     {

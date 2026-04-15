@@ -36,7 +36,8 @@ class CharityCaseForm
                         TextInput::make('code')
                             ->label(__('Code'))
                             ->unique(ignoreRecord: true)
-                            ->required(),
+                            ->disabled()
+                            ->dehydrated(),
                         TextInput::make('title')
                             ->label(__('Title'))
                             ->required(),

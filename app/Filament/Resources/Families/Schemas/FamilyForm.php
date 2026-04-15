@@ -7,9 +7,9 @@ use App\Enums\HousingStatus;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class FamilyForm
@@ -18,27 +18,8 @@ class FamilyForm
     {
         return $schema
             ->components([
-                Section::make(__('Basic Information'))
-                    ->columns(2)
-                    ->schema([
-                        TextInput::make('code')
-                            ->label(__('Code'))
-                            ->required()
-                            ->unique(ignoreRecord: true)
-                            ->default(fn (): string => strtoupper(Str::ulid()->toBase32()))
-                            ->disabled()
-                            ->dehydrated(),
-                        TextInput::make('national_id')
-                            ->label(__('National ID'))
-                            ->unique(ignoreRecord: true),
-                        TextInput::make('members_count')
-                            ->label(__('Members Count'))
-                            ->required()
-                            ->numeric()
-                            ->default(1),
-                    ]),
                 Section::make(__('Contact Information'))
-                    ->columns(2)
+                    ->columns(3)
                     ->schema([
                         TextInput::make('primary_contact_name')
                             ->label(__('Primary Contact Name'))
@@ -60,11 +41,10 @@ class FamilyForm
                             ->required(),
                         TextInput::make('district')
                             ->label(__('District')),
-                        Select::make('housing_status')
+                        ToggleButtons::make('housing_status')
                             ->label(__('Housing Status'))
                             ->options(HousingStatus::class)
-                            ->searchable()
-                            ->preload()
+                            ->inline()
                             ->required(),
                         Textarea::make('address')
                             ->label(__('Address'))

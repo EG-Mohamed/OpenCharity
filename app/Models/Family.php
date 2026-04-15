@@ -9,13 +9,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use MohamedSaid\Referenceable\Traits\HasReference;
 
 class Family extends Model
 {
     /** @use HasFactory<FamilyFactory> */
     use HasFactory;
 
+    use HasReference;
     use SoftDeletes;
+
+    protected string $referenceColumn = 'code';
+
+    protected string $referencePrefix = 'FAM';
+
+    protected int $referenceLength = 6;
 
     protected function casts(): array
     {
@@ -23,7 +31,6 @@ class Family extends Model
             'housing_status' => HousingStatus::class,
             'status' => FamilyStatus::class,
             'monthly_income' => 'decimal:2',
-            'members_count' => 'integer',
         ];
     }
 

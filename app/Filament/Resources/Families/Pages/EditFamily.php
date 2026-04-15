@@ -14,6 +14,10 @@ class EditFamily extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
+        if (blank($data['code'] ?? null)) {
+            unset($data['code']);
+        }
+
         $data['name'] = $data['primary_contact_name'] ?: $this->record->code;
 
         return $data;
