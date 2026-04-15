@@ -9,10 +9,12 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 class FamiliesTable
 {
@@ -23,29 +25,29 @@ class FamiliesTable
             ->columns([
                 TextColumn::make('code')
                     ->label(__('Code'))
-                    ->searchable(),
-                TextColumn::make('name')
-                    ->label(__('Name'))
+                    ->badge()->copyable()
                     ->searchable(),
                 TextColumn::make('primary_contact_name')
                     ->label(__('Primary Contact Name'))
                     ->searchable(),
-                TextColumn::make('primary_contact_phone')
+                PhoneColumn::make('primary_contact_phone')
                     ->label(__('Primary Contact Phone'))
+                    ->badge()->copyable()
                     ->searchable(),
-                TextColumn::make('secondary_contact_phone')
+                PhoneColumn::make('secondary_contact_phone')
                     ->label(__('Secondary Contact Phone'))
+                    ->badge()->copyable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('governorate')
-                    ->label(__('Governorate'))
-                    ->searchable(),
-                TextColumn::make('city')
+                TextColumn::make('state.name')
+                    ->badge()
+                    ->label(__('State')),
+                TextColumn::make('city.name')
+                    ->badge()
                     ->label(__('City'))
                     ->searchable(),
-                TextColumn::make('district')
-                    ->label(__('District'))
-                    ->searchable()
+                TextColumn::make('neighborhood.name')
+                    ->label(__('Neighborhood'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('housing_status')
                     ->label(__('Housing Status'))
@@ -56,7 +58,7 @@ class FamiliesTable
                     ->label(__('Monthly Income'))
                     ->currency()
                     ->sortable(),
-                TextColumn::make('familyMembers_count')
+                TextColumn::make('family_members_count')
                     ->label(__('Members Count'))
                     ->numeric()
                     ->sortable(),
@@ -93,6 +95,7 @@ class FamiliesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

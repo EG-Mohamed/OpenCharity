@@ -47,13 +47,7 @@ class DonationForm
                             ->label(__('Amount'))
                             ->required()
                             ->numeric()
-                            ->currency(),
-                        Select::make('currency')
-                            ->label(__('Currency'))
-                            ->options(Currency::class)
-                            ->searchable()
-                            ->preload()
-                            ->required(),
+                            ->currency()
                     ]),
                 Section::make(__('Payment'))
                     ->columns(2)

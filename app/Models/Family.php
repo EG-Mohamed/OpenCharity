@@ -7,6 +7,7 @@ use App\Enums\HousingStatus;
 use Database\Factories\FamilyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use MohamedSaid\Referenceable\Traits\HasReference;
@@ -31,7 +32,24 @@ class Family extends Model
             'housing_status' => HousingStatus::class,
             'status' => FamilyStatus::class,
             'monthly_income' => 'decimal:2',
+            'latitude' => 'decimal:7',
+            'longitude' => 'decimal:7',
         ];
+    }
+
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function neighborhood(): BelongsTo
+    {
+        return $this->belongsTo(Neighborhood::class);
     }
 
     public function familyMembers(): HasMany

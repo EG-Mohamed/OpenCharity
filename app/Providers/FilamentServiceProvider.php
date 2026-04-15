@@ -84,7 +84,7 @@ class FilamentServiceProvider extends ServiceProvider
                     return $state;
                 }
 
-                return money($state)->formatPrecise();
+                return money($state)->format();
             })
                 ->alignCenter()
                 ->badge()
@@ -108,7 +108,7 @@ class FilamentServiceProvider extends ServiceProvider
                     return null;
                 }
 
-                return money($state)->formatPrecise();
+                return money($state)->format();
             })
                 ->badge()
                 ->color(fn (string $state): string => match ($state >= 0) {
@@ -124,7 +124,7 @@ class FilamentServiceProvider extends ServiceProvider
                     return null;
                 }
 
-                return money($state)->formatPrecise();
+                return money($state)->format();
             });
 
             return $this;

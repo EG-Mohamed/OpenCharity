@@ -91,10 +91,6 @@ class DonationsTable
                     ->label(__('Status'))
                     ->options(DonationStatus::class)
                     ->searchable(),
-                SelectFilter::make('currency')
-                    ->label(__('Currency'))
-                    ->options(Currency::class)
-                    ->searchable(),
                 SelectFilter::make('payment_gateway')
                     ->label(__('Payment Gateway'))
                     ->options(PaymentGateway::class)

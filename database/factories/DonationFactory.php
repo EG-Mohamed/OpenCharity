@@ -24,7 +24,7 @@ class DonationFactory extends Factory
             'donor_email' => fake()->safeEmail(),
             'donor_phone' => fake()->phoneNumber(),
             'amount' => fake()->randomFloat(2, 50, 20000),
-            'currency' => fake()->randomElement(Currency::cases()),
+            'currency' => 'EGP',
             'status' => fake()->randomElement(DonationStatus::cases()),
             'payment_gateway' => fake()->randomElement(PaymentGateway::cases()),
             'payment_method' => fake()->randomElement(PaymentMethod::cases()),

@@ -4,6 +4,7 @@ return [
     'paths' => [
         app_path(),
         resource_path('views'),
+        base_path('vendor/eg-mohamed')
     ],
     'extensions' => ['php', 'blade.php'],
     'exclude_paths' => [],

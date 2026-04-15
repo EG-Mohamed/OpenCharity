@@ -24,7 +24,6 @@ class Donation extends Model
     {
         return [
             'amount' => 'decimal:2',
-            'currency' => Currency::class,
             'status' => DonationStatus::class,
             'payment_gateway' => PaymentGateway::class,
             'payment_method' => PaymentMethod::class,

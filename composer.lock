@@ -1574,16 +1574,16 @@
         },
         {
             "name": "eg-mohamed/filament-map-picker",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EG-Mohamed/filament-map-picker.git",
-                "reference": "d216f805c7df887e954216208647eb49c8bb4b1a"
+                "reference": "42f0810a4922cbfbf18db202c0f82deca057d874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EG-Mohamed/filament-map-picker/zipball/d216f805c7df887e954216208647eb49c8bb4b1a",
-                "reference": "d216f805c7df887e954216208647eb49c8bb4b1a",
+                "url": "https://api.github.com/repos/EG-Mohamed/filament-map-picker/zipball/42f0810a4922cbfbf18db202c0f82deca057d874",
+                "reference": "42f0810a4922cbfbf18db202c0f82deca057d874",
                 "shasum": ""
             },
             "require": {
@@ -1622,9 +1622,9 @@
                 "picker"
             ],
             "support": {
-                "source": "https://github.com/EG-Mohamed/filament-map-picker/tree/1.0.0"
+                "source": "https://github.com/EG-Mohamed/filament-map-picker/tree/1.0.1"
             },
-            "time": "2026-04-15T14:13:22+00:00"
+            "time": "2026-04-15T14:30:28+00:00"
         },
         {
             "name": "eg-mohamed/referenceable",

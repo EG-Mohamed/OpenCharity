@@ -4,15 +4,12 @@ namespace App\Filament\Resources\Families\Schemas;
 
 use App\Enums\FamilyStatus;
 use App\Enums\HousingStatus;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
-use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use SalemAljebaly\FilamentMapPicker\MapPicker;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class FamilyForm
@@ -33,35 +30,14 @@ class FamilyForm
                         PhoneInput::make('secondary_contact_phone')
                             ->label(__('Secondary Contact Phone')),
                     ]),
-                Section::make(__('Location'))
-                    ->columns(2)
+                AddressFields::make(),
+                Section::make(__('Location Details'))
                     ->schema([
-                        TextInput::make('governorate')
-                            ->label(__('Governorate'))
-                            ->required(),
-                        TextInput::make('city')
-                            ->label(__('City'))
-                            ->required(),
-                        TextInput::make('district')
-                            ->label(__('District')),
                         ToggleButtons::make('housing_status')
                             ->label(__('Housing Status'))
                             ->options(HousingStatus::class)
                             ->inline()
                             ->required(),
-                        TextInput::make('address')
-                            ->label(__('Address'))
-                            ->columnSpanFull(),
-                        Hidden::make('latitude')->rules(['nullable', 'numeric']),
-                        Hidden::make('longitude')->rules(['nullable', 'numeric']),
-
-                        MapPicker::make('location')
-                            ->hiddenLabel()
-                            ->latlngFields('latitude', 'longitude')
-                            ->searchable()
-                            ->collapsibleSearch()
-                            ->columnSpanFull()
-                            ->draggable()
                     ]),
                 Section::make(__('Financial'))
                     ->columns(2)
