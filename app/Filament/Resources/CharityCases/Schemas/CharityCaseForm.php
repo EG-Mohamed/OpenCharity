@@ -6,12 +6,11 @@ use App\Enums\CasePriority;
 use App\Enums\CaseStatus;
 use App\Enums\VisitStatusCase;
 use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager;
-use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
@@ -34,7 +33,7 @@ class CharityCaseForm
                             ->required(),
                         Select::make('family_member_id')
                             ->label(__('Family Member'))
-                            ->relationship('familyMember', 'name',fn($query,Get $get) => $query->where('family_id', $get('family_id')))
+                            ->relationship('familyMember', 'name', fn ($query, Get $get) => $query->where('family_id', $get('family_id')))
                             ->searchable()
                             ->preload()
                             ->required(),
@@ -92,19 +91,26 @@ class CharityCaseForm
                     ]),
                 Section::make(__('Timeline'))
                     ->columns(2)
+                    ->hiddenOn('create')
                     ->schema([
-                        DatePicker::make('registered_at')
+                        TextEntry::make('registered_at')
+                            ->dateTime()->placeholder('-')
                             ->label(__('Registered At')),
-                        DatePicker::make('reviewed_at')
+                        TextEntry::make('reviewed_at')
+                            ->dateTime()->placeholder('-')
                             ->label(__('Reviewed At')),
-                        DatePicker::make('approved_at')
+                        TextEntry::make('approved_at')
+                            ->dateTime()->placeholder('-')
                             ->label(__('Approved At')),
-                        DatePicker::make('closed_at')
+                        TextEntry::make('closed_at')
+                            ->dateTime()->placeholder('-')
                             ->label(__('Closed At')),
-                        DatePicker::make('last_visit_at')
+                        TextEntry::make('last_visit_at')
+                            ->dateTime()->placeholder('-')
                             ->label(__('Last Visit At')),
-                        DatePicker::make('next_visit_at')
-                            ->label(__('Next Visit At')),
+                        TextEntry::make('next_visit_at')
+                            ->label(__('Next Visit At'))
+                            ->dateTime()->placeholder('-'),
                     ]),
                 Section::make(__('Notes'))
                     ->schema([

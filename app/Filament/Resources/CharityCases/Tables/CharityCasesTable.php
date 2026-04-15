@@ -5,6 +5,7 @@ namespace App\Filament\Resources\CharityCases\Tables;
 use App\Enums\CasePriority;
 use App\Enums\CaseStatus;
 use App\Enums\VisitStatusCase;
+use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -21,17 +22,21 @@ class CharityCasesTable
     {
         return $table
             ->columns([
-                TextColumn::make('family.name')
-                    ->label(__('Family'))
-                    ->searchable(),
-                TextColumn::make('caseType.name')
-                    ->label(__('Case Type'))
-                    ->searchable(),
                 TextColumn::make('code')
+                    ->badge()->copyable()
                     ->label(__('Code'))
                     ->searchable(),
-                TextColumn::make('title')
-                    ->label(__('Title'))
+                TextColumn::make('family.name')
+                    ->hiddenOn(CharityCasesRelationManager::class)
+                    ->label(__('Family'))
+                    ->searchable(),
+                TextColumn::make('familyMember.name')
+                    ->badge()
+                    ->label(__('Family Member'))
+                    ->searchable(),
+                TextColumn::make('caseType.name')
+                    ->badge()
+                    ->label(__('Case Type'))
                     ->searchable(),
                 TextColumn::make('priority')
                     ->label(__('Priority'))
@@ -50,31 +55,31 @@ class CharityCasesTable
                     ->sortable(),
                 TextColumn::make('registered_at')
                     ->label(__('Registered At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable(),
                 TextColumn::make('reviewed_at')
                     ->label(__('Reviewed At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('approved_at')
                     ->label(__('Approved At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('closed_at')
                     ->label(__('Closed At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('last_visit_at')
                     ->label(__('Last Visit At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('next_visit_at')
                     ->label(__('Next Visit At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable(),
                 TextColumn::make('requested_amount')
                     ->label(__('Requested Amount'))
@@ -86,17 +91,17 @@ class CharityCasesTable
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label(__('Updated At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
                     ->label(__('Deleted At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

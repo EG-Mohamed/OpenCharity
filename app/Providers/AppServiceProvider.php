@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\CharityCase;
+use App\Models\Visit;
+use App\Observers\CharityCaseObserver;
+use App\Observers\VisitObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::automaticallyEagerLoadRelationships();
         Model::unguard();
+
+        CharityCase::observe(CharityCaseObserver::class);
+        Visit::observe(VisitObserver::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\CasePriority;
 use App\Enums\CaseStatus;
+use App\Enums\VisitStatus;
 use App\Enums\VisitStatusCase;
 use Database\Factories\CharityCaseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,6 +54,7 @@ class CharityCase extends Model
     {
         return $this->belongsTo(FamilyMember::class);
     }
+
     public function caseType(): BelongsTo
     {
         return $this->belongsTo(CaseType::class);
@@ -81,5 +83,21 @@ class CharityCase extends Model
     public function donationAllocations(): HasMany
     {
         return $this->hasMany(DonationAllocation::class);
+    }
+
+    public function syncVisitDates(): void
+    {
+        $this->last_visit_at = $this->visits()
+            ->where('status', VisitStatus::Completed)
+            ->whereNotNull('visited_at')
+            ->max('visited_at');
+
+        $this->next_visit_at = $this->visits()
+            ->where('status', VisitStatus::Scheduled)
+            ->whereNotNull('scheduled_at')
+            ->where('scheduled_at', '>=', now())
+            ->min('scheduled_at');
+
+        $this->saveQuietly();
     }
 }

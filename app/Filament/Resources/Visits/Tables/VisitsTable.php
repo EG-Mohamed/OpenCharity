@@ -20,7 +20,7 @@ class VisitsTable
     {
         return $table
             ->columns([
-                TextColumn::make('charityCase.title')
+                TextColumn::make('charityCase.code')
                     ->label(__('Charity Case'))
                     ->searchable(),
                 TextColumn::make('visit_type')
