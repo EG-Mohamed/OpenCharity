@@ -246,5 +246,17 @@
     "Housing Status": "حالة السكن",
     "Members Count": "عدد أفراد الأسرة",
     "Basic Information": "المعلومات الأساسية",
-    "Contact Information": "معلومات التواصل"
+    "Contact Information": "معلومات التواصل",
+    "City id": "مدينة",
+    "State id": "محافظة",
+    "Neighborhood": "حي",
+    "Neighborhoods": "احياء",
+    "Created Date": "تاريخ الإنشاء",
+    "Last Modified Date": "تاريخ آخر تعديل",
+    "Id": "المعرف",
+    "Cities": "المدن",
+    "State": "المحافظة",
+    "States": "المحافظات",
+    "Latitude": "",
+    "Longitude": ""
 }

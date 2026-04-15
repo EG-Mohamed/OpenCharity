@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Filament\Resources\Cities;
+
+use App\Filament\Resources\Cities\Schemas\CityForm;
+use App\Filament\Resources\Cities\Schemas\CityInfolist;
+use App\Filament\Resources\Cities\Tables\CitiesTable;
+use App\Models\City;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+class CityResource extends Resource
+{
+    protected static ?string $model = City::class;
+
+    protected static ?string $slug = 'cities';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 2;
+    public static function getModelLabel(): string
+    {
+        return __('City');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Cities');
+    }
+    public static function getNavigationGroup(): string|\UnitEnum|null
+    {
+        return __('Settings');
+    }
+    public static function form(Schema $schema): Schema
+    {
+        return CityForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return CityInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return CitiesTable::table($table);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListCities::route('/'),
+            'create' => Pages\CreateCity::route('/create'),
+            'edit' => Pages\EditCity::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name'];
+    }
+}
