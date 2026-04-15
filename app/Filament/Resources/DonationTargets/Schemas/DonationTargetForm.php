@@ -4,6 +4,8 @@ namespace App\Filament\Resources\DonationTargets\Schemas;
 
 use App\Enums\DonationTargetStatus;
 use App\Enums\DonationTargetType;
+use App\Filament\Resources\Families\RelationManagers\DonationTargetsRelationManager;
+use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -43,6 +45,7 @@ class DonationTargetForm
                     ->columns(2)
                     ->schema([
                         Select::make('family_id')
+                            ->hiddenOn(DonationTargetsRelationManager::class)
                             ->label(__('Family'))
                             ->relationship('family', 'name')
                             ->searchable()

@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Documents\Schemas;
 use App\Enums\DocumentCategory;
 use App\Enums\DocumentType;
 use App\Enums\DocumentVisibility;
+use App\Filament\Resources\Families\RelationManagers\DocumentsRelationManager;
+use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -24,6 +26,7 @@ class DocumentForm
                     ->columns(2)
                     ->schema([
                         Select::make('family_id')
+                            ->hiddenOn(DocumentsRelationManager::class)
                             ->label(__('Family'))
                             ->relationship('family', 'name')
                             ->searchable()

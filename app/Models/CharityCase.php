@@ -49,6 +49,10 @@ class CharityCase extends Model
         return $this->belongsTo(Family::class);
     }
 
+    public function familyMember(): BelongsTo
+    {
+        return $this->belongsTo(FamilyMember::class);
+    }
     public function caseType(): BelongsTo
     {
         return $this->belongsTo(CaseType::class);

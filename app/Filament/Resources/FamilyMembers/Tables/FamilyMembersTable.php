@@ -6,6 +6,7 @@ use App\Enums\EmploymentStatus;
 use App\Enums\Gender;
 use App\Enums\HealthStatus;
 use App\Enums\RelationToHead;
+use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -24,6 +25,7 @@ class FamilyMembersTable
             ->columns([
                 TextColumn::make('family.name')
                     ->label(__('Family'))
+                    ->hiddenOn(FamilyMembersRelationManager::class)
                     ->searchable(),
                 TextColumn::make('name')
                     ->label(__('Name'))

@@ -289,8 +289,11 @@
     "Keys scanned: :total | Existing: :existing | Missing: :missing": "المفاتيح المفحوصة: :total | الموجودة: :existing | المفقودة: :missing",
     "Unused keys: :count": "المفاتيح غير المستخدمة: :count",
     "Dry run mode: no changes written.": "وضع التجربة: لم يتم كتابة أي تغييرات.",
-    "Written :count new key(s) to lang\/:locale.json.": "تم كتابة :count مفتاح جديد إلى lang/:locale.json.",
+    "Written :count new key(s) to lang\/:locale.json.": "تم كتابة :count مفتاح جديد إلى lang\/:locale.json.",
     "No missing translations found for locale: :locale": "لم يتم العثور على ترجمات مفقودة للغة: :locale",
-    "Removed :count unused key(s) from lang\/:locale.json.": "تم حذف :count مفتاح غير مستخدم من lang/:locale.json."
-
+    "Removed :count unused key(s) from lang\/:locale.json.": "تم حذف :count مفتاح غير مستخدم من lang\/:locale.json.",
+    "Family Information": "معلومات الأسرة",
+    "Open In Map": "فتح في الخريطة",
+    "Household": "الأسرة",
+    "-": ""
 }

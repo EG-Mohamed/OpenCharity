@@ -5,11 +5,15 @@ namespace App\Filament\Resources\CharityCases\Schemas;
 use App\Enums\CasePriority;
 use App\Enums\CaseStatus;
 use App\Enums\VisitStatusCase;
+use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager;
+use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class CharityCaseForm
@@ -19,11 +23,18 @@ class CharityCaseForm
         return $schema
             ->components([
                 Section::make(__('Case Information'))
-                    ->columns(2)
+                    ->columns(3)
                     ->schema([
                         Select::make('family_id')
+                            ->disabledOn(CharityCasesRelationManager::class)
                             ->label(__('Family'))
                             ->relationship('family', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Select::make('family_member_id')
+                            ->label(__('Family Member'))
+                            ->relationship('familyMember', 'name',fn($query,Get $get) => $query->where('family_id', $get('family_id')))
                             ->searchable()
                             ->preload()
                             ->required(),
@@ -33,17 +44,9 @@ class CharityCaseForm
                             ->searchable()
                             ->preload()
                             ->required(),
-                        TextInput::make('code')
-                            ->label(__('Code'))
-                            ->unique(ignoreRecord: true)
-                            ->disabled()
-                            ->dehydrated(),
-                        TextInput::make('title')
-                            ->label(__('Title'))
-                            ->required(),
                     ]),
                 Section::make(__('Classification'))
-                    ->columns(2)
+                    ->columns(3)
                     ->schema([
                         Select::make('priority')
                             ->label(__('Priority'))
@@ -90,17 +93,17 @@ class CharityCaseForm
                 Section::make(__('Timeline'))
                     ->columns(2)
                     ->schema([
-                        DateTimePicker::make('registered_at')
+                        DatePicker::make('registered_at')
                             ->label(__('Registered At')),
-                        DateTimePicker::make('reviewed_at')
+                        DatePicker::make('reviewed_at')
                             ->label(__('Reviewed At')),
-                        DateTimePicker::make('approved_at')
+                        DatePicker::make('approved_at')
                             ->label(__('Approved At')),
-                        DateTimePicker::make('closed_at')
+                        DatePicker::make('closed_at')
                             ->label(__('Closed At')),
-                        DateTimePicker::make('last_visit_at')
+                        DatePicker::make('last_visit_at')
                             ->label(__('Last Visit At')),
-                        DateTimePicker::make('next_visit_at')
+                        DatePicker::make('next_visit_at')
                             ->label(__('Next Visit At')),
                     ]),
                 Section::make(__('Notes'))

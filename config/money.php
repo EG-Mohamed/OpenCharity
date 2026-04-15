@@ -6,7 +6,7 @@ return [
 
         'currency'  => env('MONEY_DEFAULTS_CURRENCY', 'EGP'),
 
-        'convert'   => env('MONEY_DEFAULTS_CONVERT', false),
+        'convert'   => env('MONEY_DEFAULTS_CONVERT', true),
 
     ],
 
@@ -480,7 +480,7 @@ return [
             'precision'           => 2,
             'subunit'             => 100,
             'symbol'              => 'ج.م',
-            'symbol_first'        => true,
+            'symbol_first'        => false,
             'decimal_mark'        => '.',
             'thousands_separator' => ',',
         ],
