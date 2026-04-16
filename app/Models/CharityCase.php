@@ -52,7 +52,7 @@ class CharityCase extends Model
 
     public function fullIdentifier(): Attribute
     {
-        return Attribute::get(fn() => "({$this->code}) - {$this->familyMember->name} - {$this->caseType->name}");
+        return Attribute::get(fn() => "({$this->code}) - {$this->familyMember->name}");
     }
     public function family(): BelongsTo
     {

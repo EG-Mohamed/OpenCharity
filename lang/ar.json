@@ -295,5 +295,17 @@
     "Family Information": "معلومات الأسرة",
     "Open In Map": "فتح في الخريطة",
     "Household": "الأسرة",
-    "-": ""
+    "-": "",
+    "Series": "سلسلة",
+    "Occurrence": "مرة",
+    "Occurrence #:number": "رقم المرة #:number",
+    "Case Code": "كود الحالة",
+    "Parents only": "للأسر فقط",
+    "Part of series": "جزء من سلسلة",
+    "Standalone schedule": "جدول مستقل",
+    "End Date": "تاريخ الانتهاء",
+    "Assistance Calendar": "جدول المساعدات",
+    "Processed :count recurring schedule series.": "تم تنفيذ :count سلسلة جداول متكررة",
+    "Money Amount": "مبلغ مالي",
+    "Service \/ Product": "خدمة \/ منتج"
 }

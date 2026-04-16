@@ -5,15 +5,19 @@ namespace App\Filament\Resources\AssistanceSchedules\Tables;
 use App\Enums\FundingStatus;
 use App\Enums\ScheduleFrequency;
 use App\Enums\ScheduleStatus;
+use App\Models\AssistanceSchedule;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class AssistanceSchedulesTable
 {
@@ -21,9 +25,33 @@ class AssistanceSchedulesTable
     {
         return $table
             ->columns([
-                TextColumn::make('charityCase.title')
+                IconColumn::make('is_parent')
+                    ->label(__('Series'))
+                    ->boolean()
+                    ->state(fn (AssistanceSchedule $record): bool => $record->isParent()),
+                TextColumn::make('series_label')
+                    ->label(__('Occurrence'))
+                    ->badge()
+                    ->state(function (AssistanceSchedule $record): string {
+                        if ($record->isParent()) {
+                            return __('Series');
+                        }
+
+                        if ($record->isChild() && $record->occurrence_number) {
+                            return __('Occurrence #:number', ['number' => $record->occurrence_number]);
+                        }
+
+                        return __('Single');
+                    }),
+                TextColumn::make('charityCase.full_identifier')
+                    ->badge()
+                    ->limit(50)
                     ->label(__('Charity Case'))
                     ->searchable(),
+                TextColumn::make('charityCase.code')
+                    ->label(__('Case Code'))
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('assistanceType.name')
                     ->label(__('Assistance Type'))
                     ->searchable(),
@@ -87,6 +115,9 @@ class AssistanceSchedulesTable
                     ->label(__('Funding Status'))
                     ->options(FundingStatus::class)
                     ->searchable(),
+                Filter::make('parents_only')
+                    ->label(__('Parents only'))
+                    ->query(fn (Builder $query): Builder => $query->whereNull('parent_schedule_id')),
                 TrashedFilter::make(),
             ])
             ->recordActions([

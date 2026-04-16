@@ -17,9 +17,9 @@ enum AssistanceUnitType: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::Amount => __('Amount'),
+            self::Amount => __('Money Amount'),
             self::Item => __('Item'),
-            self::Service => __('Service'),
+            self::Service => __('Service / Product'),
         };
     }
 

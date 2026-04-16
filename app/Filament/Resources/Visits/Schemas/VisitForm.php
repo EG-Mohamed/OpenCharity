@@ -5,8 +5,8 @@ namespace App\Filament\Resources\Visits\Schemas;
 use App\Enums\VisitStatus;
 use App\Enums\VisitType;
 use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
+use App\Filament\Resources\Families\RelationManagers\VisitsRelationManager;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
@@ -22,7 +22,18 @@ class VisitForm
                 Section::make(__('Visit Details'))
                     ->columns(2)
                     ->schema([
-                        CharityCaseSelect::make(),
+                        CharityCaseSelect::make()
+                            ->relationship(
+                                'charityCase',
+                                'code',
+                                fn ($query, $livewire = null) => $query
+                                    ->when(
+                                        $livewire && $livewire instanceof VisitsRelationManager,
+                                        fn ($query) => $query->where('charity_cases.family_id', $livewire->getOwnerRecord()->getKey())
+                                    )
+                                    ->join('family_members', 'family_members.id', '=', 'charity_cases.family_member_id')
+                                    ->select('charity_cases.*', 'family_members.name as family_member_name')
+                            ),
                         Select::make('visit_type')
                             ->label(__('Visit Type'))
                             ->options(VisitType::class)
@@ -37,7 +48,7 @@ class VisitForm
                             ->preload()
                             ->required(),
                         DatePicker::make('scheduled_at')
-                            ->visible(fn(Get $get) => $get('status') === VisitStatus::Scheduled)
+                            ->visible(fn (Get $get) => $get('status') === VisitStatus::Scheduled)
                             ->label(__('Scheduled At')),
                         DatePicker::make('visited_at')
                             ->label(__('Visited At')),
@@ -46,22 +57,22 @@ class VisitForm
                     ]),
                 Section::make(__('Findings'))
                     ->schema([
-                        Textarea::make('summary')
-                            ->label(__('Summary'))
-                            ->columnSpanFull(),
-                        Textarea::make('findings')
-                            ->label(__('Findings'))
-                            ->columnSpanFull(),
-                        Textarea::make('recommendations')
-                            ->label(__('Recommendations'))
-                            ->columnSpanFull(),
+                            Textarea::make('summary')
+                                ->label(__('Summary'))
+                                ->columnSpanFull(),
+                            Textarea::make('findings')
+                                ->label(__('Findings'))
+                                ->columnSpanFull(),
+                            Textarea::make('recommendations')
+                                ->label(__('Recommendations'))
+                                ->columnSpanFull(),
                     ])
                     ->columnSpanFull(),
                 Section::make(__('Notes'))
                     ->schema([
-                        Textarea::make('notes')
-                            ->label(__('Notes'))
-                            ->columnSpanFull(),
+                            Textarea::make('notes')
+                                ->label(__('Notes'))
+                                ->columnSpanFull(),
                     ])
                     ->columnSpanFull(),
             ]);

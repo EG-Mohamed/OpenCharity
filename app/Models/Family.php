@@ -82,4 +82,9 @@ class Family extends Model
     {
         return $this->hasMany(DonationAllocation::class);
     }
+
+    public function assistanceSchedules(): HasManyThrough
+    {
+        return $this->hasManyThrough(AssistanceSchedule::class, CharityCase::class);
+    }
 }

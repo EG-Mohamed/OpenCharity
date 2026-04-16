@@ -6,6 +6,7 @@ use App\Filament\Resources\Families\Pages\CreateFamily;
 use App\Filament\Resources\Families\Pages\EditFamily;
 use App\Filament\Resources\Families\Pages\ListFamilies;
 use App\Filament\Resources\Families\Pages\ViewFamily;
+use App\Filament\Resources\Families\RelationManagers\AssistanceSchedulesRelationManager;
 use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager;
 use App\Filament\Resources\Families\RelationManagers\DocumentsRelationManager;
 use App\Filament\Resources\Families\RelationManagers\DonationTargetsRelationManager;
@@ -49,6 +50,7 @@ class FamilyResource extends Resource
         return [
             FamilyMembersRelationManager::class,
             CharityCasesRelationManager::class,
+            AssistanceSchedulesRelationManager::class,
             VisitsRelationManager::class,
             DocumentsRelationManager::class,
             DonationTargetsRelationManager::class,

@@ -22,11 +22,6 @@ class AssistanceTypeForm
                         TextInput::make('name')
                             ->label(__('Name'))
                             ->required(),
-                        TextInput::make('code')
-                            ->label(__('Code'))
-                            ->unique(ignoreRecord: true)
-                            ->disabled()
-                            ->dehydrated(),
                         Select::make('unit_type')
                             ->label(__('Unit Type'))
                             ->options(AssistanceUnitType::class)
