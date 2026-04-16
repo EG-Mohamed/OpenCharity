@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Akaunting\Money\Money;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -44,6 +45,40 @@ class FilamentServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Money::macro('formatPrecise', function (?int $decimals = null): string {
+            /** @var Money $this */
+            $currency = $this->getCurrency();
+            $amount = $this->getAmount();
+
+            if ($decimals === null) {
+                $decimals = strlen((string) $currency->getSubunit()) - 1;
+            }
+
+            $isNegative = $amount < 0;
+            $amount = abs($amount);
+
+            $value = $amount / $currency->getSubunit();
+
+            $isWhole = abs($value - round($value)) < 0.00001;
+
+            $formatted = number_format(
+                $value,
+                $isWhole ? 0 : $decimals,
+                decimal_separator: $currency->getDecimalMark(),
+                thousands_separator: $currency->getThousandsSeparator()
+            );
+
+            if ($isNegative) {
+                $formatted = '-'.$formatted;
+            }
+
+            $symbol = $currency->getSymbol();
+            $separator = ' ';
+
+            return $currency->isSymbolFirst()
+                ? $symbol.$separator.$formatted
+                : $formatted.$separator.$symbol;
+        });
         TimePicker::configureUsing(fn (TimePicker $picker) => $picker->seconds(false));
         Table::configureUsing(fn (Table $table) => $table->defaultDateTimeDisplayFormat('j M Y - g:i A')
             ->defaultDateDisplayFormat('j M Y')
@@ -84,7 +119,7 @@ class FilamentServiceProvider extends ServiceProvider
                     return $state;
                 }
 
-                return money($state)->format();
+                return money($state)->formatPrecise();
             })
                 ->alignCenter()
                 ->badge()
@@ -108,7 +143,7 @@ class FilamentServiceProvider extends ServiceProvider
                     return null;
                 }
 
-                return money($state)->format();
+                return money($state)->formatPrecise();
             })
                 ->badge()
                 ->color(fn (string $state): string => match ($state >= 0) {
@@ -124,7 +159,7 @@ class FilamentServiceProvider extends ServiceProvider
                     return null;
                 }
 
-                return money($state)->format();
+                return money($state)->formatPrecise();
             });
 
             return $this;
