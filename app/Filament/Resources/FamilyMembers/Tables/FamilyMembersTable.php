@@ -2,20 +2,29 @@
 
 namespace App\Filament\Resources\FamilyMembers\Tables;
 
+use App\Enums\EducationStatus;
 use App\Enums\EmploymentStatus;
 use App\Enums\Gender;
 use App\Enums\HealthStatus;
+use App\Enums\MaritalStatus;
 use App\Enums\RelationToHead;
+use App\Filament\Exports\FamilyMemberExporter;
 use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
+use App\Models\Family;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
 
 class FamilyMembersTable
 {
@@ -93,6 +102,10 @@ class FamilyMembersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('family_id')
+                    ->label(__('Family'))
+                    ->options(fn (): array => Family::query()->pluck('code', 'id')->all())
+                    ->searchable(),
                 SelectFilter::make('gender')
                     ->label(__('Gender'))
                     ->options(Gender::class)
@@ -100,6 +113,14 @@ class FamilyMembersTable
                 SelectFilter::make('relation_to_head')
                     ->label(__('Relation To Head'))
                     ->options(RelationToHead::class)
+                    ->searchable(),
+                SelectFilter::make('marital_status')
+                    ->label(__('Marital Status'))
+                    ->options(MaritalStatus::class)
+                    ->searchable(),
+                SelectFilter::make('education_status')
+                    ->label(__('Education Status'))
+                    ->options(EducationStatus::class)
                     ->searchable(),
                 SelectFilter::make('employment_status')
                     ->label(__('Employment Status'))
@@ -109,10 +130,29 @@ class FamilyMembersTable
                     ->label(__('Health Status'))
                     ->options(HealthStatus::class)
                     ->searchable(),
+                DaterangepickerFilter::make('birth_date')
+                    ->label(__('Birth Date'))
+                    ->useColumn('birth_date'),
+                Filter::make('income_range')
+                    ->label(__('Monthly Income'))
+                    ->schema([
+                        TextInput::make('min')->label(__('Min Income'))->numeric(),
+                        TextInput::make('max')->label(__('Max Income'))->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('monthly_income', '>=', $amount))
+                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('monthly_income', '<=', $amount));
+                    }),
                 TrashedFilter::make(),
             ])
             ->recordActions([
                 EditAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->label(__('Export'))
+                    ->exporter(FamilyMemberExporter::class),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

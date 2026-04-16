@@ -5,19 +5,27 @@ namespace App\Filament\Resources\AssistanceSchedules\Tables;
 use App\Enums\FundingStatus;
 use App\Enums\ScheduleFrequency;
 use App\Enums\ScheduleStatus;
+use App\Filament\Exports\AssistanceScheduleExporter;
 use App\Models\AssistanceSchedule;
+use App\Models\AssistanceType;
+use App\Models\CharityCase;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
 
 class AssistanceSchedulesTable
 {
@@ -103,6 +111,14 @@ class AssistanceSchedulesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('charity_case_id')
+                    ->label(__('Charity Case'))
+                    ->options(fn (): array => CharityCase::query()->pluck('code', 'id')->all())
+                    ->searchable(),
+                SelectFilter::make('assistance_type_id')
+                    ->label(__('Assistance Type'))
+                    ->options(fn (): array => AssistanceType::query()->pluck('name', 'id')->all())
+                    ->searchable(),
                 SelectFilter::make('frequency')
                     ->label(__('Frequency'))
                     ->options(ScheduleFrequency::class)
@@ -115,6 +131,57 @@ class AssistanceSchedulesTable
                     ->label(__('Funding Status'))
                     ->options(FundingStatus::class)
                     ->searchable(),
+                DaterangepickerFilter::make('scheduled_date')
+                    ->label(__('Scheduled Date'))
+                    ->useColumn('scheduled_date'),
+                Filter::make('amount_range')
+                    ->label(__('Amount Range'))
+                    ->schema([
+                        TextInput::make('min')->label(__('Min Amount'))->numeric(),
+                        TextInput::make('max')->label(__('Max Amount'))->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('amount', '>=', $amount))
+                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('amount', '<=', $amount));
+                    }),
+                Filter::make('quantity_range')
+                    ->label(__('Quantity Range'))
+                    ->schema([
+                        TextInput::make('min')->label(__('Min Quantity'))->numeric(),
+                        TextInput::make('max')->label(__('Max Quantity'))->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['min'] ?? null, fn (Builder $query, $quantity): Builder => $query->where('quantity', '>=', $quantity))
+                            ->when($data['max'] ?? null, fn (Builder $query, $quantity): Builder => $query->where('quantity', '<=', $quantity));
+                    }),
+                Filter::make('series_type')
+                    ->label(__('Series Type'))
+                    ->schema([
+                        Select::make('value')
+                            ->label(__('Series Type'))
+                            ->options([
+                                'parent' => __('Series'),
+                                'child' => __('Occurrence'),
+                                'single' => __('Single'),
+                            ]),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return match ($data['value'] ?? null) {
+                            'parent' => $query->whereNull('parent_schedule_id')->where('frequency', '!=', ScheduleFrequency::Once->value),
+                            'child' => $query->whereNotNull('parent_schedule_id'),
+                            'single' => $query->whereNull('parent_schedule_id')->where('frequency', ScheduleFrequency::Once),
+                            default => $query,
+                        };
+                    }),
+                TernaryFilter::make('has_deliveries')
+                    ->label(__('Has Deliveries'))
+                    ->queries(
+                        true: fn (Builder $query): Builder => $query->has('assistanceDeliveries'),
+                        false: fn (Builder $query): Builder => $query->doesntHave('assistanceDeliveries'),
+                        blank: fn (Builder $query): Builder => $query,
+                    ),
                 Filter::make('parents_only')
                     ->label(__('Parents only'))
                     ->query(fn (Builder $query): Builder => $query->whereNull('parent_schedule_id')),
@@ -122,6 +189,11 @@ class AssistanceSchedulesTable
             ])
             ->recordActions([
                 EditAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->label(__('Export'))
+                    ->exporter(AssistanceScheduleExporter::class),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

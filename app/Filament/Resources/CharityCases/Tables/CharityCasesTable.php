@@ -5,16 +5,25 @@ namespace App\Filament\Resources\CharityCases\Tables;
 use App\Enums\CasePriority;
 use App\Enums\CaseStatus;
 use App\Enums\VisitStatusCase;
+use App\Filament\Exports\CharityCaseExporter;
 use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager;
+use App\Models\CaseType;
+use App\Models\Family;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
 
 class CharityCasesTable
 {
@@ -106,6 +115,14 @@ class CharityCasesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('family_id')
+                    ->label(__('Family'))
+                    ->options(fn (): array => Family::query()->pluck('code', 'id')->all())
+                    ->searchable(),
+                SelectFilter::make('case_type_id')
+                    ->label(__('Case Type'))
+                    ->options(fn (): array => CaseType::query()->pluck('name', 'id')->all())
+                    ->searchable(),
                 SelectFilter::make('priority')
                     ->label(__('Priority'))
                     ->options(CasePriority::class)
@@ -118,10 +135,60 @@ class CharityCasesTable
                     ->label(__('Visit Status'))
                     ->options(VisitStatusCase::class)
                     ->searchable(),
+                DaterangepickerFilter::make('registered_at')
+                    ->label(__('Registered At'))
+                    ->useColumn('registered_at'),
+                DaterangepickerFilter::make('approved_at')
+                    ->label(__('Approved At'))
+                    ->useColumn('approved_at'),
+                DaterangepickerFilter::make('next_visit_at')
+                    ->label(__('Next Visit At'))
+                    ->useColumn('next_visit_at'),
+                Filter::make('requested_amount')
+                    ->label(__('Requested Amount'))
+                    ->schema([
+                        TextInput::make('min')->label(__('Min Amount'))->numeric(),
+                        TextInput::make('max')->label(__('Max Amount'))->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('requested_amount', '>=', $amount))
+                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('requested_amount', '<=', $amount));
+                    }),
+                Filter::make('approved_amount')
+                    ->label(__('Approved Amount'))
+                    ->schema([
+                        TextInput::make('min')->label(__('Min Amount'))->numeric(),
+                        TextInput::make('max')->label(__('Max Amount'))->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('approved_amount', '>=', $amount))
+                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('approved_amount', '<=', $amount));
+                    }),
+                TernaryFilter::make('has_visits')
+                    ->label(__('Has Visits'))
+                    ->queries(
+                        true: fn (Builder $query): Builder => $query->has('visits'),
+                        false: fn (Builder $query): Builder => $query->doesntHave('visits'),
+                        blank: fn (Builder $query): Builder => $query,
+                    ),
+                TernaryFilter::make('has_schedules')
+                    ->label(__('Has Assistance Schedules'))
+                    ->queries(
+                        true: fn (Builder $query): Builder => $query->has('assistanceSchedules'),
+                        false: fn (Builder $query): Builder => $query->doesntHave('assistanceSchedules'),
+                        blank: fn (Builder $query): Builder => $query,
+                    ),
                 TrashedFilter::make(),
             ])
             ->recordActions([
                 EditAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->label(__('Export'))
+                    ->exporter(CharityCaseExporter::class),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

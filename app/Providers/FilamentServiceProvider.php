@@ -24,6 +24,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\ServiceProvider;
@@ -36,7 +37,7 @@ class FilamentServiceProvider extends ServiceProvider
         Panel::configureUsing(fn (Panel $panel) => $panel->maxContentWidth(Width::Full)
             ->font('Alexandria')
             ->colors([
-                'primary' => Color::Emerald,
+                'primary' => Color::generateV3Palette('#CB3223'),
             ])
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false));
     }
@@ -46,7 +47,7 @@ class FilamentServiceProvider extends ServiceProvider
         TimePicker::configureUsing(fn (TimePicker $picker) => $picker->seconds(false));
         Table::configureUsing(fn (Table $table) => $table->defaultDateTimeDisplayFormat('j M Y - g:i A')
             ->defaultDateDisplayFormat('j M Y')
-            ->defaultTimeDisplayFormat('g:i A'));
+            ->defaultTimeDisplayFormat('g:i A')->filtersLayout(FiltersLayout::AboveContentCollapsible));
         ToggleColumn::configureUsing(function (ToggleColumn $toggle): void {
             $toggle->offColor('danger')
                 ->onColor('success')

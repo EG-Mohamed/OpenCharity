@@ -71,6 +71,7 @@ class AssistanceCalendarWidget extends FullCalendarWidget
     {
         return [
             CreateAction::make()
+                ->modelLabel(__('Assistance Schedule'))
                 ->model($this->getModel())
                 ->schema($this->getFormSchema())
                 ->fillForm(function (array $arguments): array {
