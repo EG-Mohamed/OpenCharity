@@ -9,8 +9,10 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -18,6 +20,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class DonationForm extends Component implements HasForms
 {
@@ -25,7 +28,7 @@ class DonationForm extends Component implements HasForms
 
     public ?array $data = [];
 
-    public array $presetAmounts = [50, 100, 250, 500];
+    public array $presetAmounts = [50, 100, 250, 500,1000,5000];
 
     public array $targetOptions = [];
 
@@ -62,8 +65,8 @@ class DonationForm extends Component implements HasForms
     {
         return $schema
             ->components([
-                Section::make(__('بيانات التبرع'))
-                    ->compact()
+                Fieldset::make(__('بيانات التبرع'))
+                    ->columns(1)
                     ->schema([
                         Radio::make('donation_type')
                             ->label(__('نوع التبرع'))
@@ -77,16 +80,6 @@ class DonationForm extends Component implements HasForms
                             ->inlineLabel(false)
                             ->default('general')
                             ->live(),
-                        Select::make('preset_amount')
-                            ->label(__('مبالغ سريعة'))
-                            ->options(collect($this->presetAmounts)->mapWithKeys(fn (int $amount): array => [$amount => $amount.' '.__('ج.م')])->all())
-                            ->placeholder(__('اختر مبلغاً سريعاً'))
-                            ->live()
-                            ->afterStateUpdated(function ($state, callable $set): void {
-                                if (filled($state)) {
-                                    $set('amount', (int) $state);
-                                }
-                            }),
                         TextInput::make('amount')
                             ->label(__('المبلغ'))
                             ->numeric()
@@ -100,11 +93,15 @@ class DonationForm extends Component implements HasForms
                             ->visible(fn (callable $get): bool => $get('donation_type') !== 'general')
                             ->required(fn (callable $get): bool => $get('donation_type') !== 'general'),
                     ]),
-                Section::make(__('بيانات المتبرع'))
-                    ->compact()
+                Fieldset::make(__('بيانات المتبرع'))
+                    ->columns(1)
                     ->schema([
                         Grid::make(2)
                             ->schema([
+                                Toggle::make('anonymous')
+                                    ->columnSpanFull()
+                                    ->label(__('تبرع باسم مجهول'))
+                                    ->default(false),
                                 TextInput::make('donor_name')
                                     ->label(__('الاسم'))
                                     ->required()
@@ -113,26 +110,19 @@ class DonationForm extends Component implements HasForms
                                     ->label(__('البريد الإلكتروني'))
                                     ->email()
                                     ->maxLength(255),
-                                TextInput::make('donor_phone')
+                                PhoneInput::make('donor_phone')
                                     ->label(__('رقم الهاتف'))
-                                    ->tel()
-                                    ->maxLength(30),
-                                Radio::make('payment_method')
-                                    ->label(__('طريقة الدفع'))
-                                    ->options([
-                                        PaymentMethod::Card->value => __('بطاقة'),
-                                        PaymentMethod::Wallet->value => __('محفظة'),
-                                        PaymentMethod::BankTransfer->value => __('تحويل بنكي'),
-                                    ])
-                                    ->default(PaymentMethod::Card->value)
-                                    ->inline()
-                                    ->inlineLabel(false)
+                                    ->columnSpanFull()
                                     ->required(),
+//                                ToggleButtons::make('payment_method')
+//                                    ->label(__('طريقة الدفع'))
+//                                    ->options(PaymentMethod::class)
+//                                    ->columnSpanFull()
+//                                    ->default(PaymentMethod::Card)
+//                                    ->inline()
+//                                    ->inlineLabel(false)
+//                                    ->required(),
                             ]),
-                        Toggle::make('anonymous')
-                            ->label(__('تبرع باسم مجهول'))
-                            ->default(false),
-                        Hidden::make('preset_amount'),
                     ]),
             ])
             ->statePath('data');

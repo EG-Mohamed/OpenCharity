@@ -2,30 +2,23 @@
 
 <section id="donation" class="landing-section">
     <div class="landing-container">
-        <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-            <div class="rounded-[2rem] bg-gradient-to-br from-primary-950 via-primary-900 to-primary-700 p-8 text-white shadow-2xl shadow-primary-950/20 sm:p-10">
-                <span class="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-white/80">{{ __('مساحة العطاء') }}</span>
-                <h2 class="mt-6 text-3xl font-black sm:text-4xl">{{ __('تبرع أنيق، سريع، وموجّه إلى حيث يصنع الفرق') }}</h2>
-                <p class="mt-5 text-lg leading-8 text-white/80">{{ __('صممنا تجربة التبرع لتكون واضحة ومطمئنة، مع خيارات متنوعة تناسب نيتك في الدعم، سواء كان عاماً أو موجهاً إلى أسرة أو حالة أو حملة.') }}</p>
-
-                <div class="mt-10 grid gap-4 sm:grid-cols-2">
-                    <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
-                        <div class="text-lg font-bold">{{ __('ثقة ووضوح') }}</div>
-                        <p class="mt-2 text-sm leading-7 text-white/75">{{ __('كل اختيار داخل النموذج مبني ليقرّبك من الاحتياج الحقيقي بواجهة بسيطة ومباشرة.') }}</p>
-                    </div>
-                    <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
-                        <div class="text-lg font-bold">{{ __('مرونة كاملة') }}</div>
-                        <p class="mt-2 text-sm leading-7 text-white/75">{{ __('اختر مبلغاً سريعاً أو اكتب ما يناسبك، وحدد طريقة التبرع التي تفضّلها.') }}</p>
-                    </div>
-                </div>
+        <div class="mx-auto max-w-3xl space-y-5">
+            <div class="max-w-2xl">
+                <span class="landing-section-label">{{ __('Donation form') }}</span>
+                <h2 class="mt-4 text-[2rem] font-extrabold leading-[1.25] text-gray-900 sm:text-[2.15rem] dark:text-white">{{ __('Start your donation directly') }}</h2>
             </div>
 
-            <div class="space-y-4">
-                @livewire('landing.donation-form', ['targets' => $targets])
+            <div class="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-primary-100 via-white to-primary-50 p-5 shadow-xl shadow-primary-950/8 sm:p-6 dark:border dark:border-white/8 dark:bg-linear-to-br dark:from-gray-950 dark:via-primary-950/35 dark:to-gray-900">
+                <div class="pointer-events-none absolute inset-0">
+                    <div class="absolute inset-x-12 top-0 h-28 rounded-full bg-primary-300/20 blur-3xl dark:bg-primary-500/12"></div>
+                    <div class="absolute bottom-0 start-10 h-24 w-24 rounded-full bg-primary-200/20 blur-3xl dark:bg-primary-600/10"></div>
+                    <div class="absolute end-8 top-12 h-28 w-28 rounded-full bg-primary-100/80 blur-3xl dark:bg-white/4"></div>
+                </div>
 
-                <a href="{{ route('donation-cases') }}" class="inline-flex w-full items-center justify-center rounded-full border border-primary-200 bg-white px-5 py-3 text-sm font-bold text-primary-700 transition hover:border-primary-300 hover:bg-primary-50 dark:border-primary-900/50 dark:bg-gray-950 dark:text-primary-200 dark:hover:bg-primary-950/30">
-                    {{ __('استعرض صفحة حالات التبرع') }}
-                </a>
+                <div class="relative rounded-[1.8rem] border border-white/70 bg-white/96 p-3 backdrop-blur-sm dark:border-white/10 dark:bg-gray-950/92 dark:shadow-2xl dark:shadow-black/20">
+                    <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary-300/40 to-transparent dark:via-primary-400/25"></div>
+                    @livewire('landing.donation-form', ['targets' => $targets])
+                </div>
             </div>
         </div>
     </div>

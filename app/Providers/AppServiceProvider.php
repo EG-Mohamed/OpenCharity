@@ -7,6 +7,7 @@ use App\Models\Visit;
 use App\Observers\CharityCaseObserver;
 use App\Observers\VisitObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::automaticallyEagerLoadRelationships();
         Model::unguard();
+        Blade::component('layouts.app', 'app');
     }
 }
