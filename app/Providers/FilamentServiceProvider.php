@@ -28,8 +28,10 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class FilamentServiceProvider extends ServiceProvider
 {
@@ -45,6 +47,10 @@ class FilamentServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        PhoneInput::configureUsing(fn(PhoneInput $phoneInput) => $phoneInput->initialCountry(function () {
+            return rescue(fn () => Http::get('https://ipinfo.io/'.request()->ip().'/json')->json('country'), app()->getLocale(), report: false) ?? 'eg';
+
+        }));
         Money::macro('formatPrecise', function (?int $decimals = null): string {
             /** @var Money $this */
             $currency = $this->getCurrency();
