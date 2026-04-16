@@ -29,7 +29,7 @@
             @foreach ($displayTargets as $target)
                 @php
                     $goalAmount = max((float) $target->goal_amount, 1);
-                    $collectedAmount = min((float) $target->collected_amount, $goalAmount);
+                    $collectedAmount = min((float) $target->paid_donations_sum, $goalAmount);
                     $progress = min(($collectedAmount / $goalAmount) * 100, 100);
                     $typeLabel = $target->type?->getLabel() ?? __('Giving opportunity');
                 @endphp
@@ -58,7 +58,7 @@
                             <div class="mt-1 text-base font-semibold text-gray-900 dark:text-white">{{ money($collectedAmount)->formatPrecise() }}</div>
                             <div class="text-[13px] text-gray-500 dark:text-gray-400">{{ __('Out of') }} {{ money($goalAmount)->formatPrecise() }}</div>
                         </div>
-                        <a href="#donation" class="rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('Donate') }}</a>
+                        <a href="{{ route('donation-cases', ['target' => $target->id, 'type' => $target->type?->value]) }}#donation-form" class="rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('Donate') }}</a>
                     </div>
                 </article>
             @endforeach

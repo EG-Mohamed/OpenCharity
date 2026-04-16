@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Donations\Schemas;
 
-use App\Enums\Currency;
 use App\Enums\DonationStatus;
 use App\Enums\PaymentGateway;
 use App\Enums\PaymentMethod;
@@ -47,7 +46,7 @@ class DonationForm
                             ->label(__('Amount'))
                             ->required()
                             ->numeric()
-                            ->currency()
+                            ->currency(),
                     ]),
                 Section::make(__('Payment'))
                     ->columns(2)
@@ -71,6 +70,9 @@ class DonationForm
                             ->preload()
                             ->required(),
                         TextInput::make('transaction_id')
+                            ->label(__('Transaction ID')),
+                        TextInput::make('currency')
+                            ->default('EGP')
                             ->label(__('Transaction ID')),
                         DateTimePicker::make('paid_at')
                             ->label(__('Paid At')),

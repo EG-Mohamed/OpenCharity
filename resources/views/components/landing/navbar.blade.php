@@ -7,7 +7,7 @@
 >
     <div class="landing-container pt-4">
         <div class="flex items-center justify-between rounded-full border border-white/60 bg-white/80 px-4 py-3 shadow-lg shadow-primary-950/5 backdrop-blur-lg transition-all duration-300 dark:border-white/10 dark:bg-gray-950/80 md:px-6 data-[scrolled=true]:shadow-xl data-[scrolled=true]:shadow-primary-950/10">
-            <a href="#top" class="flex items-center gap-3">
+            <a href="{{ route('home') }}" class="flex items-center gap-3">
                 @if ($logo)
                     <span class="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm dark:bg-white">
                         <img src="{{ $logo }}" alt="{{ __('مؤسسة مسعي') }}" class="h-9 w-auto object-contain">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CaseStatus;
+use App\Enums\DonationStatus;
 use App\Enums\DonationTargetStatus;
 use App\Models\AssistanceType;
 use App\Models\CaseType;
@@ -17,7 +18,10 @@ class LandingController extends Controller
     public function __invoke(): View
     {
         $targets = DonationTarget::query()
-            ->with(['family:id,name', 'charityCase:id,title'])
+            ->withSum(['donations as paid_donations_sum' => function ($query) {
+                $query->where('status', DonationStatus::Paid);
+            }], 'amount')
+            ->with(['family:id,name', 'charityCase:id,code'])
             ->where('status', DonationTargetStatus::Active)
             ->latest('starts_at')
             ->limit(6)
@@ -35,23 +39,23 @@ class LandingController extends Controller
 
         $stats = [
             [
-                'label' => __('الأسر المدعومة'),
+                'label' => __('Supported families'),
                 'value' => Family::query()->count(),
                 'suffix' => '+',
             ],
             [
-                'label' => __('الحالات المكتملة'),
+                'label' => __('Completed cases'),
                 'value' => CharityCase::query()->where('status', CaseStatus::Completed)->count(),
                 'suffix' => '+',
             ],
             [
-                'label' => __('إجمالي التبرعات'),
-                'value' => (int) round((float) Donation::query()->sum('amount')),
-                'suffix' => ' '. currency()->getSuffix(),
+                'label' => __('Total donations'),
+                'value' => (int) round((float) Donation::query()->where('status', DonationStatus::Paid)->sum('amount')),
+                'suffix' => ' '.currency()->getSuffix(),
             ],
             [
-                'label' => __('المتطوعون'),
-                'value' => 120,
+                'label' => __('Active donation opportunities'),
+                'value' => DonationTarget::query()->where('status', DonationTargetStatus::Active)->count(),
                 'suffix' => '+',
             ],
         ];

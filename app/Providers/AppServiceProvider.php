@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\CharityCase;
-use App\Models\Visit;
-use App\Observers\CharityCaseObserver;
-use App\Observers\VisitObserver;
+use App\Contracts\PaymentGateway;
+use App\Services\Payments\PaymobPaymentGateway;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(PaymentGateway::class, PaymobPaymentGateway::class);
     }
 
     /**
