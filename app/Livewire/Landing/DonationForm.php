@@ -157,16 +157,16 @@ class DonationForm extends Component implements HasForms
 
         $donation = DB::transaction(function () use ($state): Donation {
             return Donation::query()->create([
-                'donation_target_id' => $state['donation_target_id'] ?: null,
-                'donor_name' => $state['donor_name'],
-                'donor_email' => $state['donor_email'],
-                'donor_phone' => $state['donor_phone'],
-                'amount' => $state['amount'],
+                'donation_target_id' => data_get($state,'donation_target_id'),
+                'donor_name' => data_get($state,'donor_name'),
+                'donor_email' => data_get($state,'donor_email'),
+                'donor_phone' => data_get($state,'donor_phone'),
+                'amount' => data_get($state,'amount'),
                 'currency' => 'EGP',
                 'status' => DonationStatus::Pending,
                 'payment_gateway' => PaymentGatewayEnum::Paymob,
                 'payment_method' => PaymentMethod::Card,
-                'anonymous' => (bool) $state['anonymous'],
+                'anonymous' => (bool) data_get($state,'anonymous'),
             ]);
         });
 
