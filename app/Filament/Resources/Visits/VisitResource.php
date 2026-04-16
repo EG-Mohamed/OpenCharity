@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Visits;
 use App\Filament\Resources\Visits\Pages\CreateVisit;
 use App\Filament\Resources\Visits\Pages\EditVisit;
 use App\Filament\Resources\Visits\Pages\ListVisits;
+use App\Filament\Resources\Visits\Pages\ViewVisit;
 use App\Filament\Resources\Visits\Schemas\VisitForm;
+use App\Filament\Resources\Visits\Schemas\VisitInfolist;
 use App\Filament\Resources\Visits\Tables\VisitsTable;
 use App\Models\Visit;
 use BackedEnum;
@@ -14,6 +16,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VisitResource extends Resource
@@ -29,6 +32,11 @@ class VisitResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return VisitForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return VisitInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -58,8 +66,14 @@ class VisitResource extends Resource
         return [
             'index' => ListVisits::route('/'),
             'create' => CreateVisit::route('/create'),
+            'view' => ViewVisit::route('/{record}'),
             'edit' => EditVisit::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return static::getUrl('view', ['record' => $record]);
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder

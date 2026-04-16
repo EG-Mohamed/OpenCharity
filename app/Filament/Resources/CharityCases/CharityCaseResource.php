@@ -5,11 +5,13 @@ namespace App\Filament\Resources\CharityCases;
 use App\Filament\Resources\CharityCases\Pages\CreateCharityCase;
 use App\Filament\Resources\CharityCases\Pages\EditCharityCase;
 use App\Filament\Resources\CharityCases\Pages\ListCharityCases;
+use App\Filament\Resources\CharityCases\Pages\ViewCharityCase;
 use App\Filament\Resources\CharityCases\RelationManagers\AssistanceSchedulesRelationManager;
 use App\Filament\Resources\CharityCases\RelationManagers\DocumentsRelationManager;
 use App\Filament\Resources\CharityCases\RelationManagers\DonationTargetsRelationManager;
 use App\Filament\Resources\CharityCases\RelationManagers\VisitsRelationManager;
 use App\Filament\Resources\CharityCases\Schemas\CharityCaseForm;
+use App\Filament\Resources\CharityCases\Schemas\CharityCaseInfolist;
 use App\Filament\Resources\CharityCases\Tables\CharityCasesTable;
 use App\Models\CharityCase;
 use BackedEnum;
@@ -18,6 +20,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CharityCaseResource extends Resource
@@ -33,6 +36,11 @@ class CharityCaseResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return CharityCaseForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return CharityCaseInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -70,8 +78,14 @@ class CharityCaseResource extends Resource
         return [
             'index' => ListCharityCases::route('/'),
             'create' => CreateCharityCase::route('/create'),
+            'view' => ViewCharityCase::route('/{record}'),
             'edit' => EditCharityCase::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return static::getUrl('view', ['record' => $record]);
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder

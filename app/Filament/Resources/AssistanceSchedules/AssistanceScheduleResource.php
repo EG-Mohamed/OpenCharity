@@ -5,9 +5,11 @@ namespace App\Filament\Resources\AssistanceSchedules;
 use App\Filament\Resources\AssistanceSchedules\Pages\CreateAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\Pages\EditAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\Pages\ListAssistanceSchedules;
+use App\Filament\Resources\AssistanceSchedules\Pages\ViewAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\RelationManagers\AssistanceDeliveriesRelationManager;
 use App\Filament\Resources\AssistanceSchedules\RelationManagers\DonationAllocationsRelationManager;
 use App\Filament\Resources\AssistanceSchedules\Schemas\AssistanceScheduleForm;
+use App\Filament\Resources\AssistanceSchedules\Schemas\AssistanceScheduleInfolist;
 use App\Filament\Resources\AssistanceSchedules\Tables\AssistanceSchedulesTable;
 use App\Models\AssistanceSchedule;
 use BackedEnum;
@@ -16,6 +18,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AssistanceScheduleResource extends Resource
@@ -31,6 +34,11 @@ class AssistanceScheduleResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return AssistanceScheduleForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return AssistanceScheduleInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -66,8 +74,14 @@ class AssistanceScheduleResource extends Resource
         return [
             'index' => ListAssistanceSchedules::route('/'),
             'create' => CreateAssistanceSchedule::route('/create'),
+            'view' => ViewAssistanceSchedule::route('/{record}'),
             'edit' => EditAssistanceSchedule::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return static::getUrl('view', ['record' => $record]);
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder
