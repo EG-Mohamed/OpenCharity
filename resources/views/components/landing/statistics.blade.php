@@ -13,16 +13,16 @@
                 <div class="max-w-2xl">
                     <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[11px] font-medium tracking-[0.12em] text-white/80 backdrop-blur-sm">
                         <span class="h-1.5 w-1.5 rounded-full bg-primary-200"></span>
-                        {{ __('أرقام تصنع الفرق') }}
+                        {{ __('Numbers that make a difference') }}
                     </span>
-                    <h2 class="mt-4 text-[2rem] font-extrabold leading-[1.25] sm:text-[2.15rem] lg:text-[2.35rem]">{{ __('نقيس أثرنا بما نتركه في حياة الناس') }}</h2>
+                    <h2 class="mt-4 text-[2rem] font-extrabold leading-[1.25] sm:text-[2.15rem] lg:text-[2.35rem]">{{ __('We measure our impact by what we leave in people\'s lives') }}</h2>
                 </div>
 
                 <div class="rounded-[1.5rem] border border-white/12 bg-white/8 p-4 backdrop-blur-sm sm:p-5">
-                    <p class="text-sm font-normal leading-7 text-white/80 sm:text-[15px]">{{ __('كل رقم هنا يعكس قصة دعم حقيقية، وتعاوناً متواصلاً بين المؤسسة والمتبرعين والمتطوعين لخدمة من هم في أمسّ الحاجة.') }}</p>
+                    <p class="text-sm font-normal leading-7 text-white/80 sm:text-[15px]">{{ __('Every number here reflects a real support story and ongoing collaboration between the foundation, donors, and volunteers to serve those in greatest need.') }}</p>
                     <div class="mt-4 flex items-center gap-2.5 text-[13px] text-white/65">
                         <span class="h-2 w-2 rounded-full bg-primary-200"></span>
-                        <span>{{ __('نتائج واضحة، وأثر يصل بكرامة وشفافية.') }}</span>
+                        <span>{{ __('Clear results and impact delivered with dignity and transparency.') }}</span>
                     </div>
                 </div>
             </div>

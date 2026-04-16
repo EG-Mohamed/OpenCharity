@@ -13,16 +13,16 @@
                 <div class="max-w-2xl">
                     <span class="landing-section-label">
                         <span class="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        {{ __('معاً نبني الأمل') }}
+                        {{ __('Together we build hope') }}
                     </span>
 
                     <h1 class="mt-6 text-5xl font-black leading-tight text-white sm:text-6xl lg:text-6xl">
-                        {{ __('مؤسسة') }}
-                        <span class="text-primary-300">{{ __('مسعي') }}</span>
+                        {{ __('Masaa') }}
+                        <span class="text-primary-300">{{ __('Foundation') }}</span>
                     </h1>
 
                     <p class="mt-6 max-w-xl text-lg leading-8 text-white/75">
-                        {{ __('نصل بالعطاء إلى من يحتاجه بكرامة واحترافية، ونحوّل التبرع إلى أثر ملموس يلامس حياة الأسر والحالات الإنسانية في الوقت المناسب.') }}
+                        {{ __('We deliver giving to those who need it with dignity and professionalism, turning donations into tangible impact that reaches families and humanitarian cases at the right time.') }}
                     </p>
 
                     <div class="mt-10 flex flex-wrap gap-4">
@@ -30,28 +30,28 @@
                             href="#donation"
                             class="inline-flex items-center justify-center rounded-full bg-primary-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-primary-950/30 transition hover:bg-primary-400"
                         >
-                            {{ __('تبرع الآن') }}
+                            {{ __('Donate now') }}
                         </a>
                         <a
                             href="#about"
                             class="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition hover:bg-white/15"
                         >
-                            {{ __('اعرف المزيد') }}
+                            {{ __('Learn more') }}
                         </a>
                     </div>
 
                     <div class="mt-16 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/15 pt-8">
                         <div>
                             <div class="text-3xl font-black text-white">+500</div>
-                            <div class="mt-1 text-sm text-white/60">{{ __('أسرة مستفيدة') }}</div>
+                            <div class="mt-1 text-sm text-white/60">{{ __('Supported family') }}</div>
                         </div>
                         <div class="border-s border-white/15 ps-10">
                             <div class="text-3xl font-black text-white">+300</div>
-                            <div class="mt-1 text-sm text-white/60">{{ __('حالة منجزة') }}</div>
+                            <div class="mt-1 text-sm text-white/60">{{ __('Completed case') }}</div>
                         </div>
                         <div class="border-s border-white/15 ps-10">
                             <div class="text-3xl font-black text-white">100%</div>
-                            <div class="mt-1 text-sm text-white/60">{{ __('شفافية كاملة') }}</div>
+                            <div class="mt-1 text-sm text-white/60">{{ __('Full transparency') }}</div>
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-bold text-white">{{ __('دعم حقيقي') }}</div>
-                                <p class="mt-1 text-sm leading-6 text-white/60">{{ __('نعمل على تلبية الاحتياجات الأساسية للأسر المحتاجة بشكل مباشر وفعّال.') }}</p>
+                                <div class="font-bold text-white">{{ __('Real support') }}</div>
+                                <p class="mt-1 text-sm leading-6 text-white/60">{{ __('We work to meet the essential needs of families in need directly and effectively.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -79,8 +79,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-bold text-white">{{ __('تبرع آمن وشفاف') }}</div>
-                                <p class="mt-1 text-sm leading-6 text-white/60">{{ __('كل تبرع يُوثَّق ويصل إلى مستحقيه بالكامل مع تقارير واضحة ومتاحة.') }}</p>
+                                <div class="font-bold text-white">{{ __('Safe and transparent donation') }}</div>
+                                <p class="mt-1 text-sm leading-6 text-white/60">{{ __('Every donation is documented and reaches its rightful recipients in full, with clear and accessible reports.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -93,8 +93,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-bold text-white">{{ __('مجتمع متكاتف') }}</div>
-                                <p class="mt-1 text-sm leading-6 text-white/60">{{ __('نربط المتبرعين بالحالات المحتاجة مباشرةً لأثر إنساني حقيقي وملموس.') }}</p>
+                                <div class="font-bold text-white">{{ __('A united community') }}</div>
+                                <p class="mt-1 text-sm leading-6 text-white/60">{{ __('We connect donors directly with cases in need for real and tangible humanitarian impact.') }}</p>
                             </div>
                         </div>
                     </div>

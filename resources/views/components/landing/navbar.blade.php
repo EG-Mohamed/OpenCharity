@@ -10,32 +10,32 @@
             <a href="{{ route('home') }}" class="flex items-center gap-3">
                 @if ($logo)
                     <span class="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm dark:bg-white">
-                        <img src="{{ $logo }}" alt="{{ __('مؤسسة مسعي') }}" class="h-9 w-auto object-contain">
+                        <img src="{{ $logo }}" alt="{{ __('Masaa Foundation') }}" class="h-9 w-auto object-contain">
                     </span>
                 @else
                     <span class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-500 text-lg font-black text-white shadow-lg shadow-primary-500/30">م</span>
                 @endif
                 <span class="hidden sm:block">
                     <span class="block text-sm font-medium text-primary-600 dark:text-primary-300">{{ __('Masaa Foundation') }}</span>
-                    <span class="block text-lg font-black leading-tight tracking-tight">{{ __('مؤسسة مسعي') }}</span>
+                    <span class="block text-lg font-black leading-tight tracking-tight">{{ __('Masaa Foundation') }}</span>
                 </span>
             </a>
 
             <div class="hidden items-center gap-8 lg:flex">
-                <a href="#about" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('من نحن') }}</a>
-                <a href="#statistics" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('الأثر') }}</a>
-                <a href="#cases" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('الحالات') }}</a>
-                <a href="#contact" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('تواصل') }}</a>
+                <a href="#about" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('About us') }}</a>
+                <a href="#statistics" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Impact') }}</a>
+                <a href="#cases" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Cases') }}</a>
+                <a href="#contact" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Contact') }}</a>
             </div>
 
             <div class="hidden items-center gap-3 lg:flex">
                 <x-theme-switch/>
-                <a href="#donation" class="rounded-full bg-primary-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary-500/30 transition hover:bg-primary-600">{{ __('تبرع الآن') }}</a>
+                <a href="#donation" class="rounded-full bg-primary-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary-500/30 transition hover:bg-primary-600">{{ __('Donate now') }}</a>
             </div>
 
             <div class="flex items-center gap-2 lg:hidden">
                 <x-theme-switch/>
-                <button type="button" @click="open = true" class="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 dark:border-white/10 dark:bg-gray-900 dark:text-gray-200" aria-label="{{ __('فتح القائمة') }}">
+                <button type="button" @click="open = true" class="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 dark:border-white/10 dark:bg-gray-900 dark:text-gray-200" aria-label="{{ __('Open menu') }}">
                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
                 </button>
             </div>
@@ -49,28 +49,28 @@
             <div class="flex items-center gap-3">
                 @if ($logo)
                     <span class="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm dark:bg-white">
-                        <img src="{{ $logo }}" alt="{{ __('مؤسسة مسعي') }}" class="h-8 w-auto object-contain">
+                        <img src="{{ $logo }}" alt="{{ __('Masaa Foundation') }}" class="h-8 w-auto object-contain">
                     </span>
                 @else
                     <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-base font-black text-white">م</span>
                 @endif
                 <div>
                     <div class="text-sm font-medium text-primary-600 dark:text-primary-300">{{ __('Masaa Foundation') }}</div>
-                    <div class="text-xl font-black leading-tight">{{ __('مؤسسة مسعي') }}</div>
+                    <div class="text-xl font-black leading-tight">{{ __('Masaa Foundation') }}</div>
                 </div>
             </div>
-            <button type="button" @click="open = false" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 dark:border-white/10 dark:text-gray-200" aria-label="{{ __('إغلاق') }}">
+            <button type="button" @click="open = false" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 dark:border-white/10 dark:text-gray-200" aria-label="{{ __('Close') }}">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6 6 18" /></svg>
             </button>
         </div>
 
         <div class="flex flex-1 flex-col gap-3 text-lg font-semibold">
-            <a @click="open = false" href="#about" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('من نحن') }}</a>
-            <a @click="open = false" href="#statistics" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('الأثر') }}</a>
-            <a @click="open = false" href="#cases" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('الحالات') }}</a>
-            <a @click="open = false" href="#contact" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('تواصل') }}</a>
+            <a @click="open = false" href="#about" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('About us') }}</a>
+            <a @click="open = false" href="#statistics" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Impact') }}</a>
+            <a @click="open = false" href="#cases" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Cases') }}</a>
+            <a @click="open = false" href="#contact" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Contact') }}</a>
         </div>
 
-        <a @click="open = false" href="#donation" class="mt-6 rounded-full bg-primary-500 px-5 py-3 text-center text-sm font-bold text-white shadow-lg shadow-primary-500/30">{{ __('تبرع الآن') }}</a>
+        <a @click="open = false" href="#donation" class="mt-6 rounded-full bg-primary-500 px-5 py-3 text-center text-sm font-bold text-white shadow-lg shadow-primary-500/30">{{ __('Donate now') }}</a>
     </div>
 </nav>

@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ __('مؤسسة مسعي') }}</title>
-    <meta name="description" content="{{ __('مؤسسة مسعي لدعم الأسر والحالات الإنسانية وصناعة أثر مستدام في المجتمع.') }}">
+    <title>{{ __('Masaa Foundation') }}</title>
+    <meta name="description" content="{{ __('Masaa Foundation supports families and humanitarian cases to create sustainable impact in the community.') }}">
     <script>
         (() => {
             const theme = localStorage.getItem('masaa-theme');

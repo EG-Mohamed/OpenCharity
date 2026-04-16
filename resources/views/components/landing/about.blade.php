@@ -14,8 +14,8 @@
                             <x-heroicon-o-shield-check class="h-5 w-5 text-white"/>
                         </div>
                         <div>
-                            <div class="font-bold text-white">{{ __('موثوق ومعتمد') }}</div>
-                            <div class="text-sm text-white/75">{{ __('إدارة احترافية وشفافية كاملة في كل خطوة') }}</div>
+                            <div class="font-bold text-white">{{ __('Trusted and accredited') }}</div>
+                            <div class="text-sm text-white/75">{{ __('Professional management and complete transparency at every step') }}</div>
                         </div>
                     </div>
                 </div>
@@ -26,13 +26,13 @@
             </div>
 
             <div>
-                <span class="landing-section-label">{{ __('من نحن') }}</span>
+                <span class="landing-section-label">{{ __('About us') }}</span>
                 <h2 class="mt-5 text-3xl font-black leading-snug tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-                    {{ __('عطاء منظم يصنع') }}
-                    <span class="text-primary-500">{{ __('أثراً حقيقياً') }}</span>
+                    {{ __('Organized giving that creates') }}
+                    <span class="text-primary-500">{{ __('real impact') }}</span>
                 </h2>
                 <p class="mt-5 text-base leading-8 text-gray-500 dark:text-gray-400">
-                    {{ __('نربط الخير بمن يستحقه من خلال إدارة دقيقة للحالات، وزيارات ميدانية، وبرامج دعم مدروسة تُراعي الأولوية والكرامة.') }}
+                    {{ __('We connect generosity to those who deserve it through careful case management, field visits, and well-designed support programs that respect priority and dignity.') }}
                 </p>
 
                 <div class="mt-10 flex flex-col gap-6">
@@ -43,8 +43,8 @@
                             </svg>
                         </div>
                         <div>
-                            <div class="text-base font-bold text-gray-900 dark:text-white">{{ __('رسالتنا') }}</div>
-                            <p class="mt-1.5 text-sm leading-7 text-gray-500 dark:text-gray-400">{{ __('تمكين الأسر من تجاوز ظروفها عبر تدخلات مدروسة وسريعة الأثر.') }}</p>
+                            <div class="text-base font-bold text-gray-900 dark:text-white">{{ __('Our mission') }}</div>
+                            <p class="mt-1.5 text-sm leading-7 text-gray-500 dark:text-gray-400">{{ __('Empowering families to overcome hardship through thoughtful interventions with timely impact.') }}</p>
                         </div>
                     </div>
 
@@ -58,8 +58,8 @@
                             </svg>
                         </div>
                         <div>
-                            <div class="text-base font-bold text-gray-900 dark:text-white">{{ __('رؤيتنا') }}</div>
-                            <p class="mt-1.5 text-sm leading-7 text-gray-500 dark:text-gray-400">{{ __('منظومة خيرية عصرية تُدار بكفاءة وتُلهم المجتمع للمشاركة المستدامة.') }}</p>
+                            <div class="text-base font-bold text-gray-900 dark:text-white">{{ __('Our vision') }}</div>
+                            <p class="mt-1.5 text-sm leading-7 text-gray-500 dark:text-gray-400">{{ __('A modern charitable system managed efficiently and inspiring the community toward sustainable participation.') }}</p>
                         </div>
                     </div>
 
@@ -72,14 +72,14 @@
                             </svg>
                         </div>
                         <div>
-                            <div class="text-base font-bold text-gray-900 dark:text-white">{{ __('قيمنا') }}</div>
-                            <p class="mt-1.5 text-sm leading-7 text-gray-500 dark:text-gray-400">{{ __('الشفافية والكرامة والاحترافية في كل تعامل مع المستفيد والمتبرع على حدٍّ سواء.') }}</p>
+                            <div class="text-base font-bold text-gray-900 dark:text-white">{{ __('Our values') }}</div>
+                            <p class="mt-1.5 text-sm leading-7 text-gray-500 dark:text-gray-400">{{ __('Transparency, dignity, and professionalism in every interaction with both beneficiaries and donors.') }}</p>
                         </div>
                     </div>
                 </div>
 
                 <a href="#donation" class="mt-10 inline-flex items-center gap-2 rounded-full bg-primary-500 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary-500/25 transition hover:bg-primary-600">
-                    {{ __('تبرع الآن') }}
+                    {{ __('Donate now') }}
                     <svg class="h-4 w-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
                     </svg>

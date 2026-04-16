@@ -22,6 +22,7 @@
         "owenvoke/blade-fontawesome": "^3.2",
         "saade/filament-fullcalendar": "v4.0.0-beta7",
         "spatie/laravel-translatable": "^6.13",
+        "statikbe/laravel-filament-chained-translation-manager": "^4.3",
         "ysfkaya/filament-phone-input": "^4.1"
     },
     "require-dev": {

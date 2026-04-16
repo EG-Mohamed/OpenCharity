@@ -95,9 +95,9 @@ class DonationForm extends Component implements HasForms
         return $schema
             ->components([
                 Radio::make('donation_type')
-                    ->label(__('نوع التبرع'))
+                    ->label(__('Donation type'))
                     ->options([
-                        'general' => __('عام'),
+                        'general' => __('General'),
                         ...collect(DonationTargetType::cases())
                             ->mapWithKeys(fn ($case) => [
                                 $case->value => $case->getLabel(),
@@ -109,13 +109,13 @@ class DonationForm extends Component implements HasForms
                     ->default('general')
                     ->live(),
                 TextInput::make('amount')
-                    ->label(__('المبلغ'))
+                    ->label(__('Amount'))
                     ->numeric()
                     ->minValue(1)
-                    ->prefix(__('ج.م'))
+                    ->prefix(__('EGP'))
                     ->required(),
                 Select::make('donation_target_id')
-                    ->label(__('الجهة المستهدفة'))
+                    ->label(__('Target destination'))
                     ->options(fn (Get $get) => DonationTarget::whereStatus(DonationTargetStatus::Active)->whereType($get('donation_type'))->pluck('title', 'id'))
                     ->searchable()
                     ->visible(fn (callable $get): bool => $get('donation_type') !== 'general')
@@ -124,22 +124,22 @@ class DonationForm extends Component implements HasForms
                     ->schema([
                         Toggle::make('anonymous')
                             ->columnSpanFull()
-                            ->label(__('تبرع باسم مجهول'))
+                            ->label(__('Donate anonymously'))
                             ->default(false),
                         TextInput::make('donor_name')
-                            ->label(__('الاسم'))
+                            ->label(__('Name'))
                             ->required()
                             ->maxLength(255),
                         TextInput::make('donor_email')
-                            ->label(__('البريد الإلكتروني'))
+                            ->label(__('Email address'))
                             ->email()
                             ->maxLength(255),
                         PhoneInput::make('donor_phone')
-                            ->label(__('رقم الهاتف'))
+                            ->label(__('Phone number'))
                             ->columnSpanFull()
                             ->required(),
                         //                                ToggleButtons::make('payment_method')
-                        //                                    ->label(__('طريقة الدفع'))
+                        //                                    ->label(__('Payment method'))
                         //                                    ->options(PaymentMethod::class)
                         //                                    ->columnSpanFull()
                         //                                    ->default(PaymentMethod::Card)

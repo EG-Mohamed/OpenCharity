@@ -3,8 +3,8 @@
         <div class="grid gap-10 md:grid-cols-3">
 
             <div class="md:col-span-1">
-                <div class="text-xl font-black text-white">{{ __('مؤسسة مسعي') }}</div>
-                <p class="mt-3 text-sm leading-7">{{ __('نصنع أثراً إنسانياً حقيقياً من خلال إدارة دقيقة للحالات وشفافية كاملة في كل خطوة.') }}</p>
+                <div class="text-xl font-black text-white">{{ __('Masaa Foundation') }}</div>
+                <p class="mt-3 text-sm leading-7">{{ __('We create real humanitarian impact through careful case management and complete transparency at every step.') }}</p>
 
                 <div class="mt-6 flex items-center gap-3">
                     <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 transition hover:border-primary-500/50 hover:bg-primary-500/10 hover:text-primary-400">
@@ -20,24 +20,24 @@
             </div>
 
             <div>
-                <div class="text-sm font-black tracking-widest text-white">{{ __('روابط سريعة') }}</div>
+                <div class="text-sm font-black tracking-widest text-white">{{ __('Quick links') }}</div>
                 <div class="mt-5 flex flex-col gap-3 text-sm">
-                    <a href="#about" class="transition hover:text-white">{{ __('من نحن') }}</a>
-                    <a href="#services" class="transition hover:text-white">{{ __('الخدمات') }}</a>
-                    <a href="#cases" class="transition hover:text-white">{{ __('الحالات') }}</a>
-                    <a href="#donation" class="transition hover:text-white">{{ __('التبرع') }}</a>
+                    <a href="#about" class="transition hover:text-white">{{ __('About us') }}</a>
+                    <a href="#services" class="transition hover:text-white">{{ __('Services') }}</a>
+                    <a href="#cases" class="transition hover:text-white">{{ __('Cases') }}</a>
+                    <a href="#donation" class="transition hover:text-white">{{ __('Donation') }}</a>
                 </div>
             </div>
 
             <div>
-                <div class="text-sm font-black tracking-widest text-white">{{ __('تواصل معنا') }}</div>
+                <div class="text-sm font-black tracking-widest text-white">{{ __('Contact us') }}</div>
                 <div class="mt-5 flex flex-col gap-4 text-sm">
                     <div class="flex items-start gap-3">
                         <svg class="mt-0.5 h-4 w-4 shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
                         </svg>
-                        <span class="leading-6">{{ __('القاهرة، جمهورية مصر العربية') }}</span>
+                        <span class="leading-6">{{ __('Cairo, Arab Republic of Egypt') }}</span>
                     </div>
                     <div class="flex items-center gap-3">
                         <svg class="h-4 w-4 shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -59,9 +59,9 @@
 
     <div class="border-t border-white/8">
         <div class="landing-container flex flex-col items-center justify-between gap-3 py-5 text-xs sm:flex-row">
-            <span>© {{ now()->year }} {{ __('مؤسسة مسعي') }} — {{ __('جميع الحقوق محفوظة') }}</span>
+            <span>© {{ now()->year }} {{ __('Masaa Foundation') }} - {{ __('All rights reserved') }}</span>
             <span>
-                {{ __('تصميم وتطوير') }}
+                {{ __('Designed and developed by') }}
                 <a href="https://msaied.com" target="_blank" class="font-semibold text-primary-400 transition hover:text-primary-300">Mohamed Said</a>
             </span>
         </div>
