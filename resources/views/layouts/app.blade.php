@@ -3,6 +3,7 @@
 <head>
     @php
         $systemName = setting('general.system_name') ?: __('Masaa Foundation');
+        $description = setting('general.description') ?: __('Masaa Foundation supports families and humanitarian cases to create sustainable impact in the community.');
         $favicon = setting('branding.favicon');
         $faviconUrl = filled($favicon) ? \Illuminate\Support\Facades\Storage::url($favicon) : null;
     @endphp
@@ -13,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ $systemName }}</title>
-    <meta name="description" content="{{ __('Masaa Foundation supports families and humanitarian cases to create sustainable impact in the community.') }}">
+    <meta name="description" content="{{ $description }}">
     @if ($faviconUrl)
         <link rel="icon" href="{{ $faviconUrl }}">
     @endif

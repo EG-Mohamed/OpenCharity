@@ -6,3 +6,4 @@
 @source '../../../../vendor/devonab/filament-easy-footer/resources/views/**/*';
 @source '../../../../vendor/saade/filament-fullcalendar/resources/views/**/*.blade.php';
 @source '../../../../vendor/statikbe/laravel-filament-chained-translation-manager/resources/**/*.blade.php';
+@source '../../../../vendor/guava/filament-icon-picker/resources/**/*';
