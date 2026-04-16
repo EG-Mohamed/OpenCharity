@@ -27,7 +27,7 @@
 
             <div>
                 <span class="landing-section-label">{{ __('About us') }}</span>
-                <h2 class="mt-5 text-3xl font-black leading-snug tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+                <h2 class="mt-5 text-2xl font-black leading-snug tracking-tight text-gray-900 sm:text-4xl dark:text-white">
                     {{ __('Organized giving that creates') }}
                     <span class="text-primary-500">{{ __('real impact') }}</span>
                 </h2>
