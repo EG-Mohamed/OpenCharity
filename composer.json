@@ -19,6 +19,7 @@
         "laravel/framework": "^13.5",
         "laravel/tinker": "^3.0",
         "malzariey/filament-daterangepicker-filter": "^5.0",
+        "outerweb/filament-settings": "^2.3",
         "owenvoke/blade-fontawesome": "^3.2",
         "saade/filament-fullcalendar": "v4.0.0-beta7",
         "spatie/laravel-translatable": "^6.13",
