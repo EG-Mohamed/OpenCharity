@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\AssistanceSchedules\Pages;
 
+use App\Filament\Actions\CreateDeliveryAction;
 use App\Filament\Resources\AssistanceSchedules\AssistanceScheduleResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
@@ -13,6 +14,7 @@ class ViewAssistanceSchedule extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            CreateDeliveryAction::make(),
             EditAction::make(),
         ];
     }

@@ -1,35 +1,36 @@
 <?php
 
-namespace App\Filament\Resources\AssistanceDeliveries\Schemas;
+namespace App\Filament\Actions;
 
 use App\Enums\DeliveryStatus;
-use App\Filament\Resources\AssistanceSchedules\RelationManagers\AssistanceDeliveriesRelationManager;
+use App\Enums\ScheduleStatus;
+use App\Models\AssistanceDelivery;
+use App\Models\AssistanceSchedule;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Schema;
-use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Filament\Support\Enums\Width;
 
-class AssistanceDeliveryForm
+class CreateDeliveryAction
 {
-    public static function configure(Schema $schema): Schema
+    public static function make(): Action
     {
-        return $schema
-            ->components([
+        return Action::make('createDelivery')
+            ->label(__('Create Delivery'))
+            ->icon('heroicon-o-truck')
+            ->button()
+            ->slideOver()
+            ->modalWidth(Width::ScreenExtraLarge)
+            ->visible(fn(AssistanceSchedule $record): bool => in_array($record->status,[ScheduleStatus::Scheduled,ScheduleStatus::Approved]))
+            ->schema([
                 Section::make(__('Delivery Info'))
                     ->columns(2)
                     ->schema([
-                        Select::make('assistance_schedule_id')
-                            ->hiddenOn(AssistanceDeliveriesRelationManager::class)
-                            ->label(__('Assistance Schedule'))
-                            ->relationship('assistanceSchedule', 'id')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->charityCase?->title ? "{$record->charityCase->title} (#{$record->id})" : (string) $record->id)
-                            ->searchable()
-                            ->preload()
-                            ->required(),
                         DateTimePicker::make('delivered_at')
                             ->label(__('Delivered At')),
                         Select::make('delivery_status')
@@ -44,7 +45,7 @@ class AssistanceDeliveryForm
                     ->schema([
                         TextInput::make('received_by_name')
                             ->label(__('Received By Name')),
-                        PhoneInput::make('received_by_phone')
+                        TextInput::make('received_by_phone')
                             ->label(__('Received By Phone')),
                     ]),
                 Section::make(__('Proof'))
@@ -62,6 +63,17 @@ class AssistanceDeliveryForm
                             ->columnSpanFull(),
                     ])
                     ->columnSpanFull(),
-            ]);
+            ])
+            ->action(function (array $data, AssistanceSchedule $record): void {
+                AssistanceDelivery::query()->create([
+                    ...$data,
+                    'assistance_schedule_id' => $record->getKey(),
+                ]);
+
+                Notification::make()
+                    ->title(__('Delivery created successfully'))
+                    ->success()
+                    ->send();
+            });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\AssistanceSchedules\Pages;
 
+use App\Filament\Actions\CreateDeliveryAction;
 use App\Filament\Resources\AssistanceSchedules\AssistanceScheduleResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
@@ -15,9 +16,7 @@ class EditAssistanceSchedule extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
-            ForceDeleteAction::make(),
-            RestoreAction::make(),
+            CreateDeliveryAction::make(),
         ];
     }
 }

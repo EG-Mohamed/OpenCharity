@@ -102,9 +102,7 @@ class AssistanceCalendarWidget extends FullCalendarWidget
     {
         return match ($status) {
             ScheduleStatus::Completed, ScheduleStatus::Approved => '#16a34a',
-            ScheduleStatus::Postponed => '#f59e0b',
             ScheduleStatus::Canceled, ScheduleStatus::Failed => '#dc2626',
-            ScheduleStatus::InProgress => '#0ea5e9',
             ScheduleStatus::Draft => '#6b7280',
             default => '#2563eb',
         };

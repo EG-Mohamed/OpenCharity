@@ -355,5 +355,7 @@
     "Parent Scheduled Date": "تاريخ الجدولة الأصلية",
     "File Name": "اسم الملف",
     "MIME Type": "نوع الملف",
-    "File Path": "مسار الملف"
+    "File Path": "مسار الملف",
+    "Create Delivery": "إنشاء تسليم",
+    "Delivery created successfully": "تم إنشاء التسليم بنجاح"
 }

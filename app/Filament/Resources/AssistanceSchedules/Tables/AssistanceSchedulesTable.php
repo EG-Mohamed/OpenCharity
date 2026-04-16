@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AssistanceSchedules\Tables;
 use App\Enums\FundingStatus;
 use App\Enums\ScheduleFrequency;
 use App\Enums\ScheduleStatus;
+use App\Filament\Actions\CreateDeliveryAction;
 use App\Filament\Exports\AssistanceScheduleExporter;
 use App\Models\AssistanceSchedule;
 use App\Models\AssistanceType;
@@ -33,6 +34,7 @@ class AssistanceSchedulesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->where('status', '!=', ScheduleStatus::Canceled))
             ->columns([
                 IconColumn::make('is_parent')
                     ->label(__('Series'))
@@ -189,6 +191,7 @@ class AssistanceSchedulesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                CreateDeliveryAction::make(),
                 ViewAction::make(),
                 EditAction::make(),
             ])
@@ -196,13 +199,6 @@ class AssistanceSchedulesTable
                 ExportAction::make()
                     ->label(__('Export'))
                     ->exporter(AssistanceScheduleExporter::class),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
             ]);
     }
 }
