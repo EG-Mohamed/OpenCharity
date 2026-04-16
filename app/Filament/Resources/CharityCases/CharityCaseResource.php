@@ -24,7 +24,7 @@ class CharityCaseResource extends Resource
 {
     protected static ?string $model = CharityCase::class;
 
-    protected static ?string $recordTitleAttribute = 'title';
+    protected static ?string $recordTitleAttribute = 'code';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 

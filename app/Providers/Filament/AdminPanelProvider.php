@@ -36,9 +36,6 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->plugins([
                 EasyFooterPlugin::make()->withBorder()->withSentence(new HtmlString(base64_decode('PHNwYW4gZGlyPSJsdHIiPk1hZGUgV2l0aCA8c3BhbiBjbGFzcz0idGV4dC1yZWQtNTAwIj7inaQ8L3NwYW4+IEJ5IDxhIGhyZWY9Imh0dHBzOi8vbXNhaWVkLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPk1vaGFtZWQgU2FpZDwvYT48L3NwYW4+'))),

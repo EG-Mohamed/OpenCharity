@@ -37,6 +37,7 @@ class AssistanceCalendarWidget extends FullCalendarWidget
         return AssistanceSchedule::query()
             ->with(['assistanceType:id,name', 'charityCase:id,code'])
             ->whereBetween('scheduled_date', [$info['start'], $info['end']])
+            ->whereIn('status', [ScheduleStatus::Approved, ScheduleStatus::Scheduled, ScheduleStatus::Postponed])
             ->get()
             ->map(function (AssistanceSchedule $schedule): array {
                 $title = collect([
@@ -53,6 +54,7 @@ class AssistanceCalendarWidget extends FullCalendarWidget
                     ->allDay($schedule->scheduled_time === null)
                     ->backgroundColor($this->getStatusColor($schedule->status))
                     ->borderColor($this->getStatusColor($schedule->status))
+                    ->textColor('white')
                     ->url(AssistanceScheduleResource::getUrl('edit', ['record' => $schedule]))
                     ->extendedProps([
                         'status' => $schedule->status?->getLabel(),
