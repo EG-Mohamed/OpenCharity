@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AssistanceSchedules\Schemas;
 use App\Enums\FundingStatus;
 use App\Enums\ScheduleFrequency;
 use App\Enums\ScheduleStatus;
+use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -22,12 +23,7 @@ class AssistanceScheduleForm
                 Section::make(__('Schedule'))
                     ->columns(2)
                     ->schema([
-                        Select::make('charity_case_id')
-                            ->label(__('Charity Case'))
-                            ->relationship('charityCase', 'title')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
+                        CharityCaseSelect::make(),
                         Select::make('assistance_type_id')
                             ->label(__('Assistance Type'))
                             ->relationship('assistanceType', 'name')

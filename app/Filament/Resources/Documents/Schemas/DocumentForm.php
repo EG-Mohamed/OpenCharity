@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Documents\Schemas;
 use App\Enums\DocumentCategory;
 use App\Enums\DocumentType;
 use App\Enums\DocumentVisibility;
+use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
 use App\Filament\Resources\Families\RelationManagers\DocumentsRelationManager;
 use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use Filament\Forms\Components\DatePicker;
@@ -31,11 +32,7 @@ class DocumentForm
                             ->relationship('family', 'name')
                             ->searchable()
                             ->preload(),
-                        Select::make('charity_case_id')
-                            ->label(__('Charity Case'))
-                            ->relationship('charityCase', 'title')
-                            ->searchable()
-                            ->preload(),
+                        CharityCaseSelect::make()
                     ]),
                 Section::make(__('Document Info'))
                     ->columns(2)

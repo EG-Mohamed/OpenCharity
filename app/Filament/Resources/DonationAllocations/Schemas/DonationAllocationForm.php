@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\DonationAllocations\Schemas;
 
 use App\Enums\AllocationStatus;
+use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -36,11 +37,7 @@ class DonationAllocationForm
                             ->relationship('family', 'name')
                             ->searchable()
                             ->preload(),
-                        Select::make('charity_case_id')
-                            ->label(__('Charity Case'))
-                            ->relationship('charityCase', 'title')
-                            ->searchable()
-                            ->preload(),
+                        CharityCaseSelect::make(),
                         Select::make('assistance_schedule_id')
                             ->label(__('Assistance Schedule'))
                             ->relationship('assistanceSchedule', 'id')

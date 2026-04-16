@@ -4,10 +4,13 @@ namespace App\Filament\Resources\Visits\Schemas;
 
 use App\Enums\VisitStatus;
 use App\Enums\VisitType;
+use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class VisitForm
@@ -19,12 +22,7 @@ class VisitForm
                 Section::make(__('Visit Details'))
                     ->columns(2)
                     ->schema([
-                        Select::make('charity_case_id')
-                            ->label(__('Charity Case'))
-                            ->relationship('charityCase', 'title')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
+                        CharityCaseSelect::make(),
                         Select::make('visit_type')
                             ->label(__('Visit Type'))
                             ->options(VisitType::class)
@@ -35,13 +33,15 @@ class VisitForm
                             ->label(__('Status'))
                             ->options(VisitStatus::class)
                             ->searchable()
+                            ->lazy()
                             ->preload()
                             ->required(),
-                        DateTimePicker::make('scheduled_at')
+                        DatePicker::make('scheduled_at')
+                            ->visible(fn(Get $get) => $get('status') === VisitStatus::Scheduled)
                             ->label(__('Scheduled At')),
-                        DateTimePicker::make('visited_at')
+                        DatePicker::make('visited_at')
                             ->label(__('Visited At')),
-                        DateTimePicker::make('next_visit_at')
+                        DatePicker::make('next_visit_at')
                             ->label(__('Next Visit At')),
                     ]),
                 Section::make(__('Findings'))

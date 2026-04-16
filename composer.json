@@ -9,6 +9,7 @@
         "php": "^8.3",
         "abdulmajeed-jamaan/filament-translatable-tabs": "^5.0",
         "akaunting/laravel-money": "^6.0",
+        "devonab/filament-easy-footer": "^2.2",
         "eg-mohamed/filament-map-picker": "^1.0",
         "eg-mohamed/referenceable": "^2.1",
         "filament/filament": "^5.5.1",

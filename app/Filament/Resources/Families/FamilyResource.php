@@ -10,6 +10,7 @@ use App\Filament\Resources\Families\RelationManagers\CharityCasesRelationManager
 use App\Filament\Resources\Families\RelationManagers\DocumentsRelationManager;
 use App\Filament\Resources\Families\RelationManagers\DonationTargetsRelationManager;
 use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
+use App\Filament\Resources\Families\RelationManagers\VisitsRelationManager;
 use App\Filament\Resources\Families\Schemas\FamilyForm;
 use App\Filament\Resources\Families\Schemas\FamilyInfolist;
 use App\Filament\Resources\Families\Tables\FamiliesTable;
@@ -48,6 +49,7 @@ class FamilyResource extends Resource
         return [
             FamilyMembersRelationManager::class,
             CharityCasesRelationManager::class,
+            VisitsRelationManager::class,
             DocumentsRelationManager::class,
             DonationTargetsRelationManager::class,
         ];

@@ -26,8 +26,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::automaticallyEagerLoadRelationships();
         Model::unguard();
-
-        CharityCase::observe(CharityCaseObserver::class);
-        Visit::observe(VisitObserver::class);
     }
 }

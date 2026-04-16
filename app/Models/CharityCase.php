@@ -6,7 +6,10 @@ use App\Enums\CasePriority;
 use App\Enums\CaseStatus;
 use App\Enums\VisitStatus;
 use App\Enums\VisitStatusCase;
+use App\Observers\CharityCaseObserver;
 use Database\Factories\CharityCaseFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use MohamedSaid\Referenceable\Traits\HasReference;
 
+#[ObservedBy(CharityCaseObserver::class)]
 class CharityCase extends Model
 {
     /** @use HasFactory<CharityCaseFactory> */
@@ -28,6 +32,7 @@ class CharityCase extends Model
 
     protected int $referenceLength = 6;
 
+    protected $appends = ['full_identifier'];
     protected function casts(): array
     {
         return [
@@ -45,6 +50,10 @@ class CharityCase extends Model
         ];
     }
 
+    public function fullIdentifier(): Attribute
+    {
+        return Attribute::get(fn() => "({$this->code}) - {$this->familyMember->name} - {$this->caseType->name}");
+    }
     public function family(): BelongsTo
     {
         return $this->belongsTo(Family::class);

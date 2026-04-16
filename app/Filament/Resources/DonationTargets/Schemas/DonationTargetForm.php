@@ -4,6 +4,7 @@ namespace App\Filament\Resources\DonationTargets\Schemas;
 
 use App\Enums\DonationTargetStatus;
 use App\Enums\DonationTargetType;
+use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
 use App\Filament\Resources\Families\RelationManagers\DonationTargetsRelationManager;
 use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use Filament\Forms\Components\DateTimePicker;
@@ -50,11 +51,8 @@ class DonationTargetForm
                             ->relationship('family', 'name')
                             ->searchable()
                             ->preload(),
-                        Select::make('charity_case_id')
-                            ->label(__('Charity Case'))
-                            ->relationship('charityCase', 'title')
-                            ->searchable()
-                            ->preload(),
+
+                        CharityCaseSelect::make(),
                     ]),
                 Section::make(__('Amounts'))
                     ->columns(2)

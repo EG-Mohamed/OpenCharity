@@ -35,29 +35,30 @@ class VisitsTable
                     ->sortable(),
                 TextColumn::make('scheduled_at')
                     ->label(__('Scheduled At'))
-                    ->dateTime()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->date()->placeholder('-')
                     ->sortable(),
                 TextColumn::make('visited_at')
                     ->label(__('Visited At'))
-                    ->dateTime()
+                    ->date()->placeholder('-')
                     ->sortable(),
                 TextColumn::make('next_visit_at')
                     ->label(__('Next Visit At'))
-                    ->dateTime()
+                    ->date()->placeholder('-')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label(__('Updated At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
                     ->label(__('Deleted At'))
-                    ->dateTime()
+                    ->dateTime()->placeholder('-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

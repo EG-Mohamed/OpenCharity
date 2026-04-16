@@ -12,7 +12,7 @@ class EgyptianIDParser
      * @param string $idNumber 14-digit Egyptian ID number
      * @return array|false Returns array with birth_date, gender, governorate on success, false on invalid input
      */
-    public static function parse(string $idNumber): array|false
+    public static function parse(?string $idNumber): array|false
     {
         // Remove spaces and validate length
         $idNumber = preg_replace('/\s+/', '', $idNumber);

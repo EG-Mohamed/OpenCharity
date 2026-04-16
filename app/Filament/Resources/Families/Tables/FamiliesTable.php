@@ -54,7 +54,8 @@ class FamiliesTable
                     ->badge()
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('monthly_income')
+                TextColumn::make('family_members_sum_monthly_income')
+                    ->sum('familyMembers', 'monthly_income')
                     ->label(__('Monthly Income'))
                     ->currency()
                     ->sortable(),
