@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -32,12 +33,29 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
+            ->profile()
             ->topbar(false)
             ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->plugins([
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 3,
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 3,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ]),
                 EasyFooterPlugin::make()->withBorder()->withSentence(new HtmlString(base64_decode('PHNwYW4gZGlyPSJsdHIiPk1hZGUgV2l0aCA8c3BhbiBjbGFzcz0idGV4dC1yZWQtNTAwIj7inaQ8L3NwYW4+IEJ5IDxhIGhyZWY9Imh0dHBzOi8vbXNhaWVkLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPk1vaGFtZWQgU2FpZDwvYT48L3NwYW4+'))),
                 FilamentFullCalendarPlugin::make()
                     ->selectable(),

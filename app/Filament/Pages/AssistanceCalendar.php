@@ -4,12 +4,14 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\AssistanceCalendarWidget;
 use BackedEnum;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 
 class AssistanceCalendar extends Page
 {
+    use HasPageShield;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
     protected static ?string $title = 'Assistance Calendar';
