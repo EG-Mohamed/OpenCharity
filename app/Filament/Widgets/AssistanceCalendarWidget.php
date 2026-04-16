@@ -37,7 +37,7 @@ class AssistanceCalendarWidget extends FullCalendarWidget
         return AssistanceSchedule::query()
             ->with(['assistanceType:id,name', 'charityCase:id,code'])
             ->whereBetween('scheduled_date', [$info['start'], $info['end']])
-            ->whereIn('status', [ScheduleStatus::Approved, ScheduleStatus::Scheduled, ScheduleStatus::Postponed])
+            ->whereIn('status', [ScheduleStatus::Approved, ScheduleStatus::Scheduled])
             ->get()
             ->map(function (AssistanceSchedule $schedule): array {
                 $title = collect([
@@ -102,7 +102,7 @@ class AssistanceCalendarWidget extends FullCalendarWidget
     {
         return match ($status) {
             ScheduleStatus::Completed, ScheduleStatus::Approved => '#16a34a',
-            ScheduleStatus::Canceled, ScheduleStatus::Failed => '#dc2626',
+            ScheduleStatus::Canceled => '#dc2626',
             ScheduleStatus::Draft => '#6b7280',
             default => '#2563eb',
         };

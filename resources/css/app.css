@@ -1,11 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&display=swap');
 @import 'tailwindcss';
+/* Required by all components */
+@import '../../vendor/filament/support/resources/css/index.css';
 
+/* Required by actions and tables */
+@import '../../vendor/filament/actions/resources/css/index.css';
+
+/* Required by actions, forms and tables */
+@import '../../vendor/filament/forms/resources/css/index.css';
+
+/* Required by actions and infolists */
+@import '../../vendor/filament/infolists/resources/css/index.css';
+
+/* Required by notifications */
+@import '../../vendor/filament/notifications/resources/css/index.css';
+
+/* Required by actions, infolists, forms, schemas and tables */
+@import '../../vendor/filament/schemas/resources/css/index.css';
+
+/* Required by tables */
+@import '../../vendor/filament/tables/resources/css/index.css';
+
+/* Required by widgets */
+@import '../../vendor/filament/widgets/resources/css/index.css';
+
+@variant dark (&:where(.dark, .dark *));
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
-
+@source '../../vendor/bezhansalleh/filament-language-switch/**';
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Alexandria', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-primary-50: #fef2f1;
+    --color-primary-100: #fde3e1;
+    --color-primary-200: #fcc9c5;
+    --color-primary-300: #f9a29b;
+    --color-primary-400: #f46d62;
+    --color-primary-500: #cb3223;
+    --color-primary-600: #b22a1c;
+    --color-primary-700: #952318;
+    --color-primary-800: #7b2018;
+    --color-primary-900: #681e18;
+    --color-primary-950: #390c08;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+    }
+}
+
+@layer components {
+    .landing-container {
+        @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .landing-section {
+        @apply scroll-mt-24 py-20 sm:py-24;
+    }
+
+    .landing-card {
+        @apply rounded-3xl border border-white/60 bg-white/90 shadow-sm shadow-primary-950/5 backdrop-blur-sm dark:border-white/10 dark:bg-gray-900/85;
+    }
+
+    .landing-section-label {
+        @apply inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-primary-700 dark:border-primary-900/70 dark:bg-primary-950/30 dark:text-primary-200;
+    }
 }
