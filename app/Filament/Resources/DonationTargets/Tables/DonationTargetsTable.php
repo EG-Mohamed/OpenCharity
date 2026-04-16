@@ -34,10 +34,6 @@ class DonationTargetsTable
                 TextColumn::make('title')
                     ->label(__('Title'))
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label(__('Slug'))
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('goal_amount')
                     ->label(__('Goal Amount'))
                     ->currency()

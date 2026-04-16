@@ -6,11 +6,12 @@ use App\Enums\DonationTargetStatus;
 use App\Enums\DonationTargetType;
 use App\Filament\Resources\CharityCases\Schemas\CharityCaseSelect;
 use App\Filament\Resources\Families\RelationManagers\DonationTargetsRelationManager;
-use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -32,14 +33,11 @@ class DonationTargetForm
                         TextInput::make('title')
                             ->label(__('Title'))
                             ->required(),
-                        TextInput::make('slug')
-                            ->label(__('Slug'))
-                            ->required(),
-                        Select::make('status')
+                        ToggleButtons::make('status')
                             ->label(__('Status'))
                             ->options(DonationTargetStatus::class)
-                            ->searchable()
-                            ->preload()
+                            ->inline()
+                            ->columnSpanFull()
                             ->required(),
                     ]),
                 Section::make(__('Ownership'))
