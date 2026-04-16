@@ -16,7 +16,7 @@
                     <span class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-500 text-lg font-black text-white shadow-lg shadow-primary-500/30">م</span>
                 @endif
                 <span class="hidden sm:block">
-                    <span class="block text-sm font-medium text-primary-600 dark:text-primary-300">{{ __('Masaa Foundation') }}</span>
+                    <span class="block text-sm font-medium text-primary-600 dark:text-primary-300">Masaa Foundation</span>
                     <span class="block text-lg font-black leading-tight tracking-tight">{{ __('Masaa Foundation') }}</span>
                 </span>
             </a>
@@ -42,9 +42,9 @@
         </div>
     </div>
 
-    <div x-show="open" x-transition.opacity class="fixed inset-0 z-40 bg-gray-950/40 backdrop-blur-sm lg:hidden" @click="open = false"></div>
+    <div x-cloak x-show="open" x-transition.opacity.duration.200ms class="fixed inset-0 z-40 bg-gray-950/50 lg:hidden" @click="open = false"></div>
 
-    <div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave="transition duration-200" x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-full opacity-0" class="fixed inset-y-0 end-0 z-50 flex w-full max-w-xs flex-col border-s border-white/10 bg-white p-6 shadow-2xl dark:bg-gray-950 lg:hidden">
+    <div x-cloak x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-x-6 opacity-0" x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-6 opacity-0" class="fixed inset-y-0 end-0 z-50 flex w-full max-w-xs flex-col border-s border-white/10 bg-white p-6 shadow-2xl dark:bg-gray-950 lg:hidden">
         <div class="mb-8 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 @if ($logo)
@@ -55,8 +55,8 @@
                     <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-base font-black text-white">م</span>
                 @endif
                 <div>
-                    <div class="text-sm font-medium text-primary-600 dark:text-primary-300">{{ __('Masaa Foundation') }}</div>
-                    <div class="text-xl font-black leading-tight">{{ __('Masaa Foundation') }}</div>
+                    <div class="text-sm font-medium text-primary-600 dark:text-primary-300">Masaa Foundation</div>
+                    <div class="text-md font-black leading-tight">{{ __('Masaa Foundation') }}</div>
                 </div>
             </div>
             <button type="button" @click="open = false" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 dark:border-white/10 dark:text-gray-200" aria-label="{{ __('Close') }}">
