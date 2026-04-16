@@ -4,17 +4,13 @@ namespace App\Livewire\Landing;
 
 use App\Enums\PaymentMethod;
 use App\Models\DonationTarget;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -28,7 +24,7 @@ class DonationForm extends Component implements HasForms
 
     public ?array $data = [];
 
-    public array $presetAmounts = [50, 100, 250, 500,1000,5000];
+    public array $presetAmounts = [50, 100, 250, 500, 1000, 5000];
 
     public array $targetOptions = [];
 
@@ -43,7 +39,7 @@ class DonationForm extends Component implements HasForms
     public function mount(Collection $targets, ?string $defaultType = null, ?int $defaultTargetId = null): void
     {
         $this->targetOptions = $targets
-            ->mapWithKeys(fn (DonationTarget $target): array => [$target->id => $target->title])
+            ->mapWithKeys(fn(DonationTarget $target): array => [$target->id => $target->title])
             ->all();
 
         $this->defaultType = $defaultType;
@@ -65,55 +61,48 @@ class DonationForm extends Component implements HasForms
     {
         return $schema
             ->components([
-                Fieldset::make(__('بيانات التبرع'))
-                    ->columns(1)
+                Radio::make('donation_type')
+                    ->label(__('نوع التبرع'))
+                    ->options([
+                        'general' => __('عام'),
+                        'family' => __('عائلة'),
+                        'case' => __('حالة'),
+                        'campaign' => __('حملة'),
+                    ])
+                    ->inline()
+                    ->inlineLabel(false)
+                    ->default('general')
+                    ->live(),
+                TextInput::make('amount')
+                    ->label(__('المبلغ'))
+                    ->numeric()
+                    ->minValue(1)
+                    ->prefix(__('ج.م'))
+                    ->required(),
+                Select::make('donation_target_id')
+                    ->label(__('الجهة المستهدفة'))
+                    ->options($this->targetOptions)
+                    ->searchable()
+                    ->visible(fn(callable $get): bool => $get('donation_type') !== 'general')
+                    ->required(fn(callable $get): bool => $get('donation_type') !== 'general'),
+                Grid::make(2)
                     ->schema([
-                        Radio::make('donation_type')
-                            ->label(__('نوع التبرع'))
-                            ->options([
-                                'general' => __('عام'),
-                                'family' => __('عائلة'),
-                                'case' => __('حالة'),
-                                'campaign' => __('حملة'),
-                            ])
-                            ->inline()
-                            ->inlineLabel(false)
-                            ->default('general')
-                            ->live(),
-                        TextInput::make('amount')
-                            ->label(__('المبلغ'))
-                            ->numeric()
-                            ->minValue(1)
-                            ->prefix(__('ج.م'))
+                        Toggle::make('anonymous')
+                            ->columnSpanFull()
+                            ->label(__('تبرع باسم مجهول'))
+                            ->default(false),
+                        TextInput::make('donor_name')
+                            ->label(__('الاسم'))
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('donor_email')
+                            ->label(__('البريد الإلكتروني'))
+                            ->email()
+                            ->maxLength(255),
+                        PhoneInput::make('donor_phone')
+                            ->label(__('رقم الهاتف'))
+                            ->columnSpanFull()
                             ->required(),
-                        Select::make('donation_target_id')
-                            ->label(__('الجهة المستهدفة'))
-                            ->options($this->targetOptions)
-                            ->searchable()
-                            ->visible(fn (callable $get): bool => $get('donation_type') !== 'general')
-                            ->required(fn (callable $get): bool => $get('donation_type') !== 'general'),
-                    ]),
-                Fieldset::make(__('بيانات المتبرع'))
-                    ->columns(1)
-                    ->schema([
-                        Grid::make(2)
-                            ->schema([
-                                Toggle::make('anonymous')
-                                    ->columnSpanFull()
-                                    ->label(__('تبرع باسم مجهول'))
-                                    ->default(false),
-                                TextInput::make('donor_name')
-                                    ->label(__('الاسم'))
-                                    ->required()
-                                    ->maxLength(255),
-                                TextInput::make('donor_email')
-                                    ->label(__('البريد الإلكتروني'))
-                                    ->email()
-                                    ->maxLength(255),
-                                PhoneInput::make('donor_phone')
-                                    ->label(__('رقم الهاتف'))
-                                    ->columnSpanFull()
-                                    ->required(),
 //                                ToggleButtons::make('payment_method')
 //                                    ->label(__('طريقة الدفع'))
 //                                    ->options(PaymentMethod::class)
@@ -122,7 +111,6 @@ class DonationForm extends Component implements HasForms
 //                                    ->inline()
 //                                    ->inlineLabel(false)
 //                                    ->required(),
-                            ]),
                     ]),
             ])
             ->statePath('data');
