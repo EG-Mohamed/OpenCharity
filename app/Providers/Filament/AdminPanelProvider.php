@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
+use App\Filament\Pages\SystemSettings;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -21,6 +22,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Outerweb\FilamentSettings\SettingsPlugin;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -60,6 +62,10 @@ class AdminPanelProvider extends PanelProvider
                 EasyFooterPlugin::make()->withBorder()->withSentence(new HtmlString(base64_decode('PHNwYW4gZGlyPSJsdHIiPk1hZGUgV2l0aCA8c3BhbiBjbGFzcz0idGV4dC1yZWQtNTAwIj7inaQ8L3NwYW4+IEJ5IDxhIGhyZWY9Imh0dHBzOi8vbXNhaWVkLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPk1vaGFtZWQgU2FpZDwvYT48L3NwYW4+'))),
                 FilamentFullCalendarPlugin::make()
                     ->selectable(),
+                SettingsPlugin::make()
+                    ->pages([
+                        SystemSettings::class
+                    ]),
             ])
             ->middleware([
                 EncryptCookies::class,
