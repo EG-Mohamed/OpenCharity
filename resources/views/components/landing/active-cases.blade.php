@@ -17,21 +17,33 @@
             </div>
 
             <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                @foreach ($displayTargets as $target)
+                @foreach ($targets as $target)
                     @php
                         $goalAmount = max((float) $target->goal_amount, 1);
                         $collectedAmount = min((float) $target->collected_amount, $goalAmount);
                         $progress = min(($collectedAmount / $goalAmount) * 100, 100);
                         $typeLabel = $target->type?->getLabel() ?? __('Giving opportunity');
+                        $familyCode = $target->family?->code;
+                        $caseCode = $target->charityCase?->code;
                     @endphp
 
                     <article class="overflow-hidden rounded-[1.6rem] border border-gray-200/70 bg-white p-5 shadow-sm shadow-primary-950/5 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-950/8 dark:border-white/8 dark:bg-gray-950">
-                        <div class="flex items-start justify-between gap-3">
+                        <div class="flex flex-wrap items-center gap-2 justify-between">
                             <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-[11px] font-medium text-primary-700 dark:bg-primary-950/30 dark:text-primary-200">{{ $typeLabel }}</span>
+
+                            <div>
+                                @if ($familyCode)
+                                    <bdi class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-[11px] font-medium text-primary-700 dark:bg-primary-950/30 dark:text-primary-200"># {{ $familyCode }}</bdi>
+                                @endif
+
+                                @if ($caseCode)
+                                        <bdi class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-[11px] font-medium text-primary-700 dark:bg-primary-950/30 dark:text-primary-200"># {{ $caseCode }}</bdi>
+                                @endif
+                            </div>
                         </div>
 
                         <h3 class="mt-4 text-lg font-bold leading-7 text-gray-900 dark:text-white">{{ $target->title }}</h3>
-                        <p class="mt-2 line-clamp-3 min-h-[4.5rem] text-sm leading-6 text-gray-600 dark:text-gray-300">{{ $target->description ?: __('A direct donation opportunity with clear and timely impact for the beneficiary.') }}</p>
+                        <p class="mt-2 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-gray-300">{{ $target->description ?: __('A direct donation opportunity with clear and timely impact for the beneficiary.') }}</p>
 
                         <div class="mt-5">
                             <div class="mb-2 flex items-center justify-between text-[13px] font-medium text-gray-500 dark:text-gray-400">

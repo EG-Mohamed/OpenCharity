@@ -37,16 +37,16 @@
                             $collectedAmount = min((float) $target->paid_donations_sum, $goalAmount);
                             $progress = min(($collectedAmount / $goalAmount) * 100, 100);
                             $targetType = $target->type?->getLabel() ?? __('Giving opportunity');
-                            $targetContext = $target->charityCase?->code ?: $target->family?->name;
+                            $targetContext = $target->charityCase?->code ?: $target->family?->code;
                         @endphp
 
                         <article class="overflow-hidden rounded-[1.7rem] border border-gray-200/70 bg-white p-4 shadow-sm shadow-primary-950/5 sm:p-5 dark:border-white/8 dark:bg-gray-950">
                             <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
                                 <div class="min-w-0">
-                                    <div class="flex flex-wrap items-center gap-2.5">
+                                    <div class="flex flex-wrap items-center gap-2.5 justify-between">
                                         <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-[11px] font-medium text-primary-700 dark:bg-primary-950/30 dark:text-primary-200">{{ $targetType }}</span>
                                         @if ($targetContext)
-                                            <span class="text-[13px] text-gray-500 dark:text-gray-400">{{ $targetContext }}</span>
+                                            <bdi class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-[11px] font-medium text-primary-700 dark:bg-primary-950/30 dark:text-primary-200"># {{ $targetContext }}</bdi>
                                         @endif
                                     </div>
 

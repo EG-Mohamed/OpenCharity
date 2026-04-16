@@ -14,7 +14,7 @@ class DonationCasesController extends Controller
     public function __invoke(Request $request): View
     {
         $allActiveTargets = DonationTarget::query()
-            ->with(['family:id,name', 'charityCase:id,code'])
+            ->with(['family:id,name,code', 'charityCase:id,code'])
             ->where('status', DonationTargetStatus::Active)
             ->latest('starts_at')
             ->get();
@@ -23,7 +23,7 @@ class DonationCasesController extends Controller
             ->withSum(['donations as paid_donations_sum' => function ($query) {
                 $query->where('status', DonationStatus::Paid);
             }], 'amount')
-            ->with(['family:id,name', 'charityCase:id,code'])
+            ->with(['family:id,name,code', 'charityCase:id,code'])
             ->where('status', DonationTargetStatus::Active)
             ->latest('starts_at')
             ->paginate(12)
