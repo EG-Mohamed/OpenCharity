@@ -22,10 +22,13 @@ class Family extends Model
     use SoftDeletes;
 
     protected string $referenceColumn = 'code';
-
-    protected string $referencePrefix = 'FAM';
-
-    protected int $referenceLength = 6;
+    protected $referenceStrategy = 'sequential';
+    protected $referenceSequential = [
+        'start'           => 1,
+        'min_digits'      => 3,   // no zero-padding, gives: 1, 2, 3 ...
+        'reset_frequency' => 'never',
+    ];
+    protected string $referencePrefix = 'F';
 
     protected function casts(): array
     {
@@ -76,11 +79,6 @@ class Family extends Model
     public function donationTargets(): HasMany
     {
         return $this->hasMany(DonationTarget::class);
-    }
-
-    public function donationAllocations(): HasMany
-    {
-        return $this->hasMany(DonationAllocation::class);
     }
 
     public function assistanceSchedules(): HasManyThrough

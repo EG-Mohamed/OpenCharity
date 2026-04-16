@@ -63,11 +63,6 @@ class AssistanceSchedule extends Model
         return $this->hasMany(AssistanceDelivery::class);
     }
 
-    public function donationAllocations(): HasMany
-    {
-        return $this->hasMany(DonationAllocation::class);
-    }
-
     public function isParent(): bool
     {
         return $this->parent_schedule_id === null && $this->isRecurring();

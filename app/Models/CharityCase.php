@@ -27,12 +27,19 @@ class CharityCase extends Model
     use SoftDeletes;
 
     protected string $referenceColumn = 'code';
-
-    protected string $referencePrefix = 'CASE';
-
-    protected int $referenceLength = 6;
+    protected $referenceStrategy = 'sequential';
+    protected $referenceSequential = [
+        'start'           => 1,
+        'min_digits'      => 4,   // no zero-padding, gives: 1, 2, 3 ...
+        'reset_frequency' => 'never',
+    ];
+    public function getReferencePrefix(): string
+    {
+        return 'C-' . explode('-',$this->family->code)[1];
+    }
 
     protected $appends = ['full_identifier'];
+
     protected function casts(): array
     {
         return [
@@ -52,8 +59,9 @@ class CharityCase extends Model
 
     public function fullIdentifier(): Attribute
     {
-        return Attribute::get(fn() => "({$this->code}) - {$this->familyMember->name}");
+        return Attribute::get(fn () => "({$this->code}) - {$this->familyMember->name}");
     }
+
     public function family(): BelongsTo
     {
         return $this->belongsTo(Family::class);
@@ -87,11 +95,6 @@ class CharityCase extends Model
     public function donationTargets(): HasMany
     {
         return $this->hasMany(DonationTarget::class);
-    }
-
-    public function donationAllocations(): HasMany
-    {
-        return $this->hasMany(DonationAllocation::class);
     }
 
     public function syncVisitDates(): void

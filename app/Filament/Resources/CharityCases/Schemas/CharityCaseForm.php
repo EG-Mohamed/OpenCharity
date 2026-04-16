@@ -10,6 +10,7 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
@@ -45,7 +46,7 @@ class CharityCaseForm
                             ->required(),
                     ]),
                 Section::make(__('Classification'))
-                    ->columns(3)
+                    ->columns(4)
                     ->schema([
                         Select::make('priority')
                             ->label(__('Priority'))
@@ -53,17 +54,16 @@ class CharityCaseForm
                             ->searchable()
                             ->preload()
                             ->required(),
-                        Select::make('status')
+                        ToggleButtons::make('status')
                             ->label(__('Status'))
+                            ->columnSpan(2)
                             ->options(CaseStatus::class)
-                            ->searchable()
-                            ->preload()
+                            ->inline()
                             ->required(),
-                        Select::make('visit_status')
+                        ToggleButtons::make('visit_status')
                             ->label(__('Visit Status'))
                             ->options(VisitStatusCase::class)
-                            ->searchable()
-                            ->preload()
+                            ->inline()
                             ->required(),
                     ]),
                 Section::make(__('Description'))

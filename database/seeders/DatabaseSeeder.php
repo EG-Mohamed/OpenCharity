@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             //            AssistanceDeliverySeeder::class,
             //            DonationTargetSeeder::class,
             //            DonationSeeder::class,
-            //            DonationAllocationSeeder::class,
         ]);
     }
 }

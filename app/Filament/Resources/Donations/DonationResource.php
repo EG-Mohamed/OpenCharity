@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Donations;
 use App\Filament\Resources\Donations\Pages\CreateDonation;
 use App\Filament\Resources\Donations\Pages\EditDonation;
 use App\Filament\Resources\Donations\Pages\ListDonations;
-use App\Filament\Resources\Donations\RelationManagers\DonationAllocationsRelationManager;
 use App\Filament\Resources\Donations\Schemas\DonationForm;
 use App\Filament\Resources\Donations\Tables\DonationsTable;
 use App\Models\Donation;
@@ -39,9 +38,7 @@ class DonationResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            DonationAllocationsRelationManager::class,
-        ];
+        return [];
     }
 
     public static function getModelLabel(): string

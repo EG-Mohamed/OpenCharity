@@ -5,7 +5,6 @@ namespace App\Filament\Resources\DonationTargets;
 use App\Filament\Resources\DonationTargets\Pages\CreateDonationTarget;
 use App\Filament\Resources\DonationTargets\Pages\EditDonationTarget;
 use App\Filament\Resources\DonationTargets\Pages\ListDonationTargets;
-use App\Filament\Resources\DonationTargets\RelationManagers\DonationAllocationsRelationManager;
 use App\Filament\Resources\DonationTargets\RelationManagers\DonationsRelationManager;
 use App\Filament\Resources\DonationTargets\Schemas\DonationTargetForm;
 use App\Filament\Resources\DonationTargets\Tables\DonationTargetsTable;
@@ -42,7 +41,6 @@ class DonationTargetResource extends Resource
     {
         return [
             DonationsRelationManager::class,
-            DonationAllocationsRelationManager::class,
         ];
     }
 

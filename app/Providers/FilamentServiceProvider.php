@@ -98,6 +98,7 @@ class FilamentServiceProvider extends ServiceProvider
             ->size(Size::ExtraSmall));
         DeleteAction::configureUsing(fn (DeleteAction $action) => $action->button()
             ->size(Size::ExtraSmall));
+
         Column::configureUsing(fn (Column $column) => $column->translateLabel());
         Field::configureUsing(fn (Field $field) => $field->translateLabel());
         Entry::configureUsing(fn (Entry $entry) => $entry->translateLabel());
@@ -112,7 +113,7 @@ class FilamentServiceProvider extends ServiceProvider
             ->extraImgAttributes(['loading' => 'lazy']));
         FileUpload::configureUsing(fn (FileUpload $fileUpload) => $fileUpload->visibility('public')
             ->fetchFileInformation(false));
-
+        TextColumn::configureUsing(fn (TextColumn $textColumn) => $textColumn->placeholder('-'));
         TextColumn::macro('currency', function (): static {
             $this->formatStateUsing(static function (TextColumn $column, $state): ?string {
                 if (blank($state) or empty($state) or ! is_numeric($state)) {

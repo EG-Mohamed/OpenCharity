@@ -33,11 +33,6 @@ class DonationTarget extends Model
         return $this->hasMany(Donation::class);
     }
 
-    public function donationAllocations(): HasMany
-    {
-        return $this->hasMany(DonationAllocation::class);
-    }
-
     protected function casts(): array
     {
         return [

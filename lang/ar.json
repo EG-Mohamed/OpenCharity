@@ -162,8 +162,6 @@
     "Donation Targets": "أهداف التبرعات",
     "Family Member": "فرد من الأسرة",
     "Family Members": "أفراد الأسرة",
-    "Donation Allocation": "تخصيص تبرع",
-    "Donation Allocations": "تخصيصات التبرعات",
     "Document": "مستند",
     "Charity Case": "حالة إعانة",
     "Charity Cases": "حالات الإعانة",
@@ -424,8 +422,14 @@
     "Thank you for your donation": "شكراً لك على تبرعك",
     "Your payment has been completed successfully and your support has been recorded.": "تم إتمام الدفع بنجاح وتم تسجيل مساهمتك.",
     "Payment ID": "رقم عملية الدفع",
+    "Payment reference": "مرجع الدفع",
     "Amount paid": "المبلغ المدفوع",
     "Donation target": "جهة التبرع",
     "Back to home": "العودة للرئيسية",
-    "Browse more cases": "تصفح حالات أكثر"
+    "Browse more cases": "تصفح حالات أكثر",
+    "What happens next": "ماذا يحدث بعد ذلك",
+    "Your donation was recorded": "تم تسجيل تبرعك",
+    "The payment is linked to your donation record and stored successfully.": "تم ربط الدفع بسجل التبرع الخاص بك وحفظه بنجاح.",
+    "You can keep this reference": "يمكنك الاحتفاظ بهذا المرجع",
+    "Use the payment reference if you need to follow up on this contribution later.": "استخدم مرجع الدفع إذا احتجت إلى متابعة هذه المساهمة لاحقاً."
 }

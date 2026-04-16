@@ -7,7 +7,6 @@ use App\Filament\Resources\AssistanceSchedules\Pages\EditAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\Pages\ListAssistanceSchedules;
 use App\Filament\Resources\AssistanceSchedules\Pages\ViewAssistanceSchedule;
 use App\Filament\Resources\AssistanceSchedules\RelationManagers\AssistanceDeliveriesRelationManager;
-use App\Filament\Resources\AssistanceSchedules\RelationManagers\DonationAllocationsRelationManager;
 use App\Filament\Resources\AssistanceSchedules\Schemas\AssistanceScheduleForm;
 use App\Filament\Resources\AssistanceSchedules\Schemas\AssistanceScheduleInfolist;
 use App\Filament\Resources\AssistanceSchedules\Tables\AssistanceSchedulesTable;
@@ -50,7 +49,6 @@ class AssistanceScheduleResource extends Resource
     {
         return [
             AssistanceDeliveriesRelationManager::class,
-            DonationAllocationsRelationManager::class,
         ];
     }
 

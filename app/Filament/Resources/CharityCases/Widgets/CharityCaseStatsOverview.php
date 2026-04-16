@@ -15,7 +15,7 @@ class CharityCaseStatsOverview extends StatsOverviewWidget
     use InteractsWithPageTable;
 
     protected static bool $isLazy = false;
-
+    protected int | array | null $columns = 5;
     protected function getTablePage(): string
     {
         return ListCharityCases::class;
@@ -30,8 +30,7 @@ class CharityCaseStatsOverview extends StatsOverviewWidget
             ElegantState::make(__('Urgent'), (string) (clone $query)->where('priority', CasePriority::Urgent)->count()),
             ElegantState::make(__('Pending Review'), (string) (clone $query)->where('status', CaseStatus::PendingReview)->count()),
             ElegantState::make(__('Approved'), (string) (clone $query)->where('status', CaseStatus::Approved)->count()),
-            ElegantState::make(__('In Progress'), (string) (clone $query)->where('status', CaseStatus::InProgress)->count()),
-            ElegantState::make(__('Closed / Completed'), (string) (clone $query)->whereIn('status', [CaseStatus::Closed, CaseStatus::Completed])->count()),
+            ElegantState::make(__('Closed / Completed'), (string) (clone $query)->whereIn('status', [CaseStatus::Completed])->count()),
         ];
     }
 }
