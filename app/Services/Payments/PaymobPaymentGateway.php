@@ -17,7 +17,7 @@ class PaymobPaymentGateway implements PaymentGateway
     public function initialize(Donation $donation, PaymentInitializationData $data): PaymentInitializationResult
     {
         $response = $this->paymobPayment->pay([
-            'payment_id' => (string) $donation->id,
+            'payment_id' => (string) $donation->uuid,
             'amount' => (float) $donation->amount,
             'user_first_name' => $donation->anonymous ? 'Anonymous' : (string) str($donation->donor_name)->before(' '),
             'user_last_name' => $donation->anonymous ? 'Donor' : (string) str($donation->donor_name)->after('-'),
@@ -27,26 +27,26 @@ class PaymobPaymentGateway implements PaymentGateway
 
         return new PaymentInitializationResult(
             redirectUrl: (string) ($response['redirect_url'] ?? ''),
-            transactionId: (string) ($response['payment_id'] ?? $donation->id),
+            transactionId: (string) ($response['payment_id'] ?? $donation->uuid),
             payload: $response,
         );
     }
 
     public function handleCallback(array $payload): ?Donation
     {
-        $donationId = (int) Arr::get($payload, 'merchant_order_id', Arr::get($payload, 'obj.order.merchant_order_id', Arr::get($payload, 'id')));
+        $merchantOrderId = (string) Arr::get($payload, 'merchant_order_id', Arr::get($payload, 'obj.order.merchant_order_id', Arr::get($payload, 'id')));
 
-        if ($donationId === 0) {
+        if ($merchantOrderId === '') {
             return null;
         }
 
-        $donation = Donation::query()->find($donationId);
+        $donation = Donation::query()->where('uuid', $merchantOrderId)->first();
 
         if ($donation === null) {
             return null;
         }
 
-        $verification = $this->paymobPayment->verify((string) $donationId);
+        $verification = $this->paymobPayment->verify($merchantOrderId);
         $isSuccessful = (bool) ($verification['success'] ?? false);
         $transactionId = (string) ($verification['payment_id'] ?? Arr::get($payload, 'id', Arr::get($payload, 'obj.id', $donation->transaction_id)));
 
