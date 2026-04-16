@@ -1,10 +1,15 @@
+@php
+    $aboutImageSetting = setting('media.about_image');
+    $aboutImage = filled($aboutImageSetting) ? \Illuminate\Support\Facades\Storage::url($aboutImageSetting) : asset('images/landing/about.jpg');
+@endphp
+
 <section id="about" class="landing-section">
     <div class="landing-container">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
 
             <div class="relative">
                 <div class="overflow-hidden rounded-[2.5rem]"
-                     style="background-image: url('{{ asset('images/landing/about.jpg') }}'); background-size: cover; background-position: center; min-height: 30rem;">
+                     style="background-image: url('{{ $aboutImage }}'); background-size: cover; background-position: center; min-height: 30rem;">
                     <div class="absolute inset-0 rounded-[2.5rem] bg-linear-to-t from-primary-950/80 via-primary-950/10 to-transparent"></div>
                 </div>
 

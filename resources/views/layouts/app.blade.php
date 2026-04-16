@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ (app()->getLocale() == 'ar') ? 'rtl' : 'ltr' }}" class="scroll-smooth antialiased">
 <head>
+    @php
+        $systemName = setting('general.system_name') ?: __('Masaa Foundation');
+        $favicon = setting('branding.favicon');
+        $faviconUrl = filled($favicon) ? \Illuminate\Support\Facades\Storage::url($favicon) : null;
+    @endphp
     <meta charset="utf-8">
 
-    <meta name="application-name" content="{{ config('app.name') }}">
+    <meta name="application-name" content="{{ $systemName }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ __('Masaa Foundation') }}</title>
+    <title>{{ $systemName }}</title>
     <meta name="description" content="{{ __('Masaa Foundation supports families and humanitarian cases to create sustainable impact in the community.') }}">
+    @if ($faviconUrl)
+        <link rel="icon" href="{{ $faviconUrl }}">
+    @endif
     <script>
         (() => {
             const theme = localStorage.getItem('masaa-theme');

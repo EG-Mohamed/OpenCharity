@@ -1,4 +1,8 @@
-@php($heroImage = asset('images/landing/hero.jpg'))
+@php
+    $heroImageSetting = setting('media.hero_background_image');
+    $heroImage = filled($heroImageSetting) ? \Illuminate\Support\Facades\Storage::url($heroImageSetting) : asset('images/landing/hero.jpg');
+    $systemName = setting('general.system_name') ?: __('Masaa Foundation');
+@endphp
 
 <section
     id="top"
@@ -19,8 +23,7 @@
                     </span>
 
                     <h1 class="mt-6 text-4xl font-black leading-tight text-white sm:text-6xl lg:text-6xl">
-                        {{ __('Masaa') }}
-                        <span class="text-primary-300">{{ __('Foundation') }}</span>
+                        {{ $systemName }}
                     </h1>
 
                     <p class="mt-5 max-w-xl text-base leading-7 text-white/75 sm:mt-6 sm:text-lg sm:leading-8">

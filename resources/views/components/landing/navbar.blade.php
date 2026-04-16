@@ -1,4 +1,8 @@
-@props(['logo' => asset('images/logo.jpg')])
+@php
+    $systemName = setting('general.system_name') ?: __('Masaa Foundation');
+    $logoSetting = setting('branding.logo');
+    $logo = filled($logoSetting) ? \Illuminate\Support\Facades\Storage::url($logoSetting) : asset('images/logo.jpg');
+@endphp
 
 <nav
     x-data="{ open: false }"
@@ -10,14 +14,14 @@
             <a href="{{ route('home') }}" class="flex items-center gap-3">
                 @if ($logo)
                     <span class="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm dark:bg-white">
-                        <img src="{{ $logo }}" alt="{{ __('Masaa Foundation') }}" class="h-9 w-auto object-contain">
+                        <img src="{{ $logo }}" alt="{{ $systemName }}" class="h-9 w-auto object-contain">
                     </span>
                 @else
                     <span class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-500 text-lg font-black text-white shadow-lg shadow-primary-500/30">م</span>
                 @endif
                 <span class="hidden sm:block">
                     <span class="block text-sm font-medium text-primary-600 dark:text-primary-300">Masaa Foundation</span>
-                    <span class="block text-lg font-black leading-tight tracking-tight">{{ __('Masaa Foundation') }}</span>
+                    <span class="block text-lg font-black leading-tight tracking-tight">{{ $systemName }}</span>
                 </span>
             </a>
 
@@ -49,14 +53,14 @@
             <div class="flex items-center gap-3">
                 @if ($logo)
                     <span class="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm dark:bg-white">
-                        <img src="{{ $logo }}" alt="{{ __('Masaa Foundation') }}" class="h-8 w-auto object-contain">
+                        <img src="{{ $logo }}" alt="{{ $systemName }}" class="h-8 w-auto object-contain">
                     </span>
                 @else
                     <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-base font-black text-white">م</span>
                 @endif
                 <div>
                     <div class="text-sm font-medium text-primary-600 dark:text-primary-300">Masaa Foundation</div>
-                    <div class="text-md font-black leading-tight">{{ __('Masaa Foundation') }}</div>
+                    <div class="text-md font-black leading-tight">{{ $systemName }}</div>
                 </div>
             </div>
             <button type="button" @click="open = false" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 dark:border-white/10 dark:text-gray-200" aria-label="{{ __('Close') }}">

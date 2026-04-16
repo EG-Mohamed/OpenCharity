@@ -506,5 +506,15 @@
     "User Information": "معلومات المستخدم",
     "Password": "كلمة المرور",
     "Latitude": "خط الطول",
-    "Longitude": "خط العرض"
+    "Longitude": "خط العرض",
+    "System Name": "اسم النظام",
+    "Primary Phone": "رقم الهاتف الأساسي",
+    "Secondary Phone": "رقم الهاتف الاحتياطي",
+    "Branding": "الهوية البصرية",
+    "Logo": "الشعار",
+    "Favicon": "أيقونة الموقع",
+    "Media": "الوسائط",
+    "Hero Background Image": "صورة الخلفية الرئيسية",
+    "About Image": "صورة قسم من نحن",
+    "System Settings": "إعدادات النظام"
 }
