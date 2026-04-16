@@ -51,10 +51,10 @@ class CharityCaseInfolist
                     ->schema([
                         TextEntry::make('requested_amount')
                             ->label(__('Requested Amount'))
-                            ->money('EGP'),
+                            ->currency(),
                         TextEntry::make('approved_amount')
                             ->label(__('Approved Amount'))
-                            ->money('EGP'),
+                            ->currency(),
                     ]),
                 Section::make(__('Timeline'))
                     ->columns(2)

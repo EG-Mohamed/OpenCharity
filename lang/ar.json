@@ -349,5 +349,11 @@
     "Proof File": "ملف الإثبات",
     "Your assistance deliveries export has completed and :count rows were exported.": "تم تصدير تسليمات المساعدات بنجاح، وعدد الصفوف :count",
     "Your family members export has completed and :count rows were exported.": "تم تصدير أفراد الأسرة بنجاح، وعدد الصفوف :count",
-    "All": "الكل"
+    "All": "الكل",
+    "Parent Series": "السلسلة الأصلية",
+    "Occurrence Number": "رقم المرة",
+    "Parent Scheduled Date": "تاريخ الجدولة الأصلية",
+    "File Name": "اسم الملف",
+    "MIME Type": "نوع الملف",
+    "File Path": "مسار الملف"
 }

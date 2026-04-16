@@ -25,7 +25,7 @@ class AssistanceScheduleResource extends Resource
 {
     protected static ?string $model = AssistanceSchedule::class;
 
-    protected static ?string $recordTitleAttribute = 'scheduled_date';
+    protected static ?string $recordTitleAttribute = 'code';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 

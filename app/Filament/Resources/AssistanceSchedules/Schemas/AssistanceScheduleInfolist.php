@@ -44,7 +44,7 @@ class AssistanceScheduleInfolist
                     ->schema([
                         TextEntry::make('amount')
                             ->label(__('Amount'))
-                            ->money('EGP')
+                            ->currency()
                             ->placeholder('-'),
                         TextEntry::make('quantity')
                             ->label(__('Quantity'))
