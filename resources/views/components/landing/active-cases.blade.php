@@ -20,7 +20,7 @@
                 @foreach ($targets as $target)
                     @php
                         $goalAmount = max((float) $target->goal_amount, 1);
-                        $collectedAmount = min((float) $target->collected_amount, $goalAmount);
+                        $collectedAmount = min((float) $target->paid_donations_sum, $goalAmount);
                         $progress = min(($collectedAmount / $goalAmount) * 100, 100);
                         $typeLabel = $target->type?->getLabel() ?? __('Giving opportunity');
                         $familyCode = $target->family?->code;

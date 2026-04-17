@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DonationStatus;
 use App\Enums\DonationTargetStatus;
 use App\Enums\DonationTargetType;
 use Database\Factories\DonationTargetFactory;
@@ -31,6 +32,15 @@ class DonationTarget extends Model
     public function donations(): HasMany
     {
         return $this->hasMany(Donation::class);
+    }
+
+    public function getCollectedAmountAttribute(): float
+    {
+        if (array_key_exists('paid_donations_sum', $this->attributes)) {
+            return (float) $this->attributes['paid_donations_sum'];
+        }
+
+        return (float) $this->donations()->where('status', DonationStatus::Paid)->sum('amount');
     }
 
     protected function casts(): array

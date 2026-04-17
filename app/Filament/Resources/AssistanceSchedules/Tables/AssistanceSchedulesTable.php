@@ -10,12 +10,8 @@ use App\Filament\Exports\AssistanceScheduleExporter;
 use App\Models\AssistanceSchedule;
 use App\Models\AssistanceType;
 use App\Models\CharityCase;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ExportAction;
-use Filament\Actions\ForceDeleteBulkAction;
-use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -34,7 +30,7 @@ class AssistanceSchedulesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query): Builder => $query->where('status', '!=', ScheduleStatus::Canceled))
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->where('assistance_schedules.status', '!=', ScheduleStatus::Canceled))
             ->columns([
                 IconColumn::make('is_parent')
                     ->label(__('Series'))

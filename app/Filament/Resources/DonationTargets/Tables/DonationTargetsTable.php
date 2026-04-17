@@ -4,6 +4,7 @@ namespace App\Filament\Resources\DonationTargets\Tables;
 
 use App\Enums\DonationTargetStatus;
 use App\Enums\DonationTargetType;
+use App\Models\DonationTarget;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -40,8 +41,7 @@ class DonationTargetsTable
                     ->sortable(),
                 TextColumn::make('collected_amount')
                     ->label(__('Collected Amount'))
-                    ->currency()
-                    ->sortable(),
+                    ->currency(),
                 TextColumn::make('status')
                     ->label(__('Status'))
                     ->badge()

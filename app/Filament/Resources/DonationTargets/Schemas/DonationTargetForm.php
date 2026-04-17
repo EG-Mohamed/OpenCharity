@@ -10,7 +10,6 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -53,7 +52,6 @@ class DonationTargetForm
                         CharityCaseSelect::make(),
                     ]),
                 Section::make(__('Amounts'))
-                    ->columns(2)
                     ->schema([
                         TextInput::make('goal_amount')
                             ->label(__('Goal Amount'))
@@ -61,14 +59,6 @@ class DonationTargetForm
                             ->numeric()
                             ->currency()
                             ->default(0.0),
-                        TextInput::make('collected_amount')
-                            ->label(__('Collected Amount'))
-                            ->required()
-                            ->numeric()
-                            ->currency()
-                            ->default(0.0)
-                            ->disabled()
-                            ->dehydrated(),
                     ]),
                 Section::make(__('Period'))
                     ->columns(2)
