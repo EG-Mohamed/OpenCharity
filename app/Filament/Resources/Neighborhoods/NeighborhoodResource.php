@@ -19,7 +19,11 @@ class NeighborhoodResource extends Resource
     protected static ?string $slug = 'neighborhoods';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static ?int $navigationSort = 3;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
+
+    protected static ?int $navigationSort = 5;
+
     public static function getModelLabel(): string
     {
         return __('Neighborhood');
@@ -29,10 +33,12 @@ class NeighborhoodResource extends Resource
     {
         return __('Neighborhoods');
     }
+
     public static function getNavigationGroup(): string|\UnitEnum|null
     {
         return __('Settings');
     }
+
     public static function form(Schema $schema): Schema
     {
         return NeighborhoodForm::configure($schema);

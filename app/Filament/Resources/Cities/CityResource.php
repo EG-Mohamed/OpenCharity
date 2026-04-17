@@ -19,7 +19,11 @@ class CityResource extends Resource
     protected static ?string $slug = 'cities';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static ?int $navigationSort = 2;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
+
+    protected static ?int $navigationSort = 4;
+
     public static function getModelLabel(): string
     {
         return __('City');
@@ -29,10 +33,12 @@ class CityResource extends Resource
     {
         return __('Cities');
     }
+
     public static function getNavigationGroup(): string|\UnitEnum|null
     {
         return __('Settings');
     }
+
     public static function form(Schema $schema): Schema
     {
         return CityForm::configure($schema);

@@ -69,7 +69,7 @@ return [
      | (visit: https://filamentphp.com/docs/4.x/navigation/overview#sorting-navigation-items)
      |
      */
-    'navigation_group' => 'filament-translation-manager::messages.navigation_group',
+    'navigation_group' => 'Settings',
 
     /*
      |--------------------------------------------------------------------------

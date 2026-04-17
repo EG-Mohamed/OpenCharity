@@ -20,6 +20,12 @@ class AssistanceTypeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
+
+    protected static ?int $navigationSort = 1;
+
     public static function form(Schema $schema): Schema
     {
         return AssistanceTypeForm::configure($schema);

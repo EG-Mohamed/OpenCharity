@@ -26,6 +26,8 @@ class DonationResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Donations';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Schema $schema): Schema
     {
         return DonationForm::configure($schema);

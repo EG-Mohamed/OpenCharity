@@ -12,11 +12,14 @@ use Illuminate\Contracts\Support\Htmlable;
 class AssistanceCalendar extends Page
 {
     use HasPageShield;
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
     protected static ?string $title = 'Assistance Calendar';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Assistance';
+
+    protected static ?int $navigationSort = 1;
 
     protected string $view = 'filament.pages.assistance-calendar';
 

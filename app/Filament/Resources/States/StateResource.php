@@ -19,7 +19,11 @@ class StateResource extends Resource
     protected static ?string $slug = 'states';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static ?int $navigationSort = 1;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
+
+    protected static ?int $navigationSort = 3;
+
     public static function getModelLabel(): string
     {
         return __('State');
@@ -29,10 +33,12 @@ class StateResource extends Resource
     {
         return __('States');
     }
+
     public static function getNavigationGroup(): string|\UnitEnum|null
     {
         return __('Settings');
     }
+
     public static function form(Schema $schema): Schema
     {
         return StateForm::configure($schema);

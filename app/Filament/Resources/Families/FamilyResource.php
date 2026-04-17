@@ -30,6 +30,12 @@ class FamilyResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'code';
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHome;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Families';
+
+    protected static ?int $navigationSort = 1;
+
     public static function form(Schema $schema): Schema
     {
         return FamilyForm::configure($schema);

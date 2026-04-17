@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\SystemSettings;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
@@ -10,11 +9,9 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -24,6 +21,7 @@ use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Outerweb\FilamentSettings\SettingsPlugin;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
+use Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -39,11 +37,19 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->topbar(false)
             ->sidebarCollapsibleOnDesktop()
+            ->navigationGroups([
+                NavigationGroup::make('Assistance')->label(__('Assistance')),
+                NavigationGroup::make('Families')->label(__('Families')),
+                NavigationGroup::make('Cases')->label(__('Cases')),
+                NavigationGroup::make('Donations')->label(__('Donations')),
+                NavigationGroup::make('Documents')->label(__('Documents')),
+                NavigationGroup::make('Settings')->label(__('Settings')),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->plugins([
-                \Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin::make(),
+                FilamentChainedTranslationManagerPlugin::make(),
                 FilamentShieldPlugin::make()
                     ->gridColumns([
                         'default' => 1,
@@ -65,7 +71,7 @@ class AdminPanelProvider extends PanelProvider
                     ->selectable(),
                 SettingsPlugin::make()
                     ->pages([
-                        SystemSettings::class
+                        SystemSettings::class,
                     ]),
             ])
             ->middleware([
