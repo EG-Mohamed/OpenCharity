@@ -20,6 +20,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Size;
 use Filament\Support\Enums\Width;
+use Filament\Support\Facades\FilamentColor;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -39,10 +40,10 @@ class FilamentServiceProvider extends ServiceProvider
     {
         Panel::configureUsing(fn (Panel $panel) => $panel->maxContentWidth(Width::Full)
             ->font('Alexandria')
-            ->colors([
-                'primary' => Color::generateV3Palette('#CB3223'),
-            ])
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false));
+        FilamentColor::register([
+            'primary' => Color::generateV3Palette('#CB3223'),
+        ]);
     }
 
     public function boot(): void

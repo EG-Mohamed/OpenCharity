@@ -36,18 +36,6 @@
 @theme {
     --font-sans: 'Alexandria', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-
-    --color-primary-50: #fef2f1;
-    --color-primary-100: #fde3e1;
-    --color-primary-200: #fcc9c5;
-    --color-primary-300: #f9a29b;
-    --color-primary-400: #f46d62;
-    --color-primary-500: #cb3223;
-    --color-primary-600: #b22a1c;
-    --color-primary-700: #952318;
-    --color-primary-800: #7b2018;
-    --color-primary-900: #681e18;
-    --color-primary-950: #390c08;
 }
 
 @layer base {

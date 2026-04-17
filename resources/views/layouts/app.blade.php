@@ -35,7 +35,9 @@
     </style>
 
     @filamentStyles
+
     @vite(['resources/css/app.css', 'resources/js/landing.js'])
+
     @yield('head')
 </head>
 
