@@ -11,18 +11,23 @@ use App\Enums\PaymentGateway as PaymentGatewayEnum;
 use App\Enums\PaymentMethod;
 use App\Models\Donation;
 use App\Models\DonationTarget;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Alignment;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use JaOcero\RadioDeck\Forms\Components\RadioDeck;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
@@ -67,7 +72,7 @@ class DonationForm extends Component implements HasForms
         $this->form->fill([
             'donation_type' => $defaultType ?? 'general',
             'donation_target_id' => $defaultTargetId,
-            'amount' => 100,
+            'amount' => null,
             'donor_name' => null,
             'donor_email' => null,
             'donor_phone' => null,
@@ -94,7 +99,7 @@ class DonationForm extends Component implements HasForms
     {
         return $schema
             ->components([
-                Radio::make('donation_type')
+                RadioDeck::make('donation_type')
                     ->label(__('Donation type'))
                     ->options([
                         'general' => __('General'),
@@ -104,8 +109,20 @@ class DonationForm extends Component implements HasForms
                             ])->toArray(),
                     ])
                     ->afterStateUpdated(fn (callable $get, callable $set) => $set('donation_target_id', null))
-                    ->inline()
-                    ->inlineLabel(false)
+                    ->required()
+                    ->alignment(Alignment::Center) // Start | Center | End
+                    ->padding('px-4 py-3') // Padding around the deck
+                    ->extraCardsAttributes([ // Extra attributes for card elements
+                        'class' => 'rounded-xl'
+                    ])
+                    ->extraOptionsAttributes([
+                        'class' => 'leading-none w-full flex flex-col items-center justify-center'
+                    ])
+                    ->columns([
+                        'sm' => 2,
+                        'md' => 3,
+                        'lg' => 4,
+                    ])
                     ->default('general')
                     ->live(),
                 TextInput::make('amount')
@@ -120,10 +137,13 @@ class DonationForm extends Component implements HasForms
                     ->searchable()
                     ->visible(fn (callable $get): bool => $get('donation_type') !== 'general')
                     ->required(fn (callable $get): bool => $get('donation_type') !== 'general'),
-                Grid::make(2)
+                Fieldset::make(__('Donor information'))
+                    ->columns(2)
                     ->schema([
-                        Toggle::make('anonymous')
+                        ToggleButtons::make('anonymous')
                             ->columnSpanFull()
+                            ->boolean()
+                            ->inline()
                             ->label(__('Donate anonymously'))
                             ->default(false),
                         TextInput::make('donor_name')

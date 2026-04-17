@@ -7,3 +7,4 @@
 @source '../../../../vendor/saade/filament-fullcalendar/resources/views/**/*.blade.php';
 @source '../../../../vendor/statikbe/laravel-filament-chained-translation-manager/resources/**/*.blade.php';
 @source '../../../../vendor/guava/filament-icon-picker/resources/**/*';
+@source '../../../../vendor/jaocero/radio-deck/resources/views';

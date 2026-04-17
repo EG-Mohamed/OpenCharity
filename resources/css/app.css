@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&display=swap');
 @import 'tailwindcss';
+
 /* Required by all components */
 @import '../../vendor/filament/support/resources/css/index.css';
 
@@ -25,7 +26,8 @@
 @import '../../vendor/filament/widgets/resources/css/index.css';
 
 @variant dark (&:where(.dark, .dark *));
-
+@source '../../app/**/*';
+@source '../../vendor/jaocero/radio-deck/resources/views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
