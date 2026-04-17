@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            //            CaseTypeSeeder::class,
-            //            AssistanceTypeSeeder::class,
-            //            FamilySeeder::class,
-            //            FamilyMemberSeeder::class,
-            //            CharityCaseSeeder::class,
-            //            VisitSeeder::class,
-            //            DocumentSeeder::class,
-            //            AssistanceScheduleSeeder::class,
-            //            AssistanceDeliverySeeder::class,
-            //            DonationTargetSeeder::class,
-            //            DonationSeeder::class,
+            CaseTypeSeeder::class,
+            AssistanceTypeSeeder::class,
+            FamilySeeder::class,
+            FamilyMemberSeeder::class,
+            CharityCaseSeeder::class,
+            VisitSeeder::class,
+            DocumentSeeder::class,
+            AssistanceScheduleSeeder::class,
+            AssistanceDeliverySeeder::class,
+            DonationTargetSeeder::class,
+            DonationSeeder::class,
         ]);
     }
 }

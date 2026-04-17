@@ -1,0 +1,329 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CB3223;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#9B1A10;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="familyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="caseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#6D28D9;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="assistGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="donationGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#B45309;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8FAFC;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#F1F5F9;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000018"/>
+    </filter>
+    <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94A3B8"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8B5CF6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#F59E0B"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bgGrad)"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="72" fill="url(#headerGrad)"/>
+  <text x="600" y="28" text-anchor="middle" fill="white" font-size="22" font-weight="700" letter-spacing="1">OpenCharity</text>
+  <text x="600" y="54" text-anchor="middle" fill="#FECACA" font-size="13">Open-source Charity &amp; Family Assistance Management — System Architecture</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FAMILY (center-left) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="120" width="220" height="190" rx="10" fill="white" stroke="#BFDBFE" stroke-width="1.5"/>
+    <rect x="60" y="120" width="220" height="36" rx="10" fill="url(#familyGrad)"/>
+    <rect x="60" y="143" width="220" height="13" fill="url(#familyGrad)"/>
+    <text x="170" y="144" text-anchor="middle" fill="white" font-size="13" font-weight="700">Family</text>
+
+    <text x="80" y="175" fill="#374151" font-size="11">code, name</text>
+    <text x="80" y="191" fill="#374151" font-size="11">primary_contact_name / phone</text>
+    <text x="80" y="207" fill="#374151" font-size="11">secondary_contact_phone</text>
+    <text x="80" y="223" fill="#374151" font-size="11">housing_status, monthly_income</text>
+    <text x="80" y="239" fill="#374151" font-size="11">governorate, city, district</text>
+    <text x="80" y="255" fill="#374151" font-size="11">address (lat/lng map picker)</text>
+    <text x="80" y="271" fill="#374151" font-size="11">status, notes</text>
+    <text x="80" y="291" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · hasMany Cases, Members</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FAMILY MEMBER (below family) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="350" width="220" height="210" rx="10" fill="white" stroke="#BFDBFE" stroke-width="1.5"/>
+    <rect x="60" y="350" width="220" height="36" rx="10" fill="url(#familyGrad)"/>
+    <rect x="60" y="373" width="220" height="13" fill="url(#familyGrad)"/>
+    <text x="170" y="374" text-anchor="middle" fill="white" font-size="13" font-weight="700">FamilyMember</text>
+
+    <text x="80" y="405" fill="#374151" font-size="11">name, national_id, phone</text>
+    <text x="80" y="421" fill="#374151" font-size="11">relation_to_head (enum)</text>
+    <text x="80" y="437" fill="#374151" font-size="11">gender (enum)</text>
+    <text x="80" y="453" fill="#374151" font-size="11">birth_date, marital_status (enum)</text>
+    <text x="80" y="469" fill="#374151" font-size="11">education_status (enum)</text>
+    <text x="80" y="485" fill="#374151" font-size="11">employment_status (enum)</text>
+    <text x="80" y="501" fill="#374151" font-size="11">health_status (enum)</text>
+    <text x="80" y="517" fill="#374151" font-size="11">monthly_income, notes</text>
+    <text x="80" y="543" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · belongsTo Family</text>
+  </g>
+
+  <!-- Arrow Family → FamilyMember -->
+  <line x1="170" y1="310" x2="170" y2="348" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowBlue)"/>
+  <text x="175" y="333" fill="#3B82F6" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CHARITY CASE (center) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="370" y="120" width="230" height="230" rx="10" fill="white" stroke="#DDD6FE" stroke-width="1.5"/>
+    <rect x="370" y="120" width="230" height="36" rx="10" fill="url(#caseGrad)"/>
+    <rect x="370" y="143" width="230" height="13" fill="url(#caseGrad)"/>
+    <text x="485" y="144" text-anchor="middle" fill="white" font-size="13" font-weight="700">CharityCase</text>
+
+    <text x="390" y="175" fill="#374151" font-size="11">code, case_type_id</text>
+    <text x="390" y="191" fill="#374151" font-size="11">priority: low/medium/high/urgent</text>
+    <text x="390" y="207" fill="#374151" font-size="11">status (10-step lifecycle)</text>
+    <text x="390" y="223" fill="#374151" font-size="11">visit_status (enum)</text>
+    <text x="390" y="239" fill="#374151" font-size="11">registered_at, reviewed_at</text>
+    <text x="390" y="255" fill="#374151" font-size="11">approved_at, closed_at</text>
+    <text x="390" y="271" fill="#374151" font-size="11">last_visit_at, next_visit_at</text>
+    <text x="390" y="287" fill="#374151" font-size="11">requested_amount, approved_amount</text>
+    <text x="390" y="303" fill="#374151" font-size="11">description, notes</text>
+    <text x="390" y="335" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · belongsTo Family, CaseType</text>
+  </g>
+
+  <!-- Arrow Family → CharityCase -->
+  <line x1="280" y1="200" x2="368" y2="200" stroke="#8B5CF6" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+  <text x="296" y="194" fill="#8B5CF6" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CASE TYPE (top right of case) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="370" y="90" width="230" height="24" rx="6" fill="white" stroke="#DDD6FE" stroke-width="1" opacity="0"/>
+    <rect x="700" y="90" width="180" height="90" rx="10" fill="white" stroke="#DDD6FE" stroke-width="1.5"/>
+    <rect x="700" y="90" width="180" height="30" rx="10" fill="#7C3AED"/>
+    <rect x="700" y="108" width="180" height="12" fill="#7C3AED"/>
+    <text x="790" y="111" text-anchor="middle" fill="white" font-size="12" font-weight="700">CaseType</text>
+    <text x="718" y="140" fill="#374151" font-size="11">name, code</text>
+    <text x="718" y="156" fill="#374151" font-size="11">description, is_active</text>
+    <text x="718" y="171" fill="#6B7280" font-size="10" font-style="italic">hasMany CharityCases</text>
+  </g>
+  <line x1="600" y1="150" x2="698" y2="135" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowPurple)"/>
+  <text x="620" y="144" fill="#7C3AED" font-size="9">belongsTo</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- VISIT -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="205" width="200" height="195" rx="10" fill="white" stroke="#DDD6FE" stroke-width="1.5"/>
+    <rect x="700" y="205" width="200" height="32" rx="10" fill="url(#caseGrad)"/>
+    <rect x="700" y="225" width="200" height="12" fill="url(#caseGrad)"/>
+    <text x="800" y="226" text-anchor="middle" fill="white" font-size="12" font-weight="700">Visit</text>
+    <text x="718" y="257" fill="#374151" font-size="11">visit_type (enum)</text>
+    <text x="718" y="273" fill="#374151" font-size="11">status (enum)</text>
+    <text x="718" y="289" fill="#374151" font-size="11">scheduled_at, visited_at</text>
+    <text x="718" y="305" fill="#374151" font-size="11">summary, findings</text>
+    <text x="718" y="321" fill="#374151" font-size="11">recommendations</text>
+    <text x="718" y="337" fill="#374151" font-size="11">next_visit_at, notes</text>
+    <text x="718" y="387" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · belongsTo CharityCase</text>
+  </g>
+  <!-- Arrow CharityCase → Visit -->
+  <line x1="600" y1="250" x2="698" y2="250" stroke="#8B5CF6" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+  <text x="618" y="244" fill="#8B5CF6" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- DOCUMENT -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="420" width="200" height="210" rx="10" fill="white" stroke="#DDD6FE" stroke-width="1.5"/>
+    <rect x="700" y="420" width="200" height="32" rx="10" fill="#6D28D9"/>
+    <rect x="700" y="440" width="200" height="12" fill="#6D28D9"/>
+    <text x="800" y="441" text-anchor="middle" fill="white" font-size="12" font-weight="700">Document</text>
+    <text x="718" y="472" fill="#374151" font-size="11">type (enum)</text>
+    <text x="718" y="488" fill="#374151" font-size="11">category (enum)</text>
+    <text x="718" y="504" fill="#374151" font-size="11">title, file_path, file_name</text>
+    <text x="718" y="520" fill="#374151" font-size="11">mime_type, file_size</text>
+    <text x="718" y="536" fill="#374151" font-size="11">visibility (enum)</text>
+    <text x="718" y="552" fill="#374151" font-size="11">issued_at, expires_at</text>
+    <text x="718" y="568" fill="#374151" font-size="11">is_required, is_verified</text>
+    <text x="718" y="614" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · nullable Family/Case</text>
+  </g>
+  <!-- Arrow CharityCase → Document -->
+  <line x1="485" y1="350" x2="485" y2="490" stroke="#6D28D9" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="485" y1="490" x2="698" y2="490" stroke="#6D28D9" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+  <text x="490" y="436" fill="#6D28D9" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- ASSISTANCE SCHEDULE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="370" y="390" width="230" height="220" rx="10" fill="white" stroke="#A7F3D0" stroke-width="1.5"/>
+    <rect x="370" y="390" width="230" height="32" rx="10" fill="url(#assistGrad)"/>
+    <rect x="370" y="410" width="230" height="12" fill="url(#assistGrad)"/>
+    <text x="485" y="411" text-anchor="middle" fill="white" font-size="12" font-weight="700">AssistanceSchedule</text>
+    <text x="390" y="443" fill="#374151" font-size="11">assistance_type_id</text>
+    <text x="390" y="459" fill="#374151" font-size="11">scheduled_date, scheduled_time</text>
+    <text x="390" y="475" fill="#374151" font-size="11">amount, quantity</text>
+    <text x="390" y="491" fill="#374151" font-size="11">frequency (enum)</text>
+    <text x="390" y="507" fill="#374151" font-size="11">status (enum)</text>
+    <text x="390" y="523" fill="#374151" font-size="11">funding_status (enum)</text>
+    <text x="390" y="539" fill="#374151" font-size="11">notes</text>
+    <text x="390" y="595" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · belongsTo Case, AssistanceType</text>
+  </g>
+  <!-- Arrow CharityCase → AssistanceSchedule -->
+  <line x1="485" y1="350" x2="485" y2="388" stroke="#10B981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="490" y="373" fill="#10B981" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- ASSISTANCE TYPE (left of schedule) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="100" y="620" width="200" height="105" rx="10" fill="white" stroke="#A7F3D0" stroke-width="1.5"/>
+    <rect x="100" y="620" width="200" height="30" rx="10" fill="#059669"/>
+    <rect x="100" y="638" width="200" height="12" fill="#059669"/>
+    <text x="200" y="640" text-anchor="middle" fill="white" font-size="12" font-weight="700">AssistanceType</text>
+    <text x="118" y="670" fill="#374151" font-size="11">name, code, description</text>
+    <text x="118" y="686" fill="#374151" font-size="11">unit_type (enum)</text>
+    <text x="118" y="702" fill="#374151" font-size="11">is_recurring_allowed</text>
+    <text x="118" y="718" fill="#6B7280" font-size="10" font-style="italic">hasMany Schedules</text>
+  </g>
+  <line x1="370" y1="490" x2="302" y2="672" stroke="#10B981" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowGreen)"/>
+  <text x="310" y="572" fill="#10B981" font-size="9">belongsTo</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- ASSISTANCE DELIVERY -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="370" y="640" width="230" height="150" rx="10" fill="white" stroke="#A7F3D0" stroke-width="1.5"/>
+    <rect x="370" y="640" width="230" height="30" rx="10" fill="#047857"/>
+    <rect x="370" y="658" width="230" height="12" fill="#047857"/>
+    <text x="485" y="660" text-anchor="middle" fill="white" font-size="12" font-weight="700">AssistanceDelivery</text>
+    <text x="390" y="691" fill="#374151" font-size="11">delivered_at</text>
+    <text x="390" y="707" fill="#374151" font-size="11">delivery_status (enum)</text>
+    <text x="390" y="723" fill="#374151" font-size="11">received_by_name / phone</text>
+    <text x="390" y="739" fill="#374151" font-size="11">proof_file_path, notes</text>
+    <text x="390" y="775" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · belongsTo Schedule</text>
+  </g>
+  <!-- Arrow AssistanceSchedule → AssistanceDelivery -->
+  <line x1="485" y1="610" x2="485" y2="638" stroke="#10B981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="490" y="628" fill="#10B981" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- DONATION TARGET -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="920" y="120" width="230" height="195" rx="10" fill="white" stroke="#FDE68A" stroke-width="1.5"/>
+    <rect x="920" y="120" width="230" height="32" rx="10" fill="url(#donationGrad)"/>
+    <rect x="920" y="140" width="230" height="12" fill="url(#donationGrad)"/>
+    <text x="1035" y="142" text-anchor="middle" fill="white" font-size="13" font-weight="700">DonationTarget</text>
+    <text x="940" y="173" fill="#374151" font-size="11">type: family/case/campaign</text>
+    <text x="940" y="189" fill="#374151" font-size="11">title, description</text>
+    <text x="940" y="205" fill="#374151" font-size="11">goal_amount, collected_amount</text>
+    <text x="940" y="221" fill="#374151" font-size="11">status (enum)</text>
+    <text x="940" y="237" fill="#374151" font-size="11">starts_at, ends_at</text>
+    <text x="940" y="297" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · nullable Family/Case</text>
+  </g>
+  <!-- Arrow Family → DonationTarget -->
+  <line x1="280" y1="175" x2="918" y2="175" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowAmber)"/>
+  <text x="840" y="169" fill="#F59E0B" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- DONATION -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="920" y="345" width="230" height="220" rx="10" fill="white" stroke="#FDE68A" stroke-width="1.5"/>
+    <rect x="920" y="345" width="230" height="32" rx="10" fill="url(#donationGrad)"/>
+    <rect x="920" y="365" width="230" height="12" fill="url(#donationGrad)"/>
+    <text x="1035" y="366" text-anchor="middle" fill="white" font-size="13" font-weight="700">Donation</text>
+    <text x="940" y="398" fill="#374151" font-size="11">donor_name, donor_email</text>
+    <text x="940" y="414" fill="#374151" font-size="11">donor_phone (anonymous flag)</text>
+    <text x="940" y="430" fill="#374151" font-size="11">amount</text>
+    <text x="940" y="446" fill="#374151" font-size="11">currency: EGP / USD / SAR</text>
+    <text x="940" y="462" fill="#374151" font-size="11">status (enum)</text>
+    <text x="940" y="478" fill="#374151" font-size="11">payment_gateway (enum)</text>
+    <text x="940" y="494" fill="#374151" font-size="11">payment_method (enum)</text>
+    <text x="940" y="510" fill="#374151" font-size="11">transaction_id, paid_at</text>
+    <text x="940" y="547" fill="#6B7280" font-size="10" font-style="italic">SoftDeletes · belongsTo DonationTarget</text>
+  </g>
+  <!-- Arrow DonationTarget → Donation -->
+  <line x1="1035" y1="315" x2="1035" y2="343" stroke="#F59E0B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <text x="1040" y="333" fill="#F59E0B" font-size="9">hasMany</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- DONATION ALLOCATION -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="920" y="595" width="230" height="185" rx="10" fill="white" stroke="#FDE68A" stroke-width="1.5"/>
+    <rect x="920" y="595" width="230" height="32" rx="10" fill="#B45309"/>
+    <rect x="920" y="615" width="230" height="12" fill="#B45309"/>
+    <text x="1035" y="616" text-anchor="middle" fill="white" font-size="12" font-weight="700">DonationAllocation</text>
+    <text x="940" y="648" fill="#374151" font-size="11">donation_id</text>
+    <text x="940" y="664" fill="#374151" font-size="11">donation_target_id</text>
+    <text x="940" y="680" fill="#374151" font-size="11">family_id (nullable)</text>
+    <text x="940" y="696" fill="#374151" font-size="11">charity_case_id (nullable)</text>
+    <text x="940" y="712" fill="#374151" font-size="11">assistance_schedule_id (nullable)</text>
+    <text x="940" y="728" fill="#374151" font-size="11">amount, allocation_status</text>
+    <text x="940" y="744" fill="#374151" font-size="11">allocated_at, notes</text>
+    <text x="940" y="763" fill="#6B7280" font-size="10" font-style="italic">belongsTo Donation, Target, Family, Case, Schedule</text>
+  </g>
+  <!-- Arrow Donation → DonationAllocation -->
+  <line x1="1035" y1="565" x2="1035" y2="593" stroke="#F59E0B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <text x="1040" y="583" fill="#F59E0B" font-size="9">hasMany</text>
+
+  <!-- Allocation → AssistanceSchedule (cross link) -->
+  <line x1="920" y1="712" x2="602" y2="530" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowGray)"/>
+  <text x="740" y="650" fill="#94A3B8" font-size="9">nullable FK</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- LEGEND -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="60" y="840" width="1080" height="44" rx="8" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+    <!-- Family group -->
+    <rect x="80" y="853" width="14" height="14" rx="3" fill="url(#familyGrad)"/>
+    <text x="100" y="864" fill="#374151" font-size="11">Family &amp; Members</text>
+    <!-- Case group -->
+    <rect x="240" y="853" width="14" height="14" rx="3" fill="url(#caseGrad)"/>
+    <text x="260" y="864" fill="#374151" font-size="11">Cases &amp; Visits &amp; Docs</text>
+    <!-- Assistance group -->
+    <rect x="430" y="853" width="14" height="14" rx="3" fill="url(#assistGrad)"/>
+    <text x="450" y="864" fill="#374151" font-size="11">Assistance Scheduling &amp; Delivery</text>
+    <!-- Donation group -->
+    <rect x="680" y="853" width="14" height="14" rx="3" fill="url(#donationGrad)"/>
+    <text x="700" y="864" fill="#374151" font-size="11">Donations &amp; Allocations</text>
+    <!-- Solid line -->
+    <line x1="870" y1="860" x2="900" y2="860" stroke="#374151" stroke-width="1.5"/>
+    <text x="908" y="864" fill="#374151" font-size="11">hasMany</text>
+    <!-- Dashed line -->
+    <line x1="990" y1="860" x2="1020" y2="860" stroke="#374151" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="1028" y="864" fill="#374151" font-size="11">optional FK</text>
+  </g>
+
+  <!-- Bottom credit -->
+  <text x="600" y="893" text-anchor="middle" fill="#CBD5E1" font-size="10">OpenCharity · MIT License · Built with Laravel 13 + Filament 5</text>
+</svg>

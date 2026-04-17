@@ -1,58 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# OpenCharity
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Open-source charity and family assistance management, built on Laravel + Filament.
 
-## About Laravel
+[![Laravel](https://img.shields.io/badge/Laravel-13-red?style=flat-square)](https://laravel.com)
+[![Filament](https://img.shields.io/badge/Filament-5-orange?style=flat-square)](https://filamentphp.com)
+[![PHP](https://img.shields.io/badge/PHP-8.3%2B-blue?style=flat-square)](https://www.php.net)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## About
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+OpenCharity is a full-featured admin system designed for NGOs, mosques, and community foundations that need to manage beneficiary families from intake to ongoing assistance. It covers the complete lifecycle: registering families and their members, opening charity cases, scheduling and conducting visits, delivering assistance, storing documents, and running donation campaigns — all with fine-grained role-based access control and Arabic/English bilingual support.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## System Architecture
 
-## Learning Laravel
+![OpenCharity System Architecture](public/opencharity-diagram.svg)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Key Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Family & Member Registry**
+- Detailed family profiles: housing status, monthly income, address with map picker, contact information
+- Member records with relation, gender, birth date, education, employment, health, and income fields
+- Soft-delete with full audit trail
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+**Case Management**
+- Flexible case types defined by administrators
+- Priority levels (low → urgent) and a complete status lifecycle (draft → closed)
+- Linked visits, documents, assistance schedules, and donation targets per case
 
-## Agentic Development
+**Visit Tracking**
+- Visit types: field visit, office interview, phone call, follow-up, reassessment
+- FullCalendar scheduling with next-visit reminders
+- Summary, findings, and recommendations per visit
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+**Assistance Scheduling & Delivery**
+- Assistance types with configurable units (amount, item, service)
+- Recurring schedules (once, daily, weekly, monthly, quarterly, yearly, custom)
+- Per-schedule funding status and delivery records with proof-of-delivery file upload
+
+**Document Vault**
+- Categorized documents: identity, housing, financial, medical, legal, social research, committee decisions
+- Document types include national ID, birth certificate, rent contract, medical reports, and more
+- Verification status, expiry tracking, and visibility controls (family-only, case-only, shared)
+
+**Donations & Fundraising**
+- Donation targets at family, case, or campaign level with goal/collected amount tracking
+- Multi-currency support: EGP, USD, SAR
+- Payment gateway tracking: Paymob, Stripe, Fawry, manual, and others
+- Full donation allocation chain: donation → target → case → assistance schedule
+
+**Admin Panel**
+- Filament 5 admin panel with Shield roles and permissions
+- Arabic/English multi-language UI with translatable content (Spatie Translatable)
+- System settings for branding, social links, and media
+- Phone input with country validation, map picker for addresses, icon picker
+
+## Tech Stack
+
+| Layer | Package |
+|---|---|
+| Framework | Laravel 13, PHP 8.3+ |
+| Admin UI | Filament 5, Livewire 4 |
+| Frontend | Tailwind CSS 4, Alpine.js |
+| Database | MySQL 8+ |
+| Testing | Pest 4 |
+| Auth & Roles | Filament Shield |
+| i18n | Laravel Lang, Spatie Translatable, Chained Translation Manager |
+| Scheduling UI | Saade FullCalendar |
+| Payments | Akaunting Laravel Money |
+
+## Requirements
+
+- PHP 8.3+
+- Composer
+- Node.js 20+
+- MySQL 8+
+- [Laravel Herd](https://herd.laravel.com) (recommended for local development)
+
+## Installation
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/your-org/open-charity.git
+cd open-charity
 
-php artisan boost:install
+composer install
+
+cp .env.example .env
+php artisan key:generate
+
+# Configure your database in .env, then:
+php artisan migrate --seed
+
+php artisan shield:install --fresh
+php artisan storage:link
+
+npm install && npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Demo Credentials
+
+Running `php artisan migrate --seed` creates an admin account and seeds the full dataset:
+
+| Field | Value |
+|---|---|
+| Email | `admin@test.com` |
+| Password | `123456789` |
+| URL | `/admin` |
+
+The seeder also creates: 5 case types, 5 assistance types, 10 families with 2–6 members each, 1–3 charity cases per family, visits, documents, assistance schedules with deliveries, donation targets, and donations.
+
+## Development
+
+Run all development services concurrently (server, queue, log tail, Vite):
+
+```bash
+composer run dev
+```
+
+Or use the quick setup script (install + migrate + build in one command):
+
+```bash
+composer run setup
+```
+
+## Domain Model
+
+A **Family** is the central entity. Each family can have multiple **FamilyMembers** and one or more **CharityCases** opened against it. Each case tracks **Visits** (scheduled or completed), **AssistanceSchedules** (with individual **AssistanceDeliveries**), and **Documents**.
+
+Fundraising works through **DonationTargets** (scoped to a family, case, or campaign). **Donations** are recorded against targets and then split via **DonationAllocations** that trace exactly which funds went to which family, case, or assistance schedule.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Pull requests are welcome. Please:
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Follow the existing code conventions (check sibling files before writing new code)
+- Format PHP with Pint before submitting: `vendor/bin/pint`
+- Wrap all user-facing strings with `__()`
+- Use conventional commits (`feat:`, `fix:`, `refactor:`, etc.)
+- Do not add inline comments unless the logic is genuinely non-obvious
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+OpenCharity is open-sourced software licensed under the [MIT license](LICENSE).
+
+## Credits
+
+Built with [Laravel](https://laravel.com), [Filament](https://filamentphp.com), and the wider Laravel ecosystem.
