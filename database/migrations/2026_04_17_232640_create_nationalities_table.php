@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Nationality;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -210,12 +211,12 @@ return new class extends Migration
   "Yemenite": "يمني",
   "Zambian": "زامبي",
   "Zimbabwean": "زيمبابوي"
-}',false);
+}', false);
         foreach ($json as $key => $value) {
-            \App\Models\Nationality::create([
+            Nationality::create([
                 'name' => [
-                    'ar' => $key,
-                    'en' => $value,
+                    'ar' => $value,
+                    'en' => $key,
                 ],
             ]);
         }

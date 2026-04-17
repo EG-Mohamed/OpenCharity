@@ -26,19 +26,7 @@ class PdfGenerator implements Responsable
             'margin_right' => 10,
             'margin_top' => 10,
             'margin_bottom' => 10,
-            'default_font' => 'cairo',
-            'autoScriptToLang' => true,
-            'autoLangToFont' => true,
             'tempDir' => storage_path('app/mpdf'),
-            'fontDir' => [public_path('fonts')],
-            'fontdata' => [
-                'cairo' => [
-                    'R' => 'Cairo-Regular.ttf',
-                    'B' => 'Cairo-Bold.ttf',
-                    'useOTL' => 0xFF,
-                    'useKashida' => 75,
-                ],
-            ],
         ]);
 
         $mpdf->SetDirectionality('rtl');

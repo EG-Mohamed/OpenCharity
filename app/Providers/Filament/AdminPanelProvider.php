@@ -66,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
                         'default' => 1,
                         'sm' => 2,
                     ]),
-                EasyFooterPlugin::make()->withBorder()->withSentence(new HtmlString(base64_decode('PHNwYW4gZGlyPSJsdHIiPk1hZGUgV2l0aCA8c3BhbiBjbGFzcz0idGV4dC1yZWQtNTAwIj7inaQ8L3NwYW4+IEJ5IDxhIGhyZWY9Imh0dHBzOi8vbXNhaWVkLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPk1vaGFtZWQgU2FpZDwvYT48L3NwYW4+'))),
+                EasyFooterPlugin::make()->withBorder()->withSentence(new HtmlString(base64_decode('2KrYtdmF2YrZhSDZiCDYqti32YjZitixINio2YjYp9iz2LfYqSA8YSBjbGFzcz0idGV4dC1wcmltYXJ5LTUwMCIgaHJlZj0iaHR0cHM6Ly9tc2FpZWQuY29tLyI+2YXYrdmF2K8g2LPYudmK2K88L2E+'))),
                 FilamentFullCalendarPlugin::make()
                     ->selectable(),
                 SettingsPlugin::make()

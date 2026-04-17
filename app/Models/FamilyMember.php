@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FamilyMember extends Model
@@ -49,5 +50,15 @@ class FamilyMember extends Model
     public function nationality(): BelongsTo
     {
         return $this->belongsTo(Nationality::class);
+    }
+
+    public function charityCases(): HasMany
+    {
+        return $this->hasMany(CharityCase::class);
+    }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class);
     }
 }

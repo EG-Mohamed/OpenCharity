@@ -4,7 +4,7 @@
 <title>{{ $title }}</title>
 <style>
 body {
-    font-family: cairo, sans-serif;
+    font-family: xbriyaz, sans-serif;
     font-size: 9.5pt;
     color: #1f2937;
     direction: rtl;

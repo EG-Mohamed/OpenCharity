@@ -69,7 +69,7 @@ class FamilyMemberForm
                             ->searchable()
                             ->preload(),
                         PhoneInput::make('phone')
-                            ->label(__('Phone'))->columnSpanFull(),
+                            ->label(__('Phone')),
                     ]),
                 Section::make(__('Status'))
                     ->columns(2)
@@ -93,20 +93,20 @@ class FamilyMemberForm
                             ->preload()
                             ->live()
                             ->required(),
-                        Select::make('diseases')
-                            ->label(__('Diseases'))
-                            ->relationship('diseases', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->searchable()
-                            ->visible(fn (Get $get): bool => $get('health_status') === HealthStatus::Unhealthy->value)
-                            ->columnSpanFull(),
                         TextInput::make('monthly_income')
                             ->label(__('Monthly Income'))
                             ->required()
                             ->numeric()
                             ->currency()
                             ->default(0.0),
+                        Select::make('diseases')
+                            ->label(__('Diseases'))
+                            ->relationship('diseases', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->visible(fn (Get $get): bool => $get('health_status') === HealthStatus::Unhealthy)
+                            ->columnSpanFull(),
                     ]),
                 Section::make(__('Notes'))
                     ->schema([
