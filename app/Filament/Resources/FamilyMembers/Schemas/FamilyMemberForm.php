@@ -14,7 +14,9 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
@@ -44,11 +46,17 @@ class FamilyMemberForm
                             ->lazy()
                             ->afterStateUpdated(fn ($state, Set $set, Get $get) => self::idDetails(get: $get, set: $set))
                             ->label(__('National ID')),
-                        ToggleButtons::make('gender')
-                            ->label(__('Gender'))
-                            ->options(Gender::class)
-                            ->inline()
-                            ->required(),
+                        Grid::make(2)->schema([
+                            ToggleButtons::make('gender')
+                                ->label(__('Gender'))
+                                ->options(Gender::class)
+                                ->inline()
+                                ->required(),
+                            ToggleButtons::make('is_refugee')
+                                ->boolean()->inline()->required()
+                                ->label(__('Refugee'))
+                                ->default(false),
+                        ]),
                         Select::make('relation_to_head')
                             ->label(__('Relation To Head'))
                             ->options(RelationToHead::class)

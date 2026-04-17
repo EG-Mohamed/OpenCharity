@@ -159,6 +159,8 @@ class FamilyMembersTable
                         true: fn (Builder $query): Builder => $query->whereHas('diseases', fn (Builder $q): Builder => $q->where('is_chronic', true)),
                         false: fn (Builder $query): Builder => $query->whereDoesntHave('diseases', fn (Builder $q): Builder => $q->where('is_chronic', true)),
                     ),
+                TernaryFilter::make('is_refugee')
+                    ->label(__('Refugee')),
                 DaterangepickerFilter::make('birth_date')
                     ->label(__('Birth Date'))
                     ->useColumn('birth_date'),

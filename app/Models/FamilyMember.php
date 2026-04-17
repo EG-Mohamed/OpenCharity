@@ -34,6 +34,7 @@ class FamilyMember extends Model
             'employment_status' => EmploymentStatus::class,
             'health_status' => HealthStatus::class,
             'monthly_income' => 'decimal:2',
+            'is_refugee' => 'boolean',
         ];
     }
 
