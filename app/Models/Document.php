@@ -26,7 +26,6 @@ class Document extends Model
             'visibility' => DocumentVisibility::class,
             'issued_at' => 'date',
             'expires_at' => 'date',
-            'file_size' => 'integer',
             'is_required' => 'boolean',
             'is_verified' => 'boolean',
         ];

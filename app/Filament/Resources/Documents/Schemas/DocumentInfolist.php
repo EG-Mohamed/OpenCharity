@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Documents\Schemas;
 
+use Filament\Actions\Action;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Hugomyb\FilamentMediaAction\Actions\MediaAction;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentInfolist
 {
@@ -41,22 +44,21 @@ class DocumentInfolist
                             ->badge(),
                     ]),
                 Section::make(__('File'))
-                    ->columns(2)
                     ->schema([
-                        TextEntry::make('file_name')
-                            ->label(__('File Name'))
-                            ->placeholder('-')
-                            ->copyable(),
-                        TextEntry::make('mime_type')
-                            ->label(__('MIME Type'))
-                            ->placeholder('-'),
-                        TextEntry::make('file_size')
-                            ->label(__('File Size'))
-                            ->formatStateUsing(fn (?int $state): string => number_format(($state ?? 0) / 1024, 1).' KB'),
                         TextEntry::make('file_path')
                             ->label(__('File Path'))
                             ->placeholder('-')
-                            ->copyable(),
+                            ->copyable()
+                            ->columnSpanFull(),
+                    ])->headerActions([
+                        MediaAction::make('media')->button()
+                            ->icon('heroicon-o-eye')
+                            ->label(__('File Preview'))->media(fn($record) => rescue(fn() => Storage::url($record->file_path))),
+                        Action::make('open-url')
+                            ->label(__('Open URL'))
+                            ->url(fn($record) => $record->file_path)
+                            ->openUrlInNewTab()
+                            ->icon('heroicon-o-globe-alt')
                     ]),
                 Section::make(__('Dates & Flags'))
                     ->columns(2)

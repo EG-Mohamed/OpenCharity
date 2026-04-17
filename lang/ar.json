@@ -1,4 +1,5 @@
 {
+    "Open URL": "فتح الرابط",
     "File": "ملف",
     "Location": "موقع",
     "Settings": "إعدادات",
@@ -520,5 +521,8 @@
     "Social Links": "روابط التواصل الاجتماعي",
     "Icon": "الأيقونة",
     "URL": "الرابط",
-    "Donor information": "معلومات المتبرع"
+    "Charity Case Code": "معرف حالة الإعانة",
+    "Donor information": "معلومات المتبرع",
+    "Your documents export has completed and :count rows were exported.": "تم تصدير المستندات بنجاح، وعدد الصفوف :count",
+    "File Preview": "عرض الملف"
 }
