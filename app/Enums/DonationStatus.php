@@ -13,8 +13,6 @@ enum DonationStatus: string implements HasColor, HasIcon, HasLabel
     case Pending = 'pending';
     case Paid = 'paid';
     case Failed = 'failed';
-    case Refunded = 'refunded';
-    case Canceled = 'canceled';
 
     public function getLabel(): ?string
     {
@@ -22,8 +20,6 @@ enum DonationStatus: string implements HasColor, HasIcon, HasLabel
             self::Pending => __('Pending'),
             self::Paid => __('Paid'),
             self::Failed => __('Failed'),
-            self::Refunded => __('Refunded'),
-            self::Canceled => __('Canceled'),
         };
     }
 
@@ -32,8 +28,7 @@ enum DonationStatus: string implements HasColor, HasIcon, HasLabel
         return match ($this) {
             self::Pending => 'warning',
             self::Paid => 'success',
-            self::Failed, self::Canceled => 'danger',
-            self::Refunded => 'gray',
+            self::Failed => 'danger',
         };
     }
 
