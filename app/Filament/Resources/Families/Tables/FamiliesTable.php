@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Families\Tables;
 
 use App\Enums\FamilyStatus;
 use App\Enums\HousingStatus;
+use App\Filament\Actions\PrintFamilyReportAction;
 use App\Filament\Exports\FamilyExporter;
 use App\Models\City;
 use App\Models\Neighborhood;
@@ -147,6 +148,7 @@ class FamiliesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                PrintFamilyReportAction::make()->button(),
                 ViewAction::make(),
                 EditAction::make(),
             ])

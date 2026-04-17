@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Families\Pages;
 
+use App\Filament\Actions\PrintFamilyReportAction;
 use App\Filament\Resources\Families\FamilyResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
@@ -13,6 +14,7 @@ class ViewFamily extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            PrintFamilyReportAction::make(),
             EditAction::make(),
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
 use Akaunting\Money\Money;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
@@ -52,6 +53,14 @@ class FilamentServiceProvider extends ServiceProvider
             return rescue(fn () => Http::get('https://ipinfo.io/'.request()->ip().'/json')->json('country'), app()->getLocale(), report: false) ?? 'eg';
 
         }));
+        TranslatableTabs::configureUsing(function (TranslatableTabs $component) {
+
+            $component->localesLabels(config('app.supported_locales'))
+                ->locales(array_keys(config('app.supported_locales')))
+                ->addDirectionByLocale()
+                ->addEmptyBadgeWhenAllFieldsAreEmpty(emptyLabel: __('Not Defined'))
+                ->addSetActiveTabThatHasValue();
+        });
         Money::macro('formatPrecise', function (?int $decimals = null): string {
             /** @var Money $this */
             $currency = $this->getCurrency();

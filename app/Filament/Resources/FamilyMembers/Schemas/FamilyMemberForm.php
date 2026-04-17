@@ -42,7 +42,7 @@ class FamilyMemberForm
                             ->required(),
                         TextInput::make('national_id')
                             ->lazy()
-                            ->afterStateUpdated(fn($state, Set $set, Get $get) => self::idDetails(get: $get, set: $set))
+                            ->afterStateUpdated(fn ($state, Set $set, Get $get) => self::idDetails(get: $get, set: $set))
                             ->label(__('National ID')),
                         ToggleButtons::make('gender')
                             ->label(__('Gender'))
@@ -63,6 +63,11 @@ class FamilyMemberForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('nationality_id')
+                            ->label(__('Nationality'))
+                            ->relationship('nationality', 'name')
+                            ->searchable()
+                            ->preload(),
                         PhoneInput::make('phone')
                             ->label(__('Phone'))->columnSpanFull(),
                     ]),
@@ -86,7 +91,16 @@ class FamilyMemberForm
                             ->options(HealthStatus::class)
                             ->searchable()
                             ->preload()
+                            ->live()
                             ->required(),
+                        Select::make('diseases')
+                            ->label(__('Diseases'))
+                            ->relationship('diseases', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->visible(fn (Get $get): bool => $get('health_status') === HealthStatus::Unhealthy->value)
+                            ->columnSpanFull(),
                         TextInput::make('monthly_income')
                             ->label(__('Monthly Income'))
                             ->required()

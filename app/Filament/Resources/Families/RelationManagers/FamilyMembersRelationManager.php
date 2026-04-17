@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Families\RelationManagers;
 
+use App\Filament\Actions\PrintFamilyMemberReportAction;
 use App\Filament\Resources\FamilyMembers\Schemas\FamilyMemberForm;
 use App\Filament\Resources\FamilyMembers\Tables\FamilyMembersTable;
 use Filament\Actions\CreateAction;
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 class FamilyMembersRelationManager extends RelationManager
 {
     protected static string $relationship = 'familyMembers';
+
     protected static ?string $title = 'Family Members';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
@@ -33,6 +35,7 @@ class FamilyMembersRelationManager extends RelationManager
     {
         return FamilyMemberForm::configure($schema);
     }
+
     public function table(Table $table): Table
     {
         return FamilyMembersTable::configure($table)
@@ -41,6 +44,7 @@ class FamilyMembersRelationManager extends RelationManager
                 ViewAction::make()->slideOver(),
                 EditAction::make()
                     ->slideOver(),
+                PrintFamilyMemberReportAction::make(),
                 DeleteAction::make(),
             ])
             ->headerActions([

@@ -8,6 +8,7 @@ use App\Enums\Gender;
 use App\Enums\HealthStatus;
 use App\Enums\MaritalStatus;
 use App\Enums\RelationToHead;
+use App\Filament\Actions\PrintFamilyMemberReportAction;
 use App\Filament\Exports\FamilyMemberExporter;
 use App\Filament\Resources\Families\RelationManagers\FamilyMembersRelationManager;
 use App\Models\Family;
@@ -21,6 +22,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -68,11 +70,21 @@ class FamilyMembersTable
                     ->badge()
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('nationality.name')
+                    ->label(__('Nationality'))
+                    ->badge()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('health_status')
                     ->label(__('Health Status'))
                     ->badge()
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('diseases.name')
+                    ->label(__('Diseases'))
+                    ->badge()
+                    ->separator(',')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('monthly_income')
                     ->label(__('Monthly Income'))
                     ->currency()
@@ -130,6 +142,23 @@ class FamilyMembersTable
                     ->label(__('Health Status'))
                     ->options(HealthStatus::class)
                     ->searchable(),
+                SelectFilter::make('diseases')
+                    ->label(__('Diseases'))
+                    ->relationship('diseases', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
+                SelectFilter::make('nationality_id')
+                    ->label(__('Nationality'))
+                    ->relationship('nationality', 'name')
+                    ->searchable()
+                    ->preload(),
+                TernaryFilter::make('has_chronic_disease')
+                    ->label(__('Chronic Disease'))
+                    ->queries(
+                        true: fn (Builder $query): Builder => $query->whereHas('diseases', fn (Builder $q): Builder => $q->where('is_chronic', true)),
+                        false: fn (Builder $query): Builder => $query->whereDoesntHave('diseases', fn (Builder $q): Builder => $q->where('is_chronic', true)),
+                    ),
                 DaterangepickerFilter::make('birth_date')
                     ->label(__('Birth Date'))
                     ->useColumn('birth_date'),
@@ -147,6 +176,7 @@ class FamilyMembersTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                PrintFamilyMemberReportAction::make()->button(),
                 EditAction::make(),
             ])
             ->headerActions([
