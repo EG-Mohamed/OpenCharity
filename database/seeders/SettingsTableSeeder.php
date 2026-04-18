@@ -31,7 +31,7 @@ class SettingsTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'key' => 'branding.logo',
-                'value' => '"settings/branding/01KPH31E72E3KABZ2VWC85DRJ8.png"',
+                'value' => '"settings/branding/01KPH89B73VHAA53EE2PTXP6XF.png"',
                 'created_at' => '2026-04-16 20:56:49',
                 'updated_at' => '2026-04-18 22:03:15',
             ),
@@ -39,7 +39,7 @@ class SettingsTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'key' => 'branding.favicon',
-                'value' => '"settings/branding/01KPH2YFMMQRSRFAGF45J1HTKM.png"',
+                'value' => '"settings/branding/01KPH89B747PT6BW7JQR81ERQ2.png"',
                 'created_at' => '2026-04-16 20:56:49',
                 'updated_at' => '2026-04-18 22:01:38',
             ),
