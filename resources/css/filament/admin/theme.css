@@ -2,7 +2,7 @@
 @import '../../../../vendor/saade/filament-fullcalendar/resources/css/filament-fullcalendar.css';
 
 @source '../../../../app/Filament/**/*';
-@source '../../../../resources/views/filament/**/*';
+@source '../../../../resources/views/**/*';
 @source '../../../../vendor/devonab/filament-easy-footer/resources/views/**/*';
 @source '../../../../vendor/saade/filament-fullcalendar/resources/views/**/*.blade.php';
 @source '../../../../vendor/statikbe/laravel-filament-chained-translation-manager/resources/**/*.blade.php';

@@ -14,6 +14,8 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -50,8 +52,14 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->when(config('app.demo_mode'), fn (Panel $panel) => $panel
+                ->renderHook(
+                    PanelsRenderHook::BODY_START,
+                    fn (): View => view('demo-banner'),
+                )
+            )
             ->plugins([
-                FilamentChainedTranslationManagerPlugin::make(),
+                ...config('app.demo_mode') ? [] : [FilamentChainedTranslationManagerPlugin::make()],
                 FilamentShieldPlugin::make()
                     ->gridColumns([
                         'default' => 1,
@@ -91,6 +99,6 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
                 ApplyActiveScope::class,
                 ApplyUserCaseTypeScope::class,
-            ],true);
+            ], true);
     }
 }

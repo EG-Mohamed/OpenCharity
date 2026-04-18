@@ -12,6 +12,12 @@ class RefreshAndSeedDatabase extends Command
 {
     public function handle(): int
     {
+        if (! config('app.demo_mode')) {
+            $this->error('Demo mode is disabled.');
+
+            return self::FAILURE;
+        }
+
         $this->call('migrate:fresh', ['--seed' => true, '--force' => true]);
 
         return self::SUCCESS;
