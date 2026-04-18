@@ -24,6 +24,7 @@
         "laravel/tinker": "^3.0",
         "malzariey/filament-daterangepicker-filter": "^5.0",
         "mpdf/mpdf": "^8.3",
+        "orangehill/iseed": "^3.8",
         "outerweb/filament-settings": "^2.3",
         "owenvoke/blade-fontawesome": "^3.2",
         "saade/filament-fullcalendar": "v4.0.0-beta7",

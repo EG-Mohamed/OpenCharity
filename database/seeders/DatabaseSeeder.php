@@ -2,31 +2,41 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@test.com',
-            'password' => bcrypt('123456789'),
-        ]);
-
         $this->call([
-            CaseTypeSeeder::class,
-            AssistanceTypeSeeder::class,
-            FamilySeeder::class,
-            FamilyMemberSeeder::class,
-            CharityCaseSeeder::class,
-            VisitSeeder::class,
-            DocumentSeeder::class,
-            AssistanceScheduleSeeder::class,
-            AssistanceDeliverySeeder::class,
-            DonationTargetSeeder::class,
-            DonationSeeder::class,
+            UsersTableSeeder::class,
+            RolesTableSeeder::class,
+            PermissionsTableSeeder::class,
+            RoleHasPermissionsTableSeeder::class,
+            ModelHasRolesTableSeeder::class,
+            ModelHasPermissionsTableSeeder::class,
+            SettingsTableSeeder::class,
+            CaseTypesTableSeeder::class,
+            AssistanceTypesTableSeeder::class,
+            NationalitiesTableSeeder::class,
+            DiseasesTableSeeder::class,
+            StatesTableSeeder::class,
+            CitiesTableSeeder::class,
+            NeighborhoodsTableSeeder::class,
+            FamiliesTableSeeder::class,
+            FamilyMembersTableSeeder::class,
+            DiseaseFamilyMemberTableSeeder::class,
+            CharityCasesTableSeeder::class,
+            CaseTypeUserTableSeeder::class,
+            VisitsTableSeeder::class,
+            DocumentsTableSeeder::class,
+            AssistanceSchedulesTableSeeder::class,
+            AssistanceDeliveriesTableSeeder::class,
+            DonationTargetsTableSeeder::class,
+            DonationsTableSeeder::class,
+            ImportsTableSeeder::class,
+            ExportsTableSeeder::class,
+            FailedImportRowsTableSeeder::class,
         ]);
     }
 }
