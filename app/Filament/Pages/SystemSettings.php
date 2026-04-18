@@ -3,11 +3,13 @@
 namespace App\Filament\Pages;
 
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -106,6 +108,18 @@ class SystemSettings extends Settings
                                     ->image()
                                     ->directory('settings/branding')
                                     ->imageEditor(),
+                                ColorPicker::make('branding.primary_color')
+                                    ->label(__('Primary Color'))
+                                    ->helperText(__('Hex color code (e.g. #CB3223). Controls the main brand color across the site and admin panel.'))
+                                    ->default('#CB3223')
+                                    ->regex('/^#[0-9A-Fa-f]{6}$/'),
+                            ]),
+                        Tab::make(__('Donations'))
+                            ->schema([
+                                Toggle::make('donations.online_enabled')
+                                    ->label(__('Enable online donations'))
+                                    ->helperText(__('When disabled, donation sections will show a contact-us notice instead of the payment form.'))
+                                    ->default(true),
                             ]),
                         Tab::make(__('Media'))
                             ->schema([

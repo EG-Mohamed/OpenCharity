@@ -26,15 +26,15 @@
             </a>
 
             <div class="hidden items-center gap-8 lg:flex">
-                <a href="#about" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('About us') }}</a>
-                <a href="#statistics" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Impact') }}</a>
-                <a href="#cases" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Cases') }}</a>
-                <a href="#contact" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Contact') }}</a>
+                <a href="{{ route('home') }}#about" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('About us') }}</a>
+                <a href="{{ route('home') }}#statistics" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Impact') }}</a>
+                <a href="{{ route('home') }}#cases" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Cases') }}</a>
+                <a href="{{ route('home') }}#contact" class="text-sm font-medium text-gray-600 transition hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-300">{{ __('Contact') }}</a>
             </div>
 
             <div class="hidden items-center gap-3 lg:flex">
                 <x-theme-switch/>
-                <a href="#donation" class="rounded-full bg-primary-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary-500/30 transition hover:bg-primary-600">{{ __('Donate now') }}</a>
+                <a href="{{ route('home') }}#donation" class="rounded-full bg-primary-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary-500/30 transition hover:bg-primary-600">{{ __('Donate now') }}</a>
             </div>
 
             <div class="flex items-center gap-2 lg:hidden">
@@ -69,12 +69,12 @@
         </div>
 
         <div class="flex flex-1 flex-col gap-3 text-lg font-semibold">
-            <a @click="open = false" href="#about" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('About us') }}</a>
-            <a @click="open = false" href="#statistics" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Impact') }}</a>
-            <a @click="open = false" href="#cases" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Cases') }}</a>
-            <a @click="open = false" href="#contact" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Contact') }}</a>
+            <a @click="open = false" href="{{ route('home') }}#about" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('About us') }}</a>
+            <a @click="open = false" href="{{ route('home') }}#statistics" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Impact') }}</a>
+            <a @click="open = false" href="{{ route('home') }}#cases" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Cases') }}</a>
+            <a @click="open = false" href="{{ route('home') }}#contact" class="rounded-2xl px-4 py-3 text-gray-700 transition hover:bg-primary-50 hover:text-primary-700 dark:text-gray-200 dark:hover:bg-primary-950/30 dark:hover:text-primary-200">{{ __('Contact') }}</a>
         </div>
 
-        <a @click="open = false" href="#donation" class="mt-6 rounded-full bg-primary-500 px-5 py-3 text-center text-sm font-bold text-white shadow-lg shadow-primary-500/30">{{ __('Donate now') }}</a>
+        <a @click="open = false" href="{{ route('home') }}#donation" class="mt-6 rounded-full bg-primary-500 px-5 py-3 text-center text-sm font-bold text-white shadow-lg shadow-primary-500/30">{{ __('Donate now') }}</a>
     </div>
 </nav>

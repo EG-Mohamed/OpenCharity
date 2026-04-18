@@ -1,6 +1,11 @@
 <x-app>
     <section class="relative overflow-hidden pb-16 pt-32">
-        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(203,50,35,0.14),_transparent_40%)] dark:bg-[radial-gradient(circle_at_top,_rgba(244,109,98,0.16),_transparent_42%)]"></div>
+        <div class="absolute inset-0 -z-10"
+     x-data
+     x-bind:style="$el.closest('html').classList.contains('dark')
+        ? 'background: radial-gradient(circle at top, color-mix(in srgb, var(--color-primary-400) 16%, transparent), transparent 42%)'
+        : 'background: radial-gradient(circle at top, color-mix(in srgb, var(--color-primary-600) 14%, transparent), transparent 40%)'">
+</div>
         <div class="landing-container">
             <div class="max-w-3xl">
                 <span class="landing-section-label">{{ __('Donation cases') }}</span>
@@ -23,7 +28,9 @@
                             <div class="text-[13px] text-gray-500 dark:text-gray-400">{{ __('Selected target') }}</div>
                             <div class="mt-2 text-base font-semibold text-gray-900 dark:text-white">{{ $selectedTarget?->title ?: __('General donation') }}</div>
                         </div>
-                        <a href="#donation-form" class="inline-flex w-full items-center justify-center rounded-full bg-primary-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition sm:w-fit">{{ __('Go to donation form') }}</a>
+                        @if(setting('donations.online_enabled', true))
+                            <a href="#donation-form" class="inline-flex w-full items-center justify-center rounded-full bg-primary-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition sm:w-fit">{{ __('Go to donation form') }}</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -75,12 +82,16 @@
                                     </div>
                                 </div>
 
-                                <a
-                                    href="{{ route('donation-cases', ['target' => $target->id, 'type' => $target->type?->value]) }}#donation-form"
-                                    class="inline-flex items-center justify-center rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition sm:shrink-0"
-                                >
-                                    {{ __('Donate now') }}
-                                </a>
+                                @if(setting('donations.online_enabled', true))
+                                    <a
+                                        href="{{ route('donation-cases', ['target' => $target->id, 'type' => $target->type?->value]) }}#donation-form"
+                                        class="inline-flex items-center justify-center rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition sm:shrink-0"
+                                    >
+                                        {{ __('Donate now') }}
+                                    </a>
+                                @else
+                                    <span class="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-400 sm:shrink-0">{{ __('Contact us to donate') }}</span>
+                                @endif
                             </div>
                         </article>
                     @endforeach
@@ -93,7 +104,33 @@
                             <div class="mt-2 text-lg font-bold text-gray-900 dark:text-white">{{ $selectedTarget?->title ?: __('Complete your donation') }}</div>
                         </div>
 
-                        @livewire('landing.donation-form', ['targets' => $allTargets, 'defaultType' => $defaultType, 'defaultTargetId' => $defaultTargetId], key('donation-form-'.$defaultTargetId.'-'.$defaultType))
+                        @if(setting('donations.online_enabled', true))
+                            @livewire('landing.donation-form', ['targets' => $allTargets, 'defaultType' => $defaultType, 'defaultTargetId' => $defaultTargetId], key('donation-form-'.$defaultTargetId.'-'.$defaultType))
+                        @else
+                            <div class="flex flex-col items-center gap-4 py-8 text-center">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-amber-50 dark:bg-amber-950/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('Online donation is currently unavailable') }}</p>
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ __('Online donation is not available at the moment. Please contact us to donate directly.') }}</p>
+                                </div>
+                                <div class="flex flex-col gap-2 w-full">
+                                    @if(setting('contact.primary_phone'))
+                                        <a href="tel:{{ setting('contact.primary_phone') }}" class="inline-flex items-center justify-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-gray-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6.75Z" /></svg>
+                                            {{ setting('contact.primary_phone') }}
+                                        </a>
+                                    @endif
+                                    @if(setting('contact.email'))
+                                        <a href="mailto:{{ setting('contact.email') }}" class="inline-flex items-center justify-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-gray-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+                                            {{ setting('contact.email') }}
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

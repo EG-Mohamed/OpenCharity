@@ -558,5 +558,13 @@
     "Allowed Case Types": "أنواع الحالات المسموح بها",
     "Family Details": "تفاصيل الأسرة",
     "Other Members": "أفراد آخرين",
-    "Other Family Members": "أفراد الأسرة الآخرين"
+    "Other Family Members": "أفراد الأسرة الآخرين",
+    "Primary Color": "اللون الرئيسي",
+    "Hex color code (e.g. #CB3223). Controls the main brand color across the site and admin panel.": "رمز اللون السداسي (مثال: #CB3223). يتحكم في اللون الرئيسي للعلامة التجارية في جميع أنحاء الموقع ولوحة الإدارة.",
+    "Enable online donations": "تفعيل التبرعات الإلكترونية",
+    "When disabled, donation sections will show a contact-us notice instead of the payment form.": "عند تعطيله، ستظهر إشعار تواصل معنا في أقسام التبرع بدلاً من نموذج الدفع.",
+    "#CB3223": "",
+    "Online donation is currently unavailable": "التبرع الإلكتروني غير متاح حالياً",
+    "Online donation is not available at the moment. Please contact us to donate directly.": "التبرع الإلكتروني غير متاح في الوقت الحالي. يرجى التواصل معنا للتبرع مباشرة.",
+    "Contact us to donate": "تواصل معنا للتبرع"
 }

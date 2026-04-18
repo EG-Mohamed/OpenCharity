@@ -12,7 +12,9 @@
 
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('donation-cases') }}" class="inline-flex w-fit items-center justify-center rounded-full bg-primary-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('View all cases') }}</a>
-                    <a href="#donation" class="inline-flex w-fit items-center justify-center rounded-full border border-primary-200 bg-white px-5 py-3 text-sm font-medium text-primary-700 transition hover:border-primary-300 hover:bg-primary-50 dark:border-primary-900/50 dark:bg-gray-950 dark:text-primary-200 dark:hover:bg-primary-950/30">{{ __('Start donating') }}</a>
+                    @if(setting('donations.online_enabled', true))
+                        <a href="#donation" class="inline-flex w-fit items-center justify-center rounded-full border border-primary-200 bg-white px-5 py-3 text-sm font-medium text-primary-700 transition hover:border-primary-300 hover:bg-primary-50 dark:border-primary-900/50 dark:bg-gray-950 dark:text-primary-200 dark:hover:bg-primary-950/30">{{ __('Start donating') }}</a>
+                    @endif
                 </div>
             </div>
 
@@ -61,7 +63,11 @@
                                 <div class="mt-1 text-base font-semibold text-gray-900 dark:text-white">{{ money($collectedAmount)->formatPrecise() }}</div>
                                 <div class="text-[13px] text-gray-500 dark:text-gray-400">{{ __('Out of') }} {{ money($goalAmount)->formatPrecise() }}</div>
                             </div>
-                            <a href="{{ route('donation-cases', ['target' => $target->id, 'type' => $target->type?->value]) }}#donation-form" class="rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('Donate') }}</a>
+                            @if(setting('donations.online_enabled', true))
+                                <a href="{{ route('donation-cases', ['target' => $target->id, 'type' => $target->type?->value]) }}#donation-form" class="rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('Donate') }}</a>
+                            @else
+                                <span class="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-400">{{ __('Contact us to donate') }}</span>
+                            @endif
                         </div>
                     </article>
                 @endforeach

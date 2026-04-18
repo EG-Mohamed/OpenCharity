@@ -11,16 +11,12 @@ use App\Enums\PaymentGateway as PaymentGatewayEnum;
 use App\Enums\PaymentMethod;
 use App\Models\Donation;
 use App\Models\DonationTarget;
-use Filament\Forms\Components\Field;
-use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Schemas\Components\Fieldset;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
@@ -113,10 +109,10 @@ class DonationForm extends Component implements HasForms
                     ->alignment(Alignment::Center) // Start | Center | End
                     ->padding('px-4 py-3') // Padding around the deck
                     ->extraCardsAttributes([ // Extra attributes for card elements
-                        'class' => 'rounded-xl'
+                        'class' => 'rounded-xl',
                     ])
                     ->extraOptionsAttributes([
-                        'class' => 'leading-none w-full flex flex-col items-center justify-center'
+                        'class' => 'leading-none w-full flex flex-col items-center justify-center',
                     ])
                     ->columns([
                         'sm' => 2,
@@ -173,20 +169,24 @@ class DonationForm extends Component implements HasForms
 
     public function submit(): void
     {
+        if (! setting('donations.online_enabled', true)) {
+            return;
+        }
+
         $state = $this->form->getState();
 
         $donation = DB::transaction(function () use ($state): Donation {
             return Donation::query()->create([
-                'donation_target_id' => data_get($state,'donation_target_id'),
-                'donor_name' => data_get($state,'donor_name'),
-                'donor_email' => data_get($state,'donor_email'),
-                'donor_phone' => data_get($state,'donor_phone'),
-                'amount' => data_get($state,'amount'),
+                'donation_target_id' => data_get($state, 'donation_target_id'),
+                'donor_name' => data_get($state, 'donor_name'),
+                'donor_email' => data_get($state, 'donor_email'),
+                'donor_phone' => data_get($state, 'donor_phone'),
+                'amount' => data_get($state, 'amount'),
                 'currency' => 'EGP',
                 'status' => DonationStatus::Pending,
                 'payment_gateway' => PaymentGatewayEnum::Paymob,
                 'payment_method' => PaymentMethod::Card,
-                'anonymous' => (bool) data_get($state,'anonymous'),
+                'anonymous' => (bool) data_get($state, 'anonymous'),
             ]);
         });
 

@@ -42,14 +42,14 @@ class FilamentServiceProvider extends ServiceProvider
         Panel::configureUsing(fn (Panel $panel) => $panel->maxContentWidth(Width::Full)
             ->font('Alexandria')
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false));
-        FilamentColor::register([
-            'primary' => Color::generateV3Palette('#CB3223'),
-        ]);
     }
 
     public function boot(): void
     {
-        PhoneInput::configureUsing(fn(PhoneInput $phoneInput) => $phoneInput->initialCountry(function () {
+        FilamentColor::register([
+            'primary' => Color::generateV3Palette(setting('branding.primary_color', '#CB3223') ?: '#CB3223'),
+        ]);
+        PhoneInput::configureUsing(fn (PhoneInput $phoneInput) => $phoneInput->initialCountry(function () {
             return rescue(fn () => Http::get('https://ipinfo.io/'.request()->ip().'/json')->json('country'), app()->getLocale(), report: false) ?? 'eg';
 
         }));

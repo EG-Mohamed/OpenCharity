@@ -6,6 +6,8 @@
         $description = setting('general.description') ?: __('Masaa Foundation supports families and humanitarian cases to create sustainable impact in the community.');
         $favicon = setting('branding.favicon');
         $faviconUrl = filled($favicon) ? \Illuminate\Support\Facades\Storage::url($favicon) : null;
+        $primaryColor = setting('branding.primary_color');
+        $primaryPalette = filled($primaryColor) ? \Filament\Support\Colors\Color::generateV3Palette($primaryColor) : null;
     @endphp
     <meta charset="utf-8">
 
@@ -32,6 +34,13 @@
         [x-cloak] {
             display: none !important;
         }
+        @if($primaryPalette)
+        :root {
+            @foreach($primaryPalette as $shade => $value)
+            --color-primary-{{ $shade }}: {{ $value }};
+            @endforeach
+        }
+        @endif
     </style>
 
     @filamentStyles
