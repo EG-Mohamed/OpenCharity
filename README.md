@@ -20,11 +20,13 @@ OpenCharity is a full-featured admin system designed for NGOs, mosques, and comm
 **Family & Member Registry**
 - Detailed family profiles: housing status, monthly income, address with map picker, contact information
 - Member records with relation, gender, birth date, education, employment, health, and income fields
+- Printable family member reports with grid layout
 - Soft-delete with full audit trail
 
 **Case Management**
 - Flexible case types defined by administrators
 - Priority levels (low → urgent) and a complete status lifecycle (draft → closed)
+- Active and assigned case scoping per user role
 - Linked visits, documents, assistance schedules, and donation targets per case
 
 **Visit Tracking**
@@ -44,14 +46,22 @@ OpenCharity is a full-featured admin system designed for NGOs, mosques, and comm
 
 **Donations & Fundraising**
 - Donation targets at family, case, or campaign level with goal/collected amount tracking
+- Public donation detail page per target with progress bar and direct donation link
+- Online donations toggle in system settings to enable or disable the donation flow
 - Multi-currency support: EGP, USD, SAR
 - Payment gateway tracking: Paymob, Stripe, Fawry, manual, and others
 - Full donation allocation chain: donation → target → case → assistance schedule
 
+**Public Website**
+- Public landing page with hero, about, services, statistics, testimonials, FAQ, active cases, and donation call-to-action
+- Browse active donation cases list and per-case detail page with progress bar
+- Paymob payment gateway integration with callback handling and success page
+- Fully SEO-optimized: per-page `<title>`, meta description, canonical URL, hreflang, OpenGraph (og:title, og:description, og:type, og:image, og:locale), Twitter Cards, and JSON-LD structured data (Organization, WebSite, Project, DonateAction)
+
 **Admin Panel**
 - Filament 5 admin panel with Shield roles and permissions
 - Arabic/English multi-language UI with translatable content (Spatie Translatable)
-- System settings for branding, social links, and media
+- System settings for branding, social links, contact info, and online donation toggle
 - Phone input with country validation, map picker for addresses, icon picker
 
 ## Tech Stack
@@ -66,7 +76,8 @@ OpenCharity is a full-featured admin system designed for NGOs, mosques, and comm
 | Auth & Roles | Filament Shield |
 | i18n | Laravel Lang, Spatie Translatable, Chained Translation Manager |
 | Scheduling UI | Saade FullCalendar |
-| Payments | Akaunting Laravel Money |
+| Payments | Akaunting Laravel Money, Paymob |
+| SEO | artesaos/seotools (OpenGraph, Twitter Cards, JSON-LD) |
 
 ## Requirements
 

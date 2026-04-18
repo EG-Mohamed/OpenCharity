@@ -11,12 +11,32 @@ use App\Models\CharityCase;
 use App\Models\Donation;
 use App\Models\DonationTarget;
 use App\Models\Family;
+use Artesaos\SEOTools\Facades\JsonLdMulti;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Contracts\View\View;
 
 class LandingController extends Controller
 {
     public function __invoke(): View
     {
+        $siteName = setting('general.system_name') ?: config('app.name');
+        $description = setting('general.description') ?: '';
+
+        SEOTools::setTitle($siteName, false);
+        SEOTools::setDescription($description);
+        OpenGraph::setType('website');
+
+        JsonLdMulti::newJsonLd();
+        JsonLdMulti::setType('WebSite');
+        JsonLdMulti::setTitle($siteName);
+        JsonLdMulti::setUrl(url('/'));
+        JsonLdMulti::addValue('potentialAction', [
+            '@type' => 'SearchAction',
+            'target' => url('/donation-cases').'?q={search_term_string}',
+            'query-input' => 'required name=search_term_string',
+        ]);
+
         $targets = DonationTarget::query()
             ->withSum(['donations as paid_donations_sum' => function ($query) {
                 $query->where('status', DonationStatus::Paid);

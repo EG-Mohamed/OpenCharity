@@ -9,6 +9,7 @@
         "php": "^8.3",
         "abdulmajeed-jamaan/filament-translatable-tabs": "^5.0",
         "akaunting/laravel-money": "^6.0",
+        "artesaos/seotools": "^1.4",
         "bezhansalleh/filament-language-switch": "^4.3",
         "bezhansalleh/filament-shield": "^4.2",
         "devonab/filament-easy-footer": "^2.2",

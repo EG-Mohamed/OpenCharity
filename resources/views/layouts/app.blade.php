@@ -3,7 +3,6 @@
 <head>
     @php
         $systemName = setting('general.system_name') ?: __('Masaa Foundation');
-        $description = setting('general.description') ?: __('Masaa Foundation supports families and humanitarian cases to create sustainable impact in the community.');
         $favicon = setting('branding.favicon');
         $faviconUrl = filled($favicon) ? \Illuminate\Support\Facades\Storage::url($favicon) : null;
         $primaryColor = setting('branding.primary_color');
@@ -14,9 +13,11 @@
     <meta name="application-name" content="{{ $systemName }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ setting('branding.primary_color') ?: '#cb3223' }}">
 
-    <title>{{ $systemName }}</title>
-    <meta name="description" content="{{ $description }}">
+    {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
+
+    <link rel="alternate" hreflang="ar" href="{{ url()->current() }}">
     @if ($faviconUrl)
         <link rel="icon" href="{{ $faviconUrl }}">
     @endif
