@@ -2,11 +2,14 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Models\CaseType;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Validation\Rules\Password;
+use Spatie\Permission\Models\Role;
 
 class UserForm
 {
@@ -43,7 +46,18 @@ class UserForm
                             ->relationship('roles', 'name')
                             ->multiple()
                             ->preload()
-                            ->searchable(),
+                            ->searchable()
+                            ->live(),
+                        Select::make('caseTypes')
+                            ->label(__('Allowed Case Types'))
+                            ->relationship('caseTypes', 'name')
+                            ->options(fn (): array => CaseType::withoutGlobalScopes()->pluck('name', 'id')->all())
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->visible(fn (Get $get): bool => ! collect($get('roles'))->contains(
+                                fn ($role) => Role::find($role)?->name === config('filament-shield.super_admin.name', 'super_admin')
+                            )),
                     ]),
             ]);
     }
