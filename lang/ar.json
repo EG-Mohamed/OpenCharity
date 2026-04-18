@@ -553,5 +553,10 @@
     "Goal": "الهدف",
     "Generated": "تم الإنشاء",
     "Confidential Document": "مستند سري",
-    "Refugee": "لاجئ"
+    "Refugee": "لاجئ",
+    "Not Defined": "غير محدد",
+    "Allowed Case Types": "أنواع الحالات المسموح بها",
+    "Family Details": "تفاصيل الأسرة",
+    "Other Members": "أفراد آخرين",
+    "Other Family Members": "أفراد الأسرة الآخرين"
 }
