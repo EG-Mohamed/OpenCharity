@@ -44,7 +44,7 @@ class FamilyMembersRelationManager extends RelationManager
                 ViewAction::make()->slideOver(),
                 EditAction::make()
                     ->slideOver(),
-                PrintFamilyMemberReportAction::make(),
+                PrintFamilyMemberReportAction::make()->button(),
                 DeleteAction::make(),
             ])
             ->headerActions([

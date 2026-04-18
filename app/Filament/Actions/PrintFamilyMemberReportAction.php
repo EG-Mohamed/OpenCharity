@@ -5,6 +5,7 @@ namespace App\Filament\Actions;
 use App\Models\FamilyMember;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Support\Icons\Heroicon;
 
@@ -17,8 +18,7 @@ class PrintFamilyMemberReportAction
             ->icon(Heroicon::OutlinedPrinter)
             ->color('info')
             ->schema([
-                Section::make(__('Report Sections'))
-                    ->columns(2)
+                Grid::make(3)
                     ->schema([
                         Toggle::make('include_family_details')
                             ->label(__('Family Details'))
