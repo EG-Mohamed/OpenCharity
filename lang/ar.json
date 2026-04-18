@@ -583,5 +583,8 @@
     "support families": "دعم الأسر",
     "Donation Cases": "حالات التبرع",
     "Browse active charity donation cases and support families in need with your contribution.": "تصفح حالات التبرع الخيرية النشطة وادعم الأسر المحتاجة بمساهمتك.",
-    "This is a demo site. All data will be reset every 6 hours.": "هذا موقع تجريبي. سيتم إعادة تعيين جميع البيانات كل 6 ساعات."
+    "This is a demo site. All data will be reset every 6 hours.": "هذا موقع تجريبي. سيتم إعادة تعيين جميع البيانات كل 6 ساعات.",
+    "Demo Mode": "وضع العرض التجريبي",
+    "This is a demo site. All data resets every 6 hours.": "هذا موقع تجريبي. يتم إعادة تعيين جميع البيانات كل 6 ساعات.",
+    "Demo Credentials": "بيانات الدخول التجريبية"
 }

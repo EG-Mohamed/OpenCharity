@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\SystemSettings;
 use App\Http\Middleware\ApplyActiveScope;
 use App\Http\Middleware\ApplyUserCaseTypeScope;
@@ -37,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
-            ->login()
+            ->login(Login::class)
             ->profile()
             ->topbar(false)
             ->sidebarCollapsibleOnDesktop()
