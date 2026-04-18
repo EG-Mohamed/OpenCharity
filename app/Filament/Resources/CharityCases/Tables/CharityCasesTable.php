@@ -25,6 +25,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class CharityCasesTable
 {
@@ -145,28 +146,10 @@ class CharityCasesTable
                 DaterangepickerFilter::make('next_visit_at')
                     ->label(__('Next Visit At'))
                     ->useColumn('next_visit_at'),
-                Filter::make('requested_amount')
-                    ->label(__('Requested Amount'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Amount'))->numeric(),
-                        TextInput::make('max')->label(__('Max Amount'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('requested_amount', '>=', $amount))
-                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('requested_amount', '<=', $amount));
-                    }),
-                Filter::make('approved_amount')
-                    ->label(__('Approved Amount'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Amount'))->numeric(),
-                        TextInput::make('max')->label(__('Max Amount'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('approved_amount', '>=', $amount))
-                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('approved_amount', '<=', $amount));
-                    }),
+                ValueRangeFilter::make('requested_amount')
+                    ->label(__('Requested Amount')),
+                ValueRangeFilter::make('approved_amount')
+                    ->label(__('Approved Amount')),
                 TernaryFilter::make('has_visits')
                     ->label(__('Has Visits'))
                     ->queries(

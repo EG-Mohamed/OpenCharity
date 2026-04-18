@@ -24,6 +24,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class AssistanceSchedulesTable
 {
@@ -133,28 +134,11 @@ class AssistanceSchedulesTable
                 DaterangepickerFilter::make('scheduled_date')
                     ->label(__('Scheduled Date'))
                     ->useColumn('scheduled_date'),
-                Filter::make('amount_range')
-                    ->label(__('Amount Range'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Amount'))->numeric(),
-                        TextInput::make('max')->label(__('Max Amount'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('amount', '>=', $amount))
-                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('amount', '<=', $amount));
-                    }),
-                Filter::make('quantity_range')
-                    ->label(__('Quantity Range'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Quantity'))->numeric(),
-                        TextInput::make('max')->label(__('Max Quantity'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, fn (Builder $query, $quantity): Builder => $query->where('quantity', '>=', $quantity))
-                            ->when($data['max'] ?? null, fn (Builder $query, $quantity): Builder => $query->where('quantity', '<=', $quantity));
-                    }),
+
+                ValueRangeFilter::make('amount_range')
+                    ->label(__('Amount Range')),
+                ValueRangeFilter::make('quantity_range')
+                    ->label(__('Quantity Range')),
                 Filter::make('series_type')
                     ->label(__('Series Type'))
                     ->schema([

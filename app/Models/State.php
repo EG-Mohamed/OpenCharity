@@ -9,7 +9,7 @@ use Spatie\Translatable\HasTranslations;
 
 class State extends Model
 {
-    use HasUuids, HasTranslations;
+    use HasTranslations, HasUuids;
 
     public $translatable = ['name'];
 

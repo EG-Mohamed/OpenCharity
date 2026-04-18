@@ -29,6 +29,7 @@
         "spatie/browsershot": "^5.2",
         "spatie/laravel-translatable": "^6.13",
         "statikbe/laravel-filament-chained-translation-manager": "^4.3",
+        "tapp/filament-value-range-filter": "^2.0",
         "ysfkaya/filament-phone-input": "^4.1"
     },
     "require-dev": {

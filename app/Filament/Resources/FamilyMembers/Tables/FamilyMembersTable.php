@@ -27,6 +27,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class FamilyMembersTable
 {
@@ -164,17 +165,8 @@ class FamilyMembersTable
                 DaterangepickerFilter::make('birth_date')
                     ->label(__('Birth Date'))
                     ->useColumn('birth_date'),
-                Filter::make('income_range')
-                    ->label(__('Monthly Income'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Income'))->numeric(),
-                        TextInput::make('max')->label(__('Max Income'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, fn (Builder $query, $amount): Builder => $query->where('monthly_income', '>=', $amount))
-                            ->when($data['max'] ?? null, fn (Builder $query, $amount): Builder => $query->where('monthly_income', '<=', $amount));
-                    }),
+                ValueRangeFilter::make('income_range')
+                    ->label(__('Monthly Income')),
                 TrashedFilter::make(),
             ])
             ->recordActions([

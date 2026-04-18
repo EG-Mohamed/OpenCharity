@@ -24,6 +24,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter as DaterangepickerFilter;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class FamiliesTable
 {
@@ -117,34 +118,10 @@ class FamiliesTable
                 DaterangepickerFilter::make('created_at')
                     ->label(__('Created At'))
                     ->useColumn('created_at'),
-                Filter::make('members_count')
-                    ->label(__('Members Count'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Members'))->numeric(),
-                        TextInput::make('max')->label(__('Max Members'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, fn (Builder $query, $count): Builder => $query->has('familyMembers', '>=', (int) $count))
-                            ->when($data['max'] ?? null, fn (Builder $query, $count): Builder => $query->has('familyMembers', '<=', (int) $count));
-                    }),
-                Filter::make('income_range')
-                    ->label(__('Monthly Income'))
-                    ->schema([
-                        TextInput::make('min')->label(__('Min Income'))->numeric(),
-                        TextInput::make('max')->label(__('Max Income'))->numeric(),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when($data['min'] ?? null, function (Builder $query, $amount): Builder {
-                                return $query->withSum('familyMembers', 'monthly_income')
-                                    ->having('family_members_sum_monthly_income', '>=', $amount);
-                            })
-                            ->when($data['max'] ?? null, function (Builder $query, $amount): Builder {
-                                return $query->withSum('familyMembers', 'monthly_income')
-                                    ->having('family_members_sum_monthly_income', '<=', $amount);
-                            });
-                    }),
+                ValueRangeFilter::make('members_count')
+                    ->label(__('Members Count')),
+                ValueRangeFilter::make('income_range')
+                    ->label(__('Monthly Income')),
                 TrashedFilter::make(),
             ])
             ->recordActions([

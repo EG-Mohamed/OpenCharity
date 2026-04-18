@@ -14,6 +14,7 @@ class Nationality extends Model
     use HasFactory,HasTranslations;
 
     public $translatable = ['name'];
+
     protected function casts(): array
     {
         return [

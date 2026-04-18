@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
@@ -20,7 +20,7 @@ use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class SystemSettings extends Settings
 {
-    use HasPanelShield;
+    use HasPageShield;
 
     public static function getNavigationGroup(): ?string
     {
