@@ -35,10 +35,10 @@
             <div>
                 <div class="text-sm font-black tracking-widest text-white">{{ __('Quick links') }}</div>
                 <div class="mt-5 flex flex-col gap-3 text-sm">
-                    <a href="#about" class="transition hover:text-white">{{ __('About us') }}</a>
-                    <a href="#services" class="transition hover:text-white">{{ __('Services') }}</a>
-                    <a href="#cases" class="transition hover:text-white">{{ __('Cases') }}</a>
-                    <a href="#donation" class="transition hover:text-white">{{ __('Donation') }}</a>
+                    <a href="{{ route('home') }}#about" class="transition hover:text-white">{{ __('About us') }}</a>
+                    <a href="{{ route('home') }}#services" class="transition hover:text-white">{{ __('Services') }}</a>
+                    <a href="{{ route('donation-cases') }}" class="transition hover:text-white">{{ __('Cases') }}</a>
+                    <a href="{{ route('home') }}#donation" class="transition hover:text-white">{{ __('Donation') }}</a>
                 </div>
             </div>
 

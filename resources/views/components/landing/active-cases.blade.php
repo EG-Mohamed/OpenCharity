@@ -64,7 +64,7 @@
                                 <div class="text-[13px] text-gray-500 dark:text-gray-400">{{ __('Out of') }} {{ money($goalAmount)->formatPrecise() }}</div>
                             </div>
                             @if(setting('donations.online_enabled', true))
-                                <a href="{{ route('donation-cases', ['target' => $target->id, 'type' => $target->type?->value]) }}#donation-form" class="rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('Donate') }}</a>
+                                <a href="{{ route('donation-target', $target) }}" class="rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600">{{ __('Donate') }}</a>
                             @else
                                 <span class="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-400">{{ __('Contact us to donate') }}</span>
                             @endif

@@ -566,5 +566,14 @@
     "#CB3223": "",
     "Online donation is currently unavailable": "التبرع الإلكتروني غير متاح حالياً",
     "Online donation is not available at the moment. Please contact us to donate directly.": "التبرع الإلكتروني غير متاح في الوقت الحالي. يرجى التواصل معنا للتبرع مباشرة.",
-    "Contact us to donate": "تواصل معنا للتبرع"
+    "Contact us to donate": "تواصل معنا للتبرع",
+    "All cases": "كل الحالات",
+    "Case details": "تفاصيل الحالة",
+    "Registered": "مسجلة",
+    "Approved amount": "المبلغ المعتمد",
+    "Back to all cases": "العودة لكل الحالات",
+    "Choose a case to view full details and donate directly to it.": "اختر حالة لعرض التفاصيل الكاملة والتبرع لها مباشرة.",
+    "Active opportunities": "الفرص النشطة",
+    "of": "من",
+    "View case & donate": "عرض الحالة والتبرع"
 }
