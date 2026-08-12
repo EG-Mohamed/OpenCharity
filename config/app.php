@@ -80,8 +80,10 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'id'),
     'supported_locales' => [
+        'id' => 'Bahasa Indonesia',
+        'en' => 'English',
         'ar' => 'العربية',
     ],
 

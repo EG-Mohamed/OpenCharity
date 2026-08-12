@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\Cities\Schemas;
 
-use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class CityForm
@@ -13,18 +14,25 @@ class CityForm
     {
         return $schema
             ->components([
-                TextInput::make('state_id')
-                    ->required(),
+                Section::make(__('Basic Information'))
+                    ->schema([
+                        Select::make('state_id')
+                            ->label(__('State'))
+                            ->relationship('state', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
 
-                Checkbox::make('status'),
+                        TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required()
+                            ->translatableTabs(),
 
-                TextEntry::make('created_at')
-                    ->label('Created Date')
-                    ->dateTime(),
-
-                TextEntry::make('updated_at')
-                    ->label('Last Modified Date')
-                    ->dateTime(),
+                        Toggle::make('status')
+                            ->label(__('Is Active'))
+                            ->default(true)
+                            ->required(),
+                    ]),
             ]);
     }
 }

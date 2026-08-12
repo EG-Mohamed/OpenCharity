@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\States\Schemas;
 
-use Filament\Forms\Components\Checkbox;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class StateForm
@@ -12,15 +13,18 @@ class StateForm
     {
         return $schema
             ->components([
-                Checkbox::make('status'),
+                Section::make(__('Basic Information'))
+                    ->schema([
+                        TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required()
+                            ->translatableTabs(),
 
-                TextEntry::make('created_at')
-                    ->label('Created Date')
-                    ->dateTime(),
-
-                TextEntry::make('updated_at')
-                    ->label('Last Modified Date')
-                    ->dateTime(),
+                        Toggle::make('status')
+                            ->label(__('Is Active'))
+                            ->default(true)
+                            ->required(),
+                    ]),
             ]);
     }
 }
