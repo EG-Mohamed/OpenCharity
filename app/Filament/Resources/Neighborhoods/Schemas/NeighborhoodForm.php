@@ -2,9 +2,13 @@
 
 namespace App\Filament\Resources\Neighborhoods\Schemas;
 
-use Filament\Forms\Components\Checkbox;
+use App\Models\City;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class NeighborhoodForm
@@ -13,21 +17,36 @@ class NeighborhoodForm
     {
         return $schema
             ->components([
-                TextInput::make('city_id')
-                    ->required(),
+                Section::make(__('Basic Information'))
+                    ->schema([
+                        Select::make('state_id')
+                            ->label(__('State'))
+                            ->relationship('state', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
+                            ->required(),
 
-                TextInput::make('state_id')
-                    ->required(),
+                        Select::make('city_id')
+                            ->label(__('City'))
+                            ->options(fn (Get $get) => City::query()
+                                ->when($get('state_id'), fn ($query, $stateId) => $query->where('state_id', $stateId))
+                                ->pluck('name', 'id'))
+                            ->searchable()
+                            ->preload()
+                            ->required(),
 
-                Checkbox::make('status'),
+                        TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required()
+                            ->translatableTabs(),
 
-                TextEntry::make('created_at')
-                    ->label('Created Date')
-                    ->dateTime(),
-
-                TextEntry::make('updated_at')
-                    ->label('Last Modified Date')
-                    ->dateTime(),
+                        Toggle::make('status')
+                            ->label(__('Is Active'))
+                            ->default(true)
+                            ->required(),
+                    ]),
             ]);
     }
 }
